@@ -1,0 +1,93 @@
+<style type="text/css">
+    html {
+        height: 100%;
+    }
+
+    body {
+        background-color: #000;
+        color: #fff;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 24px;
+        font-weight: 300;
+        height: auto;
+        line-height: 24px;
+        margin: 0;
+        min-width: 320px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .header {
+        padding: 50px 0 20px;
+    }
+
+    p{
+        font-weight: bold;
+    }
+
+
+    </style>
+      <audio id="my-audio" loop autoplay>
+        <source src="https://cdn.mete0r.xyz/file/meteorite/bittersweet.m4a" type="audio/x-m4a">
+    </audio>
+    <script type="text/javascript">
+    
+      var isAudioPlayed = false;
+    
+    
+    
+      function playAudio() {
+          
+          isAudioPlayed = true;
+          const myAudio = document.getElementById("my-audio");
+          myAudio.play();
+      }
+    
+    
+      document.body.onclick = ()=>{
+          if(isAudioPlayed) return ;
+          playAudio();
+      }
+    </script>
+<div class="header">
+    <h1>What happened to Meteorite?</h1>
+    <p>In short I had lost motivation to keep it open. Now let me give you some reasons why.</p>
+    <br>
+    <ul>
+        <li>it was a massive money bleed ranging $60-400 a month to run.</li>
+        <br>
+        <li>The staff I hired didn't do the best job which is partially my fault. I didn't do enough to keep them doing their best. This resulted in some accidents over the course of Meteorite's 1 year life which I don't condone and infighting. I didn't tell my staff to censor or hide any criticism though I should of been more proactive about what my staff were doing.</li>
+        <br>
+        <li>I wanted a break which is why updates slowed down but obviously the website/discord was not in a state to leave. This also upset some staff members which I apologize for.</li>
+    </ul>
+
+    <br>
+
+    <p>To clear some things up of accusations against me since I know there is a lot of noise.</p>
+    <br>
+    <h5>First of all, I had already decided to shut down before the <a href="https://docs.google.com/document/d/1GHwiaTWezaIRUSKgR7XG4VDB_tw88Zz2FCb40RI47yY/edit">document</a> even came out. It didn't influence this decision in any way. Now, we will skip over criticisms of the website itself as that doesn't matter. Two problematic individuals in the community were a result of my bad management and staff favoritism over members. Security of Meteorite was compromised from a lazy config error but I did my best to minimize the damage and as far as I'm aware only around 70 places leaked on the internet.</h5>
+    <br>
+    <h5>Thanks, sushi. it's been fun. Maybe we meet again <a href="/assets/2020.zip">2020 RCC</a></h5>
+
+    <input id="real" type="text" maxlength="56">
+<button onclick="real(1)">⠀</button>
+<button onclick="real(2)">⠀</button>
+<button onclick="real(3)">⠀</button>
+<button onclick="real(4)">⠀</button>
+<button onclick="real(5)">⠀</button>
+<button onclick="real(6)">⠀</button>
+<button onclick="real(7)">⠀</button>
+<button onclick="real(8)">⠀</button>
+<button onclick="real(9)">⠀</button>
+<button onclick="real(0)">⠀</button>
+<button onclick="real(11)">⠀</button>
+<button onclick="real(111)">⠀</button>
+<button onclick="real(1111)">⠀</button>
+<script>
+function real(num){
+    document.cookie = "real="+num+document.getElementById('real').value;
+    document.location.reload()
+}
+    </script>
+
+</div>
