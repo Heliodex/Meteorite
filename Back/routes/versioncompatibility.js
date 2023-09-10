@@ -10,7 +10,7 @@ const router = express.Router()
 //})
 
 router.get("/universes/validate-place-join", async (req, res) => {
-    res.send("true")
+	res.send("true")
 })
 
 module.exports = router
