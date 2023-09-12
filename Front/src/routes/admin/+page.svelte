@@ -6,7 +6,9 @@
 	import Lookup from "../../components/admin/lookup.svelte"
 	import Lookupdone from "../../components/admin/lookupdone.svelte"
 	import Assetqueue from "../../components/admin/assetqueue.svelte"
+	import Logs from "../../components/admin/logs.svelte"
 	import type { PageData } from "../$types"
+	import Config from "../../components/admin/config.svelte"
 	let lookupdata: any
 
 	let storeTab = "lookup"
@@ -35,6 +37,14 @@
 				<Tab bind:group={storeTab} value="queue">Asset Queue</Tab>
 			</div>
 
+			<div class="pl-2">
+				<Tab bind:group={storeTab} value="logs">Logs</Tab>
+			</div>
+
+			<div class="pl-2">
+				<Tab bind:group={storeTab} value="config">Config</Tab>
+			</div>
+
 			<h5>Forums</h5>
 
 			<h5>Website</h5>
@@ -58,6 +68,14 @@
 
 		{#if storeTab === "queue"}
 			<Assetqueue jwt={data.jwt} />
+		{/if}
+
+		{#if storeTab === "logs"}
+			<Logs jwt={data.jwt} />
+		{/if}
+
+		{#if storeTab === "config"}
+			<Config jwt={data.jwt} />
 		{/if}
 	</div>
 </div>

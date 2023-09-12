@@ -24,7 +24,6 @@ router.get("/", requireAuth, async (req, res) => {
 		"ugcpermission",
 		"moderation",
 		"colors",
-		"inventory",
 		"joindate",
 		"lastclaimofcurrency",
 		"membership",

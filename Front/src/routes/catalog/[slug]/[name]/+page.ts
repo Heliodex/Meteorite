@@ -9,14 +9,14 @@ export const load = (async ({ fetch, params }) => {
 
 	if (
 		params.name !=
-		data.iteminfo.Name.replace(/[^a-zA-Z ]/g, "").replaceAll(" ", "-")
+		data.iteminfo.Name.replace(/[^0-9a-z ]/gi, "").replaceAll(" ", "-")
 	) {
 		throw redirect(
 			301,
 			"/catalog/" +
 				params.slug +
 				"/" +
-				data.iteminfo.Name.replace(/[^a-zA-Z ]/g, "").replaceAll(
+				data.iteminfo.Name.replace(/[^0-9a-z ]/gi, "").replaceAll(
 					" ",
 					"-",
 				),

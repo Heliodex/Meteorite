@@ -260,6 +260,7 @@ router.get("/gameinfo/:id", async (req, res) => {
 		])
 		.populate("owner", "username")
 	//console.log(response)
+	//console.log(response)
 
 	if (!response) {
 		return res.json({ status: "error", error: "Not found" })

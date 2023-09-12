@@ -34,7 +34,7 @@
 				"/games/" +
 				idofgame +
 				"/" +
-				gamename.replace(/[^a-zA-Z ]/g, "").replaceAll(" ", "-")
+				gamename.replace(/[^0-9a-z ]/gi, "").replaceAll(" ", "-")
 		}}>
 		<div
 			class="card rounded-md card-glass-surface snap-center card-hover w-20 sm:w-40 relative">
@@ -70,7 +70,7 @@
 	<a
 		class="unstyled group"
 		href="/games/{idofgame}/{gamename
-			.replace(/[^a-zA-Z ]/g, '')
+			.replace(/[^0-9a-z ]/gi, '')
 			.replaceAll(' ', '-')}">
 		<div
 			class="card rounded-md card-glass-surface snap-center card-hover w-20 sm:w-40 relative">

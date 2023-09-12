@@ -1,10 +1,12 @@
 import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { url } from "$lib/url"
 
 export const load = (async ({ fetch, params, parent }) => {
 	let data = await parent()
 	let alreadyFriends = false
 	let otherUserWantsToBeFriends = false
+	let wearingItems: Array<any> = []
 	const res = await fetch(`http://mete0r.xyz/api/userinfo/${params.slug}`)
 	const datauser = await res.json()
 
@@ -36,12 +38,24 @@ export const load = (async ({ fetch, params, parent }) => {
 		}
 	}
 
+	const wearingresponse = await fetch(
+		url + `/api/userinfo/${params.slug}/inventory`,
+		{
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ onlywearing: true }),
+		},
+	)
+	const wearingdata = await wearingresponse.json()
+	wearingItems = wearingdata.inventory
+
 	if (datauser.error === false) {
 		return {
 			profile: datauser.userinfo,
 			alreadyFriends,
 			otherUserWantsToBeFriends,
 			visits: datavisits.visits,
+			wearingItems,
 		}
 	}
 	throw error(404, "Not found")

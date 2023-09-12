@@ -60,7 +60,6 @@ router.post("/", requireAuth, async (req, res) => {
 						inventory: {
 							Type: itemdoc.Type,
 							ItemId: itemdoc.ItemId,
-							ItemName: itemdoc.Name,
 							Equipped: false,
 						},
 					},

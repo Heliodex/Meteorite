@@ -281,4 +281,51 @@ router.post("/queue", requireAuth, async (req, res) => {
 	})
 })
 
+router.post("/config", requireAuth, async (req, res) => {
+	if (req.userdocument.admin == false) {
+		return res.redirect("/")
+	}
+
+	return res.json({
+		data: {
+			GamesEnabled: req.config.GamesEnabled,
+			KeysEnabled: req.config.KeysEnabled,
+			MaintenanceEnabled: req.config.MaintenanceEnabled,
+			RegistrationEnabled: req.config.RegistrationEnabled,
+			bannermessage: req.config.bannermessage,
+		},
+	})
+})
+
+router.post("/config/update", requireAuth, async (req, res) => {
+	if (req.userdocument.admin == false) {
+		return res.redirect("/")
+	}
+
+	if (
+		req.body.setting != "RegistrationEnabled" &&
+		req.body.setting != "MaintenanceEnabled" &&
+		req.body.setting != "GamesEnabled" &&
+		req.body.setting != "KeysEnabled"
+	) {
+		return res.json({
+			data: { status: "error", error: "Malformed input!" },
+		})
+	}
+
+	req.config[req.body.setting] = req.body.update
+
+	await req.configRepository.save(req.config)
+
+	return res.json({
+		data: {
+			GamesEnabled: req.config.GamesEnabled,
+			KeysEnabled: req.config.KeysEnabled,
+			MaintenanceEnabled: req.config.MaintenanceEnabled,
+			RegistrationEnabled: req.config.RegistrationEnabled,
+			bannermessage: req.config.bannermessage,
+		},
+	})
+})
+
 module.exports = router

@@ -3,9 +3,10 @@
 	import Rocks from "../../../../components/rocks.svelte"
 	import Commentcard from "../../../../components/commentcard.svelte"
 	import type { PageData } from "./$types"
-	import { toastStore } from "@skeletonlabs/skeleton"
+	import { toastStore, menu } from "@skeletonlabs/skeleton"
 	import type { ToastSettings } from "@skeletonlabs/skeleton"
 	import { coinstore } from "$lib/coinstore"
+	import { MoreHorizontalIcon } from "lucide-svelte"
 
 	export let data: PageData
 
@@ -87,7 +88,7 @@
 			class="m-auto border sm:border-0 object-cover"
 			alt={data.item.Name}
 			src="/api/thumbnailrender/asset/?id={data.item.ItemId}" />
-		{#if data.user.admin === true}
+		{#if data.user.admin === true || (data.user.userid === data.item?.Creator && data.user.ugcpermission === true)}
 			<button
 				on:click={moderate}
 				class="btn variant-filled-primary rounded-md btn-sm absolute right-0 top-0">
@@ -96,7 +97,25 @@
 		{/if}
 	</div>
 	<div class="text-center sm:text-left">
-		<h2>{data.item.Name}</h2>
+		<div class="flex flex-row">
+			<h2>{data.item.Name}</h2>
+			<span class="relative ml-auto">
+				<button use:menu={{ menu: "navigationconfig" }}>
+					<MoreHorizontalIcon />
+				</button>
+				<nav
+					class=" rounded-none pb-2 pt-2 w-40"
+					data-menu="navigationconfig">
+					<ul>
+						<a
+							href="/catalog/{data.item.ItemId}/configure"
+							class="btn variant-filled-primary !rounded-md w-full btn-sm text-xs">
+							Configure
+						</a>
+					</ul>
+				</nav>
+			</span>
+		</div>
 
 		<h5>
 			By <a href="/users/{data.item.Creator ?? '0'}">
@@ -130,7 +149,7 @@
 						<h5 class="text-base">Description</h5>
 						<div class=" pl-8">
 							<h5
-								class="text-base w-52 h-48 overflow-y-auto break-words">
+								class="text-base w-52 h-48 overflow-y-auto break-words whitespace-pre-line">
 								{data.item?.Description ?? ""}
 							</h5>
 						</div>

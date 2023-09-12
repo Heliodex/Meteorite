@@ -271,7 +271,7 @@
 					<a
 						class="unstyled block sm:hidden px-2"
 						href="/catalog/{ItemId}/{Name.replace(
-							/[^a-zA-Z ]/g,
+							/[^0-9a-z ]/gi,
 							'',
 						).replaceAll(' ', '-')}">
 						<div class="bg-surface-800 flex flex-row">

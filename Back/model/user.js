@@ -71,6 +71,13 @@ UserSchema.virtual("feed.userdata", {
 	justOne: true,
 })
 
+UserSchema.virtual("inventory.itemdata", {
+	ref: "CatalogSchema",
+	localField: "inventory.ItemId",
+	foreignField: "ItemId",
+	justOne: true,
+})
+
 const model = mongoose.model("UserSchema", UserSchema)
 
 module.exports = model

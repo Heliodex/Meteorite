@@ -25,3 +25,17 @@ easy enough
 ```
 PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host pm2 start server.mjs
 ```
+
+# Setting up Access keys
+
+Open regedit go to Computer\HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node
+
+Make a key called ROBLOX Corporation if it doesn't exist
+
+Inside of that key make another key called Roblox if it doesn't exist
+
+Finally inside that key made a string value called AccessKey for the value put the same value as the one from the env file thank you.
+
+# Contribution
+
+Anyone is welcome to contribute.

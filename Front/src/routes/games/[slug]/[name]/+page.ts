@@ -7,7 +7,9 @@ export const load = (async ({ fetch, params }) => {
 
 	if (
 		params.name !=
-		data.gameinfo.nameofgame.replace(/[^a-zA-Z ]/g, "").replaceAll(" ", "-")
+		data.gameinfo.nameofgame
+			.replace(/[^0-9a-z ]/gi, "")
+			.replaceAll(" ", "-")
 	) {
 		throw redirect(
 			301,
@@ -15,7 +17,7 @@ export const load = (async ({ fetch, params }) => {
 				params.slug +
 				"/" +
 				data.gameinfo.nameofgame
-					.replace(/[^a-zA-Z ]/g, "")
+					.replace(/[^0-9a-z ]/gi, "")
 					.replaceAll(" ", "-"),
 		)
 	}

@@ -162,6 +162,9 @@
 					on:click={() => {
 						search = ""
 					}}
+					on:keydown
+					on:keyup
+					on:keypress
 					class="w-8 h-8 absolute inset-y-0 right-0 pt-2 pr-3"
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -264,6 +267,9 @@
 				<svg
 					class="w-6 h-6 md:hidden block"
 					on:click={drawerOpen}
+					on:keydown
+					on:keyup
+					on:keypress
 					fill="none"
 					stroke="currentColor"
 					viewBox="0 0 24 24"
@@ -334,6 +340,9 @@
 							on:click={() => {
 								search = ""
 							}}
+							on:keydown
+							on:keyup
+							on:keypress
 							class="w-8 h-8 absolute inset-y-0 right-0 pt-2 pr-3"
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -425,7 +434,7 @@
 			<svelte:fragment slot="trail">
 				{#if data.user}
 					<Rocks />
-					{coins ?? "0"}
+					{coins ?? "?"}
 					<span class="relative pr-2">
 						<button
 							class="w-6 pt-2"

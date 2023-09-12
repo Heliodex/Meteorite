@@ -7,7 +7,7 @@
 	let price: string
 	let creations: any[] = []
 
-	$: if (!itemname || !price) {
+	$: if (!itemname || typeof price === "undefined") {
 		disabled = true
 		message.message = "Item name and price required."
 		message.error = true

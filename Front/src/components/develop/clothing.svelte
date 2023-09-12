@@ -101,12 +101,12 @@
 	</label>
 
 	<label class="input-label gap-8">
-		<span class="pt-3">Description:</span>
-		<input
+		<span class="">Description:</span>
+		<textarea
 			bind:value={itemdesc}
-			type="text"
 			class="input input-bordered input-primary w-full max-w-md rounded-md"
-			required />
+			required>
+		</textarea>
 	</label>
 
 	<label class="input-label gap-8">

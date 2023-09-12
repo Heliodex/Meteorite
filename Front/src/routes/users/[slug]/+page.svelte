@@ -17,6 +17,7 @@
 	let creations: any[] = []
 	let editAbout = false
 	let about: string
+	let checkedgames = false
 	//$:console.log(friends)
 	async function saveabout() {
 		const result = await fetch("/settings/aboutme", {
@@ -51,9 +52,14 @@
 		)
 		creations = await res.json()
 		console.log(creations)
+		checkedgames = true
 	}
 
-	$: if (storeTab === "Games" && creations.length === 0) {
+	$: if (
+		storeTab === "Games" &&
+		creations.length === 0 &&
+		checkedgames === false
+	) {
 		requestGames()
 	}
 
@@ -326,17 +332,17 @@
 				8
 					? 'md:gap-y-10'
 					: ''} overflow-x-scroll md:overflow-x-hidden md:overflow-y-scroll grid md:grid-cols-4 grid-flow-col md:grid-rows-none md:grid-flow-row auto-rows-max auto-cols-max">
-				{#if data.profile.inventory}
-					{#each data.profile.inventory as { Type, ItemId, ItemName, Equipped, Hidden }}
+				{#if data.wearingItems}
+					{#each data.wearingItems as { Type, ItemId, itemdata, Equipped, Hidden }}
 						{#if Equipped === true && !Hidden}
 							<a
-								href="/catalog/{ItemId}/{ItemName.replace(
-									/[^a-zA-Z ]/g,
+								href="/catalog/{ItemId}/{itemdata.Name.replace(
+									/[^0-9a-z ]/gi,
 									'',
 								).replaceAll(' ', '-')}">
 								<img
 									class="bg-surface-800 p-2 rounded-md w-28"
-									alt={ItemName}
+									alt={itemdata.Name}
 									src="/api/thumbnailrender/asset/?id={ItemId}" />
 							</a>
 						{/if}

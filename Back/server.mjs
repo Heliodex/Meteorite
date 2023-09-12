@@ -15,7 +15,7 @@ var cookieParser = require("cookie-parser")
 var session = require("express-session")
 const helmet = require("helmet")
 const mongoose = require("mongoose")
-const config = require("./model/config.js")
+import configNew from "./model/configNew.mjs"
 import ipWhitelist from "./model/ipWhitelist.mjs"
 const user = require("./model/user.js")
 const model = require("./model/user.js")
@@ -64,14 +64,15 @@ let redis
 if (PROD === "true") {
 	redis = createClient()
 } else {
-	redis = createClient({
-		url: "redis://default:2BxaAV7Dcbt8d6QqNm58TdUfdIQtEY5q@redis-15195.c53.west-us.azure.cloud.redislabs.com:15195",
-	})
+	const localRedisConnection = process.env.LOCALREDISCONNECTION
+	redis = createClient({ url: localRedisConnection })
 }
 redis.on("error", err => console.log("Redis Client Error", err))
 await redis.connect()
 
 import { Repository } from "redis-om"
+
+const configRepository = new Repository(configNew, redis)
 
 const ipWhiteListRepository = new Repository(ipWhitelist, redis)
 
@@ -133,8 +134,11 @@ const JWT_SECRET = process.env.JWT_SECRET
 const RCC_HOST = process.env.RCC_HOST
 const DB_PASSWORD = process.env.DB_PASSWORD
 console.log(RCC_HOST)
+const { logExecutionTime } = require("mongoose-execution-time")
+
+//mongoose.plugin(logExecutionTime);
 if (PROD === "true") {
-	mongoose.connect("mongodb://localhost:27017/meteoritedb", {
+	mongoose.connect("mongodb://127.0.0.1:27017/meteoritedb", {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		authSource: "admin",
@@ -142,24 +146,26 @@ if (PROD === "true") {
 		pass: DB_PASSWORD,
 	})
 } else {
-	mongoose.connect("mongodb://localhost:27017/meteoritedb", {
+	mongoose.connect("mongodb://127.0.0.1:27017/meteoritedb", {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})
 }
 
 app.disable("x-powered-by") // we don't wanna tell potential attackers our exact framework yet lol
-// automatically create a default document in mongodb for our config
-// if the config document doesn't exist auto create one these are also the default settings your site will start with
+// automatically create a default document in redisdb for our config
+// if the redis document doesn't exist auto create one these are also the default settings your site will start with
 async function createconfig() {
 	try {
-		var resp = await config.findOne()
-		if (!resp) {
-			const response = await config.create({
+		var resp = await redis.exists("config:ONE")
+		if (resp === 0) {
+			// doesn't exist
+			await configRepository.save("ONE", {
 				RegistrationEnabled: true,
 				MaintenanceEnabled: false,
-				KeysEnabled: false,
 				GamesEnabled: true,
+				KeysEnabled: false,
+				bannermessage: "",
 			})
 		}
 	} catch (err) {
@@ -174,8 +180,9 @@ app.use(async function (req, res, next) {
 		return next()
 	}
 	res.header("Cache-Control", "no-store,no-cache,must-revalidate")
-	var resp = await config.findOne().lean()
+	var resp = await configRepository.fetch("ONE")
 	req.config = resp
+	req.configRepository = configRepository
 
 	//console.log(req.headers['x-forwarded-proto'])
 	if (!req.headers["x-forwarded-proto"]) {
@@ -185,10 +192,9 @@ app.use(async function (req, res, next) {
 			req.headers["x-forwarded-proto"] = "http"
 		}
 	}
-	if (!req.headers["cf-connecting-ip"]) {
-		//localhost
-		res.header("Access-Control-Allow-Origin", "*")
-	}
+	/*if (!req.headers['cf-connecting-ip']){ //localhost
+        res.header("Access-Control-Allow-Origin", "*");
+    }*/
 	if (
 		req.headers["x-forwarded-host"] === "www.mete0r.xyz" &&
 		req.headers["x-forwarded-host"] &&
@@ -210,7 +216,7 @@ app.use(async function (req, res, next) {
 	//req.headers['x-forwarded-host'] = "mete0r.xyz"
 	//console.log(req.headers?.['cf-connecting-ip'])
 	//console.log(req.socket.remoteAddress)
-	//console.log(req.url)
+	console.log(req.url)
 	if (req.url === "/assets/2020.zip") {
 		return res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 	}
@@ -426,9 +432,9 @@ app.use("/api/requestad", requestAdRouter)
 
 app.use('/api/bank',bankRouter)*/
 
-/*const groupRouter = require('./routes/api/groups.js');
+const groupRouter = require("./routes/api/groups.js")
 
-app.use('/api/groups',groupRouter)*/
+app.use("/api/groups", groupRouter)
 
 const feedRouter = require("./routes/api/feed.js")
 
@@ -437,6 +443,10 @@ app.use("/api/feed", feedRouter)
 const commentRouter = require("./routes/api/comment.js")
 
 app.use("/api/comments", commentRouter)
+
+const ideRouter = require("./routes/ide.js")
+
+app.use(["/ide", "//ide"], ideRouter)
 
 /*
 app.get("/My/Places", (req, res) => {
