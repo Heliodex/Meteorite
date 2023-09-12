@@ -79,8 +79,7 @@
 				maxlength={500}
 				class="input input-bordered input-primary w-full h-64 rounded-md"
 				placeholder="Description"
-				required>
-			</textarea>
+				required />
 		</label>
 
 		<label>

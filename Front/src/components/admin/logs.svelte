@@ -1,7 +1,3 @@
-<script lang="ts">
-	export let jwt: string
-</script>
-
 <div class="grow">
 	<h2 class="">Admin Logs</h2>
 	<table

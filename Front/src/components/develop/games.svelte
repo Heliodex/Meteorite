@@ -104,8 +104,7 @@
 		<textarea
 			bind:value={itemdesc}
 			class="input input-bordered input-primary w-full max-w-md rounded-md"
-			required>
-		</textarea>
+			required />
 	</label>
 
 	<label class="input-label gap-14">

@@ -1,0 +1,14 @@
+version: "3"
+
+# Config file for compose, a tool that allows for easily managing multiple docker containers.
+# https://docs.docker.com/compose/
+
+services:
+    redis:
+        container_name: meteoredis
+        image: redis
+        ports:
+            - 6379:6379
+        restart: unless-stopped
+        volumes:
+            - ./data/redis:/data

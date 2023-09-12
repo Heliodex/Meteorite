@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Avatar } from "@skeletonlabs/skeleton"
-	export let selectedgroup: string
 	export let grouplist: array
 </script>
 

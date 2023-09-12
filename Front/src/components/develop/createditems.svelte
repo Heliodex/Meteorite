@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let itemname: string
 	export let itemid: string
-	export let type = ""
+	export const type = ""
 </script>
 
 <div class="flex flex-row gap-4 justify-around w-full">

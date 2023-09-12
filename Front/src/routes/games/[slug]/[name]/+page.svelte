@@ -228,6 +228,9 @@
 							on:mouseover={() => {
 								likefill = "lime"
 							}}
+							on:focus={() => {
+								likefill = "lime"
+							}}
 							on:mouseleave={() => {
 								likefill = "none"
 							}}
@@ -252,6 +255,9 @@
 					<button class="">
 						<svg
 							on:mouseover={() => {
+								dislikefill = "red"
+							}}
+							on:focus={() => {
 								dislikefill = "red"
 							}}
 							on:mouseleave={() => {

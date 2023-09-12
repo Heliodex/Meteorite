@@ -27,7 +27,7 @@ require("dotenv").config()
 const https = require("https")
 const PROD = process.env.PROD
 const client = require("prom-client")
-const { handler } = await import("../meteoriterewrite/build/handler.js")
+const { handler } = await import("../Front/build/handler.js")
 
 app.use((req, res, next) => {
 	const allowedOrigins = [

@@ -29,7 +29,7 @@
 					description,
 					price,
 				}),
-			},
+			}
 		)
 		const saveJson = await save.json()
 		if (!saveJson.error) {
@@ -93,8 +93,7 @@
 				<span>Description</span>
 				<textarea
 					bind:value={description}
-					class="input input-bordered input-primary w-full rounded-md">
-				</textarea>
+					class="input input-bordered input-primary w-full rounded-md" />
 			</label>
 
 			<div

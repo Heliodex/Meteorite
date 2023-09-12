@@ -205,11 +205,9 @@
 					stroke-linejoin="round"
 					class="feather feather-edit shrink">
 					<path
-						d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-					</path>
+						d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
 					<path
-						d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-					</path>
+						d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 				</svg>
 			</div>
 
@@ -221,6 +219,7 @@
 
 				<svg
 					on:click={passwordchange}
+					on:keypress={passwordchange}
 					xmlns="http://www.w3.org/2000/svg"
 					width="16"
 					height="16"
@@ -232,11 +231,9 @@
 					stroke-linejoin="round"
 					class="feather feather-edit shrink">
 					<path
-						d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-					</path>
+						d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
 					<path
-						d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-					</path>
+						d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 				</svg>
 			</div>
 
@@ -272,11 +269,9 @@
 							stroke-linejoin="round"
 							class="feather feather-edit shrink">
 							<path
-								d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-							</path>
+								d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
 							<path
-								d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-							</path>
+								d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 						</svg>
 					</a>
 				{/if}
@@ -308,8 +303,7 @@
 					maxlength={5000}
 					placeholder={"Custom CSS"}
 					class="input h-64 input-bordered input-primary rounded-md grow"
-					required>
-				</textarea>
+					required />
 
 				<button
 					on:click={csschange}
@@ -342,8 +336,9 @@
 					</h5>
 				</div>
 
-				<SlideToggle active="bg-success-600" bind:checked={_2faenabled}
-				></SlideToggle>
+				<SlideToggle
+					active="bg-success-600"
+					bind:checked={_2faenabled} />
 			</div>
 		</div>
 	{/if}

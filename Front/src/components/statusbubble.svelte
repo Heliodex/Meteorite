@@ -3,7 +3,7 @@
 
 	export let size: string
 	export let status = "Offline"
-	export let userid = "0"
+	export const userid = "0"
 	export let gameid = "0"
 	export let offline = false
 	export let customclass = ""

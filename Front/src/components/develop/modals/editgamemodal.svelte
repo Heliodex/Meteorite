@@ -138,8 +138,7 @@
 				<textarea
 					bind:value={description}
 					class="input input-bordered input-primary w-full rounded-md"
-					required>
-				</textarea>
+					required />
 			</label>
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<label class="label">
