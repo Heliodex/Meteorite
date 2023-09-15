@@ -1,9 +1,10 @@
 import { error, redirect } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { PUBLIC_ORIGIN } from "$env/static/public"
 
 export const load = (async ({ fetch, params }) => {
 	const res = await fetch(
-		`http://mete0r.xyz/api/catalog/iteminfo/${params.slug}`,
+		`http://${PUBLIC_ORIGIN}/api/catalog/iteminfo/${params.slug}`,
 	)
 	const data = await res.json()
 
@@ -25,7 +26,9 @@ export const load = (async ({ fetch, params }) => {
 
 	if (data.error === false) {
 		const creatorusernameresp = await fetch(
-			`http://mete0r.xyz/api/userinfo/${data.iteminfo.Creator ?? "0"}`,
+			`http://${PUBLIC_ORIGIN}/api/userinfo/${
+				data.iteminfo.Creator ?? "0"
+			}`,
 		)
 		const creatorusername = await creatorusernameresp.json()
 		return {

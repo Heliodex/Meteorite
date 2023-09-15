@@ -2,3 +2,4 @@ node_modules/
 assets/release.zip
 assets/hash.txt
 data/
+.env

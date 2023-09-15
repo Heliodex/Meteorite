@@ -1,9 +1,10 @@
 import { error, redirect } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { PUBLIC_ORIGIN } from "$env/static/public"
 
 export const load = (async ({ parent, fetch, params }) => {
 	const res = await fetch(
-		`http://mete0r.xyz/api/catalog/iteminfo/${params.slug}`,
+		`http://${PUBLIC_ORIGIN}/api/catalog/iteminfo/${params.slug}`,
 	)
 	const data = await res.json()
 	let self = (await parent()).user

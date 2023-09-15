@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Gamecard from "../../../../components/gamecard.svelte"
+	import { PUBLIC_ORIGIN } from "$env/static/public"
 	let gamearray: any[] = []
 	let currentcursor = 1
 	import type { PageData } from "./$types"
@@ -16,7 +17,7 @@
 	$: data, fetchfirst()
 
 	async function fetchfirst() {
-		const response = await fetch("http://mete0r.xyz/games/search", {
+		const response = await fetch(`http://${PUBLIC_ORIGIN}/games/search`, {
 			method: "POST",
 			body: JSON.stringify({ cursor: 0, searchquery: search }),
 			headers: { "content-type": "application/json" },
@@ -37,7 +38,7 @@
 	}
 
 	async function addToArray() {
-		const response = await fetch("http://mete0r.xyz/games/search", {
+		const response = await fetch(`http://${PUBLIC_ORIGIN}/games/search`, {
 			method: "POST",
 			body: JSON.stringify({
 				cursor: currentcursor,

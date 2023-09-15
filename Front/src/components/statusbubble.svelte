@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte"
+	import { PUBLIC_ORIGIN } from "$env/static/public"
 
 	export let size: string
 	export let status = "Offline"
@@ -21,7 +22,7 @@
 		class="{customclass} absolute bottom-2 right-5 w-{size} h-{size} bg-blue-500 rounded-full">
 	</div>
 {:else if status.includes("Playing") === true}
-	<a class="unstyled" href="http://mete0r.xyz/games/{gameid}">
+	<a class="unstyled" href="http://{PUBLIC_ORIGIN}/games/{gameid}">
 		<div
 			class="{customclass} absolute bottom-2 right-5 w-{size} h-{size} bg-green-500 rounded-full">
 		</div>

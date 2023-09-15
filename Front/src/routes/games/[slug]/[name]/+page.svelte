@@ -13,6 +13,7 @@
 	import Advertisemodal from "../../../../components/assets/advertisemodal.svelte"
 	import Itemcard from "../../../../components/itemcard.svelte"
 	import { MoreHorizontalIcon } from "lucide-svelte"
+	import { PUBLIC_ORIGIN } from "$env/static/public"
 	let storeTab = "About"
 
 	export let data: PageData
@@ -62,7 +63,7 @@
 	}
 
 	async function shutdown() {
-		const shutdownresp = await fetch("http://mete0r.xyz/games/shutdown", {
+		const shutdownresp = await fetch(`http://${PUBLIC_ORIGIN}/games/shutdown`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -78,7 +79,7 @@
 
 	async function evictplayer(userid: Number) {
 		const evictplayerresp = await fetch(
-			"http://mete0r.xyz/games/evictplayer",
+			`http://${PUBLIC_ORIGIN}/games/evictplayer`,
 			{
 				method: "POST",
 				headers: {
@@ -127,12 +128,12 @@
 		content="{data.game
 			.nameofgame} - Join others who are recreating the game world."
 		property="og:description" />
-	<meta content="https://mete0r.xyz" property="og:url" />
+	<meta content="https://{PUBLIC_ORIGIN}" property="og:url" />
 	<meta content="#6f00ff" data-react-helmet="true" name="theme-color" />
 
 	<meta
 		name="twitter:image:src"
-		content="https://mete0r.xyz/assets/gameassets/thumbnail-{data.game
+		content="https://{PUBLIC_ORIGIN}/assets/gameassets/thumbnail-{data.game
 			.idofgame}.png" />
 	<meta name="twitter:site" content="@Meteorite" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -150,7 +151,7 @@
 		<img
 			class="h-[360px] w-[640px] aspect-video m-auto"
 			alt={data.game.nameofgame}
-			src="http://mete0r.xyz/assets/gameassets/thumbnail-{data.game
+			src="http://{PUBLIC_ORIGIN}/assets/gameassets/thumbnail-{data.game
 				.idofgame}.png#"
 			style="height:360px;width:640px" />
 		<div class="grow">

@@ -159,5 +159,5 @@
 		<Accessories jwt={data.jwt} type={storeTab} />
 	{/if}
 
-	{#if storeTab === "userads"}{/if}
+	<!-- {#if storeTab === "userads"}{/if} -->
 </div>

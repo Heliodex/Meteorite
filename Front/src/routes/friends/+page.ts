@@ -1,11 +1,12 @@
 import { error } from "@sveltejs/kit"
 import type { PageLoad } from "./$types"
+import { PUBLIC_ORIGIN } from "$env/static/public"
 
 export const load = (async ({ fetch, parent }) => {
 	let data = await parent()
 
 	const response = await fetch(
-		"http://mete0r.xyz/api/friends/friend-requests",
+		`http://${PUBLIC_ORIGIN}/api/friends/friend-requests`,
 		{
 			method: "POST",
 			headers: {
