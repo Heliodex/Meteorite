@@ -227,12 +227,12 @@ router.post("/evictplayer", requireAuth, async (req, res) => {
 			return res.json({ status: "error", error: "Game not open." })
 		}
 		let kickscript = `for v, player in pairs(game:GetService("Players"):GetChildren()) do
-            print(player.UserId)
-            local tokick = ${userid}
-            if player.UserId == tokick then
-                player:Kick()
-            end
-        end`
+	print(player.UserId)
+	local tokick = ${userid}
+	if player.UserId == tokick then
+		player:Kick()
+	end
+end`
 		rcctalk.Execute("game" + gamedoc.idofgame, kickscript)
 	}
 

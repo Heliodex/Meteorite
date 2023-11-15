@@ -37,40 +37,48 @@ function sleep(ms) {
 
 router.get("/visit", async (req, res) => {
 	// studio
-	const string = `local RS = game:GetService("RunService")
-    local P = game:GetService("Players")
-    local LP = P:CreateLocalPlayer(0)
-    LP.CharacterAppearance = ""
-    LP.CharacterAdded:connect(
-        function(c)
-            repeat
-                wait()
-            until c:FindFirstChild("Humanoid")
-            local h = c:FindFirstChild("Humanoid")
-            h.Died:connect(
-                function()
-                    wait(5)
-                    LP:LoadCharacter()
-                end
-            )
-        end
-    )
-    game:GetService("InsertService"):SetBaseSetsUrl("http://mete0r.xyz/Game/Tools/InsertAsset.ashx?nsets=10&type=base")
-game:GetService("InsertService"):SetUserSetsUrl("http://mete0r.xyz/Game/Tools/InsertAsset.ashx?nsets=20&type=user&userid=%d")
-game:GetService("InsertService"):SetCollectionUrl("http://mete0r.xyz/Game/Tools/InsertAsset.ashx?sid=%d")
-pcall(function() game:GetService("InsertService"):SetFreeModelUrl("http://mete0r.xyz/Game/Tools/InsertAsset.ashx?type=fm&q=%s&pg=%d&rs=%d") end)
-pcall(function() game:GetService("InsertService"):SetFreeDecalUrl("http://mete0r.xyz/Game/Tools/InsertAsset.ashx?type=fd&q=%s&pg=%d&rs=%d") end)
-    RS:Run()
-    LP:LoadCharacter()
-    pcall(
-        function()
-            game:GetService("ContentProvider"):SetBaseUrl("http://mete0r.xyz" .. "/")
-        end
-    )
+	const string = `local RunService = game:GetService "RunService"
+local Players = game:GetService "Players"
+local InsertService = game:GetService "InsertService"
+local ContentProvider = game:GetService "ContentProvider"
+local localPlayer = Players:CreateLocalPlayer(0)
+local url = "http://mete0r.xyz"
 
+localPlayer.CharacterAppearance = ""
+localPlayer.CharacterAdded:connect(function(c)
+	repeat
+		wait()
+	until c:FindFirstChild "Humanoid"
+	local h = c:FindFirstChild "Humanoid"
+	h.Died:connect(function()
+		wait(5)
+		localPlayer:LoadCharacter()
+	end)
+end)
+InsertService:SetBaseSetsUrl(
+	url .. "/Game/Tools/InsertAsset.ashx?nsets=10&type=base"
+)
+InsertService:SetUserSetsUrl(
+	url .. "/Game/Tools/InsertAsset.ashx?nsets=20&type=user&userid=%d"
+)
+InsertService:SetCollectionUrl(url .. "/Game/Tools/InsertAsset.ashx?sid=%d")
+pcall(function()
+	InsertService:SetFreeModelUrl(
+		url .. "/Game/Tools/InsertAsset.ashx?type=fm&q=%s&pg=%d&rs=%d"
+	)
+end)
+pcall(function()
+	InsertService:SetFreeDecalUrl(
+		url .. "/Game/Tools/InsertAsset.ashx?type=fd&q=%s&pg=%d&rs=%d"
+	)
+end)
+RunService:Run()
+localPlayer:LoadCharacter()
+pcall(function()
+	ContentProvider:SetBaseUrl(url .. "/")
+end)
 
-
-    `
+`
 	const sign = crypto.createSign("SHA1")
 	sign.update("\r\n" + string)
 	var signature = sign.sign(key, "base64")
