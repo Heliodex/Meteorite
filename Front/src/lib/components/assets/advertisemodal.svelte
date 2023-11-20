@@ -2,6 +2,7 @@
 	let message = { error: false, message: "" }
 	let disabled = false
 	let AdId = ""
+
 	export let jwt: string
 	export let itemid: string
 	export let type: string

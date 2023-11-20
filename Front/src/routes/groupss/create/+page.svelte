@@ -6,7 +6,7 @@
 	let files: FileList
 	let publicgroup = true
 	let disabled = true
-	import Rocks from "../../../components/rocks.svelte"
+	import Rocks from "$lib/components/rocks.svelte"
 
 	export let data
 

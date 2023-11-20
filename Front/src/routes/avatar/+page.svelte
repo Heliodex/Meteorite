@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton"
-	import Itemcard from "../../components/itemcard.svelte"
-	import Colorpicker from "../../components/colorpicker.svelte"
+	import Itemcard from "$lib/components/itemcard.svelte"
+	import Colorpicker from "$lib/components/colorpicker.svelte"
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	let avatar: string

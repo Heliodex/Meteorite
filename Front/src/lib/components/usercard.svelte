@@ -5,7 +5,7 @@
 	export let username: string
 	export let friendRequest = false
 	export let jwt = ""
-	export let refresh = async function () {}
+	export let refresh = async () => {}
 
 	async function ignore() {
 		const result = await fetch("/api/friends/decline-friend-request", {

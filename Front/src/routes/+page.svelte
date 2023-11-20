@@ -5,7 +5,7 @@
 	import { Noir } from "@skeletonlabs/skeleton"
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
-	import _2famodal from "../components/login/2famodal.svelte"
+	import _2famodal from "$lib/components/login/2famodal.svelte"
 
 	let current = "login"
 	let username: string

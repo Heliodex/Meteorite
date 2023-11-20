@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Avatar } from "@skeletonlabs/skeleton"
-	import Rocks from "../../../../components/rocks.svelte"
-	import Commentcard from "../../../../components/commentcard.svelte"
+	import Rocks from "$lib/components/rocks.svelte"
+	import Commentcard from "$lib/components/commentcard.svelte"
 	import { toastStore, menu } from "@skeletonlabs/skeleton"
 	import type { ToastSettings } from "@skeletonlabs/skeleton"
 	import { coinstore } from "$lib/coinstore"
@@ -65,7 +65,7 @@
 
 	if (data.user.inventory) {
 		// check if user already owns item
-		for (let v of data.user.inventory) {
+		for (const v of data.user.inventory) {
 			if (v.ItemId === data.item.ItemId) {
 				// they already own it
 				disabled = true

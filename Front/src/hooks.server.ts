@@ -1,5 +1,6 @@
 import { authenticateUser } from "$lib/auth"
-import { redirect, type Handle } from "@sveltejs/kit"
+import { redirect } from "@sveltejs/kit"
+
 const protectedroutes = [
 	"/home",
 	"/catalog",
@@ -10,12 +11,12 @@ const protectedroutes = [
 	"/admin",
 ]
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle = async ({ event, resolve }) => {
 	// Stage 1
 	event.locals.user = await authenticateUser(event)
 	event.locals.jwt = event.cookies.get("jwt") ?? ""
 	event.locals.useragent = event.request.headers.get("user-agent")
-	//console.log(event.locals.user)
+	// console.log(event.locals.user)
 
 	if (
 		protectedroutes.includes(event.url.pathname) === true ||
@@ -47,7 +48,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event) // Stage 2
 
 	// Stage 3
-	//console.log(event.url.protocol)
+	// console.log(event.url.protocol)
 	if (event.url.protocol === "https:") {
 		response.headers.append(
 			"Content-Security-Policy",

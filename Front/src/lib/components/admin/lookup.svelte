@@ -4,8 +4,10 @@
 
 	let userid: any
 	let username: any
+
 	export let jwt: string
 	export let data
+
 	async function searchuser() {
 		const response = await fetch("admin/moderateuserlookup", {
 			method: "POST",

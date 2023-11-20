@@ -3,6 +3,7 @@
 
 	export let lookupdata: any
 	export let jwt: string
+
 	let lookupaction = "Banned"
 	let banreason: string
 	let expirationdate: string

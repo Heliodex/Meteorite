@@ -7,7 +7,7 @@
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import Editgamemodal from "./modals/editgamemodal.svelte"
-	import type { PageData } from "../../routes/$types"
+	import type { PageData } from "../../../routes/$types"
 
 	export let data: PageData
 

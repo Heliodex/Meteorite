@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Createditems from "../develop/createditems.svelte"
+	import Createditems from "./createditems.svelte"
 	import { url } from "$lib/url"
+
 	let message = { error: false, message: "" }
 	let disabled = false
 	let itemname: string
@@ -182,7 +183,7 @@
 			<h3>Videos</h3>
 		{/if}
 
-		{#each creations as { Name, ItemId, Description }}
+		{#each creations as { Name, ItemId }}
 			<Createditems itemname={Name} itemid={ItemId} {type} />
 		{/each}
 	</div>

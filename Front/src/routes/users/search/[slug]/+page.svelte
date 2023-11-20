@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Usercard from "../../../../components/usercard.svelte"
+	import Usercard from "$lib/components/usercard.svelte"
 	import { url } from "$lib/url"
 	let currentPage = 1
 	let maxiumumPage = 1

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Groupbar from "../../components/groups/groupbar.svelte"
+	import Groupbar from "$lib/components/groups/groupbar.svelte"
 
 	export let data
 </script>
@@ -9,5 +9,5 @@
 		<Groupbar grouplist={data.groups} />
 	{/if}
 
-	<div class="col-span-5"></div>
+	<div class="col-span-5" />
 </div>

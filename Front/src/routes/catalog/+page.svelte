@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { json } from "@sveltejs/kit"
 	import { slide } from "svelte/transition"
-	import Itemcard from "../../components/itemcard.svelte"
-	import Rocks from "../../components/rocks.svelte"
+	import Itemcard from "$lib/components/itemcard.svelte"
+	import Rocks from "$lib/components/rocks.svelte"
 	import { url } from "$lib/url"
 	import { menu } from "@skeletonlabs/skeleton"
 	import { page } from "$app/stores"
@@ -299,8 +299,8 @@
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					class="w-4 ml-auto">
-					<line x1="12" y1="5" x2="12" y2="19"></line>
-					<polyline points="19 12 12 19 5 12"></polyline>
+					<line x1="12" y1="5" x2="12" y2="19" />
+					<polyline points="19 12 12 19 5 12" />
 				</svg>
 				<nav class=" rounded-none mt-6" data-menu="navigationsort">
 					<ul>
@@ -350,7 +350,7 @@
 						class="unstyled block sm:hidden px-2"
 						href="/catalog/{ItemId}/{Name.replace(
 							/[^0-9a-z ]/gi,
-							'',
+							''
 						).replaceAll(' ', '-')}">
 						<div class="bg-surface-800 flex flex-row">
 							<img

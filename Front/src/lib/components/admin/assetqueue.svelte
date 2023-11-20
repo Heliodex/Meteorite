@@ -63,7 +63,7 @@
 	<div
 		class="flex flex-col flex-wrap md:grid sm:grid-cols-6 sm:grid-rows-5 gap-2">
 		{#if items}
-			{#each items as { Name, ItemId, Creator, Type }}
+			{#each items as { Name, ItemId, Type }}
 				<Itemcard
 					itemname={Name}
 					itemid={ItemId}

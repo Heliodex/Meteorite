@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Gamecard from "../../../../components/gamecard.svelte"
+	import Gamecard from "$lib/components/gamecard.svelte"
 	import { PUBLIC_ORIGIN } from "$env/static/public"
 	let gamearray: any[] = []
 	let currentcursor = 1

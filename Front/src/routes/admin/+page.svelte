@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { TabGroup, Tab } from "@skeletonlabs/skeleton"
-	import Lookup from "../../components/admin/lookup.svelte"
-	import Lookupdone from "../../components/admin/lookupdone.svelte"
-	import Assetqueue from "../../components/admin/assetqueue.svelte"
-	import Logs from "../../components/admin/logs.svelte"
-	import Config from "../../components/admin/config.svelte"
+	import Lookup from "$lib/components/admin/lookup.svelte"
+	import Lookupdone from "$lib/components/admin/lookupdone.svelte"
+	import Assetqueue from "$lib/components/admin/assetqueue.svelte"
+	import Logs from "$lib/components/admin/logs.svelte"
+	import Config from "$lib/components/admin/config.svelte"
 
 	let lookupdata: any
 	let storeTab = "lookup"

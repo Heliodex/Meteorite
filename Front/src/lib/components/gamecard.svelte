@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Avatar } from "@skeletonlabs/skeleton"
-	import { onMount } from "svelte"
 	export let gamename = ""
 	export let playercount = ""
 	export let idofgame: String
@@ -9,6 +7,7 @@
 	export let useridofowner = ""
 	export let useragent: string
 	export let username = ""
+
 	let imageloading = true
 	const onload = (node: HTMLImageElement, callback: VoidFunction) => {
 		if (node.complete) {
@@ -28,6 +27,8 @@
 {#if useragent.includes("Android") === true || useragent.includes("iPhone") === true}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
+		role="button"
+		tabindex="0"
 		class="unstyled group"
 		on:click={() => {
 			document.location.href =
@@ -40,8 +41,7 @@
 			class="card rounded-md card-glass-surface snap-center card-hover w-20 sm:w-40 relative">
 			{#if imageloading}
 				<div
-					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse">
-				</div>
+					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse" />
 			{/if}
 			<img
 				alt=""
@@ -76,8 +76,7 @@
 			class="card rounded-md card-glass-surface snap-center card-hover w-20 sm:w-40 relative">
 			{#if imageloading}
 				<div
-					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse">
-				</div>
+					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse" />
 			{/if}
 			<img
 				alt=""

@@ -1,4 +1,11 @@
 <script lang="ts">
+	import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton"
+
+	export let jwt: string
+	export let gameid: string
+	export let avatartype = "PC"
+	export let gearallowed = false
+
 	let title: string
 	let description: string
 	let files: FileList
@@ -8,11 +15,6 @@
 	let message = { error: false, message: "" }
 	let messageupload = { error: false, message: "" }
 	let allowmeshes = false
-	import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton"
-	export let jwt: string
-	export let gameid: string
-	export let avatartype = "PC"
-	export let gearallowed = false
 
 	$: if (!title && !description) {
 		disabled = true

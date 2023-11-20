@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Usercard from "../../components/usercard.svelte"
+	import Usercard from "$lib/components/usercard.svelte"
 
 	async function refresh() {
 		const response = await fetch("/api/friends/friend-requests", {

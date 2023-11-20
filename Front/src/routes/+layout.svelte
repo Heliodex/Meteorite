@@ -12,13 +12,13 @@
 		Avatar,
 	} from "@skeletonlabs/skeleton"
 	import { onMount } from "svelte"
-	import Rocks from "../components/rocks.svelte"
+	import Rocks from "$lib/components/rocks.svelte"
 	import { slide } from "svelte/transition"
 	import { Modal } from "@skeletonlabs/skeleton"
 	import { coinstore } from "$lib/coinstore"
 	import { HomeIcon } from "svelte-feather-icons"
 	import { PersonStandingIcon, Users2Icon } from "lucide-svelte"
-	import Progressbar from "../components/progressbar.svelte"
+	import Progressbar from "$lib/components/progressbar.svelte"
 	let coins: number
 	let avatar: string
 	import { avatarstore } from "$lib/avatarstore"
@@ -75,7 +75,7 @@
 				function escape(s: string) {
 					return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, "\\$1")
 				}
-				var match = document.cookie.match(
+				let match = document.cookie.match(
 					RegExp("(?:^|;\\s*)" + escape(name) + "=([^;]*)")
 				)
 				return match ? match[1] : null
@@ -100,6 +100,7 @@
 			data?.url?.slice(2)
 		)?.split("/")?.[0]}
 	</title>
+	<!-- Google tag (gtag.js) -->
 	<!-- Google tag (gtag.js) -->
 	<!-- Google tag (gtag.js) -->
 	<!-- Google tag (gtag.js) -->

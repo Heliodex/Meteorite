@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { Tab, TabGroup } from "@skeletonlabs/skeleton"
-	import Clothing from "../../components/develop/clothing.svelte"
-	import Games from "../../components/develop/games.svelte"
-	import Asset from "../../components/develop/asset.svelte"
-	import Packages from "../../components/develop/admin/packages.svelte"
-	import Accessories from "../../components/develop/admin/accessories.svelte"
+	import Clothing from "$lib/components/develop/clothing.svelte"
+	import Games from "$lib/components/develop/games.svelte"
+	import Asset from "$lib/components/develop/asset.svelte"
+	import Packages from "$lib/components/develop/admin/packages.svelte"
+	import Accessories from "$lib/components/develop/admin/accessories.svelte"
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import { slide } from "svelte/transition"
-	import Launchmodal from "../../components/games/launchmodal.svelte"
+	import Launchmodal from "$lib/components/games/launchmodal.svelte"
 
 	let storeTab = "Shirts"
 

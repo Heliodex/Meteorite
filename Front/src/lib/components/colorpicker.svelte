@@ -1,9 +1,11 @@
 <script lang="ts">
-	let bodypart = "all"
-	let color: any
-	export let jwt: string
 	import { toastStore } from "@skeletonlabs/skeleton"
 	import type { ToastSettings } from "@skeletonlabs/skeleton"
+
+	export let jwt: string
+
+	let bodypart = "all"
+	let color: any
 	const t: ToastSettings = {
 		message: "resp",
 		// Optional: Presets for primary | secondary | tertiary | warning

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Avatar, Tab, TabGroup } from "@skeletonlabs/skeleton"
-	import Statusbubble from "../../../components/statusbubble.svelte"
-	import Gamecard from "../../../components/gamecard.svelte"
+	import Statusbubble from "$lib/components/statusbubble.svelte"
+	import Gamecard from "$lib/components/gamecard.svelte"
 
 	export let data
 	let jwt = data.jwt
@@ -39,14 +39,14 @@
 		if (friends) {
 			friends = data.profile?.friends
 			friends = friends.sort((x: { offline: any }) =>
-				!x.offline ? -1 : 1,
+				!x.offline ? -1 : 1
 			)
 		}
 	}
 
 	async function requestGames() {
 		const res = await fetch(
-			`/api/userinfo/${data.profile.userid}/creations`,
+			`/api/userinfo/${data.profile.userid}/creations`
 		)
 		creations = await res.json()
 		console.log(creations)
@@ -74,7 +74,7 @@
 	}
 	let equippedcount =
 		data.profile?.inventory?.filter(
-			(c: any) => c.Equipped === true && !c.Hidden,
+			(c: any) => c.Equipped === true && !c.Hidden
 		)?.length ?? 0
 
 	if (data.alreadyFriends === true) {
@@ -113,7 +113,7 @@
 	if (data.profile.friends) {
 		if (
 			data.profile.friends.some(
-				(userid: { userid: any }) => userid.userid == data.user.userid,
+				(userid: { userid: any }) => userid.userid == data.user.userid
 			) === true
 		) {
 			// already friends
@@ -137,7 +137,7 @@
 				type="audio/x-m4a" />
 		</audio>
 		<script type="text/javascript">
-			var isAudioPlayed = false
+			let isAudioPlayed = false
 
 			function playAudio() {
 				isAudioPlayed = true
@@ -270,11 +270,9 @@
 					stroke-linejoin="round"
 					class="mt-2 hover:stroke-white">
 					<path
-						d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-					</path>
+						d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
 					<path
-						d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-					</path>
+						d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
 				</svg>
 			{/if}
 		</div>
@@ -336,7 +334,7 @@
 							<a
 								href="/catalog/{ItemId}/{itemdata.Name.replace(
 									/[^0-9a-z ]/gi,
-									'',
+									''
 								).replaceAll(' ', '-')}">
 								<img
 									class="bg-surface-800 p-2 rounded-md w-28"

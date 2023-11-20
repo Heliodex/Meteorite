@@ -18,9 +18,7 @@ export const authenticateUser = async (event: RequestEvent) => {
 		headers: { cookie: "jwt=" + userToken, route: route.id as string },
 	})
 	const data = await res.json()
-	if (!data.error) {
-		return data
-	} else if (data.moderationstatus) {
+	if (!data.error || data.moderationstatus) {
 		return data
 	}
 

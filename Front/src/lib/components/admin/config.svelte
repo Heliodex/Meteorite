@@ -1,15 +1,10 @@
 <script lang="ts">
 	import { SlideToggle } from "@skeletonlabs/skeleton"
-	import { Regex } from "lucide-svelte"
 
 	let regEnabled = false
-
 	let mainEnabled = false
-
 	let gameEnabled = false
-
 	let keyEnabled = false
-
 	let bannerMessage = ""
 
 	export let jwt: string

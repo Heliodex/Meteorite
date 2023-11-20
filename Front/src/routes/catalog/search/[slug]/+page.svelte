@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { slide } from "svelte/transition"
-	import Itemcard from "../../../../components/itemcard.svelte"
-	import Rocks from "../../../../components/rocks.svelte"
+	import Itemcard from "$lib/components/itemcard.svelte"
+	import Rocks from "$lib/components/rocks.svelte"
 	import { url } from "$lib/url"
 
 	export let data
@@ -269,7 +269,7 @@
 						class="unstyled block sm:hidden px-2"
 						href="/catalog/{ItemId}/{Name.replace(
 							/[^0-9a-z ]/gi,
-							'',
+							''
 						).replaceAll(' ', '-')}">
 						<div class="bg-surface-800 flex flex-row">
 							<img

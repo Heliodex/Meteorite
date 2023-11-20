@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Avatar } from "@skeletonlabs/skeleton"
-	import Rocks from "../components/rocks.svelte"
+	import Rocks from "$lib/components/rocks.svelte"
+
 	export let itemname: String
 	export let price: any = undefined
 	export let itemid: String
@@ -8,15 +8,10 @@
 	export let type = ""
 
 	export let width = "w-36"
-
 	export let interact = "false"
-
 	export let moderation = false
-
 	export let equipped = false
-
 	export let action = () => {}
-
 	export let moderate = () => {}
 
 	let imageloading = true
@@ -44,8 +39,7 @@
 			.replaceAll(' ', '-')}">
 		{#if type != "Audio" && type != "Video"}
 			{#if imageloading}
-				<div class="w-36 h-36 rounded-none placeholder animate-pulse">
-				</div>
+				<div class="w-36 h-36 rounded-none placeholder animate-pulse" />
 			{/if}
 			<img
 				alt=""

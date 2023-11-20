@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { menu } from "@skeletonlabs/skeleton"
-	import Commentcard from "../../../../components/commentcard.svelte"
+	import Commentcard from "$lib/components/commentcard.svelte"
 	import { TabGroup, Tab } from "@skeletonlabs/skeleton"
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import { invalidate } from "$app/navigation"
-	import Skybanner from "../../../../components/skybanner.svelte"
-	import Launchmodal from "../../../../components/games/launchmodal.svelte"
-	import Linkdiscordmodal from "../../../../components/games/linkdiscordmodal.svelte"
-	import Advertisemodal from "../../../../components/assets/advertisemodal.svelte"
-	import Itemcard from "../../../../components/itemcard.svelte"
+	import Skybanner from "$lib/components/skybanner.svelte"
+	import Launchmodal from "$lib/components/games/launchmodal.svelte"
+	import Linkdiscordmodal from "$lib/components/games/linkdiscordmodal.svelte"
+	import Advertisemodal from "$lib/components/assets/advertisemodal.svelte"
+	import Itemcard from "$lib/components/itemcard.svelte"
 	import { MoreHorizontalIcon } from "lucide-svelte"
 	import { PUBLIC_ORIGIN } from "$env/static/public"
-	
+
 	export let data
-	
+
 	const jwt = data.jwt
-	
+
 	let storeTab = "About"
 	let likefill = "none"
 	let dislikefill = "none"
@@ -62,16 +62,19 @@
 	}
 
 	async function shutdown() {
-		const shutdownresp = await fetch(`http://${PUBLIC_ORIGIN}/games/shutdown`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: jwt,
-			},
-			body: JSON.stringify({
-				gameid: data.game.idofgame,
-			}),
-		})
+		const shutdownresp = await fetch(
+			`http://${PUBLIC_ORIGIN}/games/shutdown`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: jwt,
+				},
+				body: JSON.stringify({
+					gameid: data.game.idofgame,
+				}),
+			}
+		)
 		const shutdownjson = await shutdownresp.json()
 		console.log(shutdownjson)
 	}
@@ -89,12 +92,12 @@
 					gameid: data.game.idofgame,
 					userid,
 				}),
-			},
+			}
 		)
 		const evictplayerjson = await evictplayerresp.json()
 		console.log(evictplayerjson)
 		invalidate(
-			url => url.pathname === "/games/gameinfo/" + data.game.idofgame,
+			url => url.pathname === "/games/gameinfo/" + data.game.idofgame
 		)
 	}
 
@@ -245,8 +248,7 @@
 							stroke-linejoin="round"
 							class="feather feather-thumbs-up">
 							<path
-								d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
-							</path>
+								d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
 						</svg>
 					</button>
 					<h5 class="!text-sm pt-2">0</h5>
@@ -274,8 +276,7 @@
 							stroke-linejoin="round"
 							class="feather feather-thumbs-up">
 							<path
-								d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
-							</path>
+								d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17" />
 						</svg>
 					</button>
 					<h5 class="!text-sm pt-2">0</h5>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
-	import changePasswordModal from "../../components/settingsmodals/changepassword.svelte"
-	import _2faModal from "../../components/settingsmodals/_2fa.svelte"
+	import changePasswordModal from "$lib/components/settingsmodals/changepassword.svelte"
+	import _2faModal from "$lib/components/settingsmodals/_2fa.svelte"
 	import { SlideToggle } from "@skeletonlabs/skeleton"
 	import { page } from "$app/stores"
 	import { coinstore } from "$lib/coinstore"

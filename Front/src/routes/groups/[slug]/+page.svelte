@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Avatar } from "@skeletonlabs/skeleton"
-	import Groupbar from "../../../components/groups/groupbar.svelte"
-	import Commentcard from "../../../components/commentcard.svelte"
+	import Groupbar from "$lib/components/groups/groupbar.svelte"
+	import Commentcard from "$lib/components/commentcard.svelte"
 	import { url } from "$lib/url"
 
 	let selectedgroup = "Lambda Media Group"
@@ -20,7 +20,7 @@
 				method: "POST",
 				body: JSON.stringify({ page: currentPage, rank: 1 }),
 				headers: { "content-type": "application/json" },
-			},
+			}
 		)
 		const data = await response.json()
 		if (!data.error) {
@@ -119,8 +119,8 @@
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						class="w-4">
-						<line x1="12" y1="5" x2="12" y2="19"></line>
-						<polyline points="19 12 12 19 5 12"></polyline>
+						<line x1="12" y1="5" x2="12" y2="19" />
+						<polyline points="19 12 12 19 5 12" />
 					</svg>
 				</button>
 			</div>

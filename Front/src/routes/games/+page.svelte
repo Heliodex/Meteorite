@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Gamecard from "../../components/gamecard.svelte"
-	import Scrollbar from "../../components/scrollbutton.svelte"
+	import Gamecard from "$lib/components/gamecard.svelte"
+	import Scrollbar from "$lib/components/scrollbutton.svelte"
 
 	export let data
 
@@ -54,12 +54,12 @@
 		scrolleft: any,
 		clientwidth: any,
 		scrollWidth: any,
-		array: string,
+		array: string
 	) {
 		const diff = Math.abs(scrolleft + clientwidth - scrollWidth)
 		if (diff < 500) {
-			var minScrollTime = 300
-			var now = new Date().getTime()
+			let minScrollTime = 300
+			let now = new Date().getTime()
 
 			function processScroll() {
 				addToArray(array)
@@ -93,7 +93,7 @@
 					e.target?.scrollLeft,
 					e.target?.clientWidth,
 					e.target?.scrollWidth,
-					"Popular",
+					"Popular"
 				)}
 			class="grid grid-flow-col grid-rows-none overflow-hidden auto-cols-max gap-4 snap-mandatory snap-x scroll-smooth h-40 sm:h-60">
 			{#each gamearrays.Popular.array as { nameofgame, idofgame, version, visits, numberofplayers, useridofowner, owner }}
@@ -121,7 +121,7 @@
 					e.target?.scrollLeft,
 					e.target?.clientWidth,
 					e.target?.scrollWidth,
-					"OurRecommendations",
+					"OurRecommendations"
 				)}
 			class="grid grid-flow-col grid-rows-none overflow-hidden auto-cols-max gap-4 snap-mandatory snap-x scroll-smooth h-40 sm:h-60">
 			{#each gamearrays.OurRecommendations.array as { nameofgame, idofgame, version, visits, numberofplayers, useridofowner, owner }}
@@ -149,7 +149,7 @@
 					e.target?.scrollLeft,
 					e.target?.clientWidth,
 					e.target?.scrollWidth,
-					"Visits",
+					"Visits"
 				)}
 			class="grid grid-flow-col grid-rows-none overflow-hidden auto-cols-max gap-4 snap-mandatory snap-x scroll-smooth h-40 sm:h-60">
 			{#each gamearrays.Visits.array as { nameofgame, idofgame, version, visits, numberofplayers, useridofowner, owner }}
@@ -177,7 +177,7 @@
 					e.target?.scrollLeft,
 					e.target?.clientWidth,
 					e.target?.scrollWidth,
-					"NewestArrivals",
+					"NewestArrivals"
 				)}
 			class="grid grid-flow-col grid-rows-none overflow-hidden auto-cols-max gap-4 snap-mandatory snap-x scroll-smooth h-40 sm:h-60">
 			{#each gamearrays.NewestArrivals.array as { nameofgame, idofgame, version, visits, numberofplayers, useridofowner, owner }}

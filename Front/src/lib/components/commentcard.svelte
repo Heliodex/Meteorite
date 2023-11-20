@@ -2,6 +2,7 @@
 	import { Avatar } from "@skeletonlabs/skeleton"
 	import RelativeTime from "@yaireo/relative-time"
 	import { url } from "$lib/url"
+
 	const relativeTime = new RelativeTime()
 
 	export let width: String
@@ -11,6 +12,7 @@
 	export let AssociatedAssetType: String
 	export let AssociatedAssetId: String
 	export let jwt: string
+
 	let comment: String
 	let currentPage = 1
 	let maxiumumPage = 1

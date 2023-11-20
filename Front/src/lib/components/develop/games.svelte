@@ -1,24 +1,23 @@
 <script lang="ts">
 	import { coinstore } from "$lib/coinstore"
-	import Createditems from "../develop/createditems.svelte"
+	import type { PageData } from "../../../routes/$types"
+	import Createdgames from "../develop/createdgames.svelte"
 	import { url } from "$lib/url"
+	export let data: PageData
 	let message = { error: false, message: "" }
 	let disabled = false
 	let itemname: string
 	let itemdesc: string
 	let files: FileList
-	let price: string
+	let gamefiles: FileList
+	let version: string
 	let creations: any[] = []
 
-	$: if (!itemname || !price) {
+	$: if (!itemname) {
 		disabled = true
-		message.message = "Item name and price required."
+		message.message = "Game name required."
 		message.error = true
-	} else if (parseFloat(price) < 5) {
-		disabled = true
-		message.message = "Minimum price is 5 rocks."
-		message.error = true
-	} else if (!files) {
+	} else if (!files || !gamefiles) {
 		disabled = true
 		message.message = "File required."
 		message.error = true
@@ -34,7 +33,7 @@
 	async function updatecreations() {
 		const response = await fetch(url + "/develop/creations", {
 			method: "POST",
-			body: JSON.stringify({ type }),
+			body: JSON.stringify({ type: "games" }),
 			headers: { "content-type": "application/json", Authorization: jwt },
 		})
 		const data = await response.json()
@@ -47,13 +46,13 @@
 
 	async function upload() {
 		const formData = new FormData()
-		formData.append("clothingfile", files[0])
-		formData.append("clothingname", itemname)
+		formData.append("gamefile", gamefiles[0])
+		formData.append("thumbnail", files[0])
+		formData.append("gamename", itemname)
 		formData.append("description", itemdesc ?? "...")
-		formData.append("price", price)
-		formData.append("type", type)
+		formData.append("version", version)
 
-		const req = await fetch("develop/uploadclothing", {
+		const req = await fetch("/develop/uploadgame", {
 			method: "post",
 			body: formData,
 			headers: {
@@ -78,21 +77,21 @@
 </script>
 
 <div class="space-y-2 grow">
-	{#if type === "Shirts"}
-		<h3>Create a Shirt</h3>
-	{:else if type === "Pants"}
-		<h3>Create a Pant</h3>
-	{/if}
+	<h3>Create a Game</h3>
 	<label class="input-label">
-		<span class="pt-3">Find your image:</span>
+		<span class="pt-3">Thumbnail :</span>
 		<input class="w-fit" accept="image/png" bind:files type="file" />
 	</label>
-	<label class="input-label gap-8">
-		{#if type === "Shirts"}
-			<span class="pt-3">Shirt Name:</span>
-		{:else if type === "Pants"}
-			<span class="pt-3">Pant Name:</span>
-		{/if}
+	<label class="input-label">
+		<span class="pt-3">Game File :</span>
+		<input
+			class="w-fit"
+			accept=".rbxl"
+			bind:files={gamefiles}
+			type="file" />
+	</label>
+	<label class="input-label gap-6">
+		<span class="pt-3">Game Name:</span>
 		<input
 			bind:value={itemname}
 			type="text"
@@ -101,20 +100,20 @@
 	</label>
 
 	<label class="input-label gap-8">
-		<span class="">Description:</span>
+		<span class="pt-3">Description:</span>
 		<textarea
 			bind:value={itemdesc}
 			class="input input-bordered input-primary w-full max-w-md rounded-md"
 			required />
 	</label>
 
-	<label class="input-label gap-8">
-		<span class="pt-3">Price:</span>
-		<input
-			bind:value={price}
-			type="number"
-			class="input input-bordered input-primary w-full max-w-md rounded-md"
-			required />
+	<label class="input-label gap-14">
+		<span class="pt-3">Version:</span>
+		<select bind:value={version} class="select w-full max-w-md">
+			<option value="2020">2020</option>
+			<option value="2018">2018</option>
+			<option value="2016">2016</option>
+		</select>
 	</label>
 
 	<h5
@@ -133,10 +132,15 @@
 	</button>
 
 	<div class="pt-8 space-y-4">
-		<h3>{type}</h3>
+		<h3>Games</h3>
 
-		{#each creations as { Name, ItemId, Description }}
-			<Createditems itemname={Name} itemid={ItemId} />
+		{#each creations as { nameofgame, idofgame, Description, avatartype, gearallowed }}
+			<Createdgames
+				itemname={nameofgame}
+				itemid={idofgame}
+				{data}
+				{avatartype}
+				{gearallowed} />
 		{/each}
 	</div>
 </div>

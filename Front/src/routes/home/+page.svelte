@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { Avatar } from "@skeletonlabs/skeleton"
-	import Gamecard from "../../components/gamecard.svelte"
+	import Gamecard from "$lib/components/gamecard.svelte"
 	let avatar: string
 	import { avatarstore } from "$lib/avatarstore"
-	import Statusbubble from "../../components/statusbubble.svelte"
-	import Skybanner from "../../components/skybanner.svelte"
+	import Statusbubble from "$lib/components/statusbubble.svelte"
+	import Skybanner from "$lib/components/skybanner.svelte"
 	import { invalidate } from "$app/navigation"
 	import RelativeTime from "@yaireo/relative-time"
 	const relativeTime = new RelativeTime()
-	//import Bannerad from "../../components/bannerad.svelte";
+	//import Bannerad from "$lib/components/bannerad.svelte";
 	avatarstore.subscribe(value => {
 		avatar = value
 	})
@@ -169,7 +169,7 @@
 									<h5 class="!text-base">"{content}"</h5>
 									<h5 class="!text-xs">
 										Posted {relativeTime.from(
-											new Date(date),
+											new Date(date)
 										)}
 									</h5>
 								</div>
