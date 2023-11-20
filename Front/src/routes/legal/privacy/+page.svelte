@@ -14,6 +14,6 @@
 	<a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a>
 	and
 	<a href="https://www.hcaptcha.com/privacy">HCaptcha</a>
-	 are an integral part of our websites operation. As such you will be using them
+	are an integral part of our websites operation. As such you will be using them
 	while on our website.
 </p>

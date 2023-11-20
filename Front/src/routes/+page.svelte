@@ -2,9 +2,8 @@
 	import { toastStore } from "@skeletonlabs/skeleton"
 	import type { ToastSettings } from "@skeletonlabs/skeleton"
 	import HCaptcha from "svelte-hcaptcha"
-	import { filter } from "@skeletonlabs/skeleton"
 	import { Noir } from "@skeletonlabs/skeleton"
-	import { Modal, modalStore } from "@skeletonlabs/skeleton"
+	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import _2famodal from "../components/login/2famodal.svelte"
 
@@ -210,6 +209,6 @@
 </div>
 <svelte:window
 	bind:scrollY={scroll}
-	use:wheel={() => {
+	on:wheel={() => {
 		scroll += 1
 	}} />

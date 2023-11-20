@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from "$app/navigation"
-	import { FileDropzone } from "@skeletonlabs/skeleton"
-	import type { PageData } from "../$types"
+
 	let groupname: string
 	let groupdescription: string
 	let files: FileList
 	let publicgroup = true
 	let disabled = true
+
 	import Rocks from "../../../components/rocks.svelte"
 
-	export let data: PageData
+	export let data
 	let jwt = data.jwt
 
 	$: if (groupname && files && data.user.coins >= 100) {

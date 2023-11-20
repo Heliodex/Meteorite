@@ -2,8 +2,7 @@ import { sveltekit } from "@sveltejs/kit/vite"
 import { defineConfig } from "vite"
 let url = "http://localhost:80"
 
-/** @type {import('vite').UserConfig} */
-const deb = {
+const deb: import("vite").UserConfig = {
 	target: url,
 	changeOrigin: true,
 }
@@ -24,20 +23,19 @@ const defaultconfig = {
 }
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
-	if (command === "serve") {
+	if (command == "serve") {
 		return {
 			...defaultconfig,
 		}
-	} else {
-		// command === 'build'
-		return {
-			// build specific config
+	}
+	// command == "build"
+	return {
+		// build specific config
 
-			...{
-				plugins: [sveltekit()],
-			},
-		}
+		...{
+			plugins: [sveltekit()],
+		},
 	}
 })
 
-//export default config;
+// export default config

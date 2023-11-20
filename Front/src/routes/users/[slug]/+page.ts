@@ -1,9 +1,8 @@
 import { error } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
 import { url } from "$lib/url"
-	import { PUBLIC_ORIGIN } from "$env/static/public"
+import { PUBLIC_ORIGIN } from "$env/static/public"
 
-export const load = (async ({ fetch, params, parent }) => {
+export const load = async ({ fetch, params, parent }) => {
 	let data = await parent()
 	let alreadyFriends = false
 	let otherUserWantsToBeFriends = false
@@ -62,4 +61,4 @@ export const load = (async ({ fetch, params, parent }) => {
 		}
 	}
 	throw error(404, "Not found")
-}) satisfies PageLoad
+}

@@ -1,20 +1,18 @@
 <script lang="ts">
 	import { Tab, TabGroup } from "@skeletonlabs/skeleton"
-	import { writable, type Writable } from "svelte/store"
 	import Clothing from "../../components/develop/clothing.svelte"
 	import Games from "../../components/develop/games.svelte"
 	import Asset from "../../components/develop/asset.svelte"
 	import Packages from "../../components/develop/admin/packages.svelte"
 	import Accessories from "../../components/develop/admin/accessories.svelte"
-	import { Modal, modalStore } from "@skeletonlabs/skeleton"
+	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import { slide } from "svelte/transition"
-	import type { PageData } from "./$types"
 	import Launchmodal from "../../components/games/launchmodal.svelte"
 
 	let storeTab = "Shirts"
 
-	export let data: PageData
+	export let data
 
 	let openstudio = false
 

@@ -3,12 +3,8 @@
 	import { PUBLIC_ORIGIN } from "$env/static/public"
 	let gamearray: any[] = []
 	let currentcursor = 1
-	import type { PageData } from "./$types"
-	import { onMount } from "svelte"
-	let scrollTimer: NodeJS.Timeout | null,
-		lastScrollFireTime = 0
 
-	export let data: PageData
+	export let data
 
 	let search = data.slug
 	$: {

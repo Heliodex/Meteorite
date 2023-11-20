@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { Avatar, menu } from "@skeletonlabs/skeleton"
-	import type { PageData } from "../$types"
+	import { Avatar } from "@skeletonlabs/skeleton"
 	import Groupbar from "../../../components/groups/groupbar.svelte"
 	import Commentcard from "../../../components/commentcard.svelte"
 	import { url } from "$lib/url"
-	let selectedgroup = "Lambda Media Group"
 	let currentPage = 1
 	let maxiumumPage = 1
 	let users: []
 
-	export let data: PageData
+	export let data
+
 	let groupid = data.group.groupid
 
 	async function updateMembers() {
@@ -37,7 +36,7 @@
 </script>
 
 <div class="sm:flex sm:flex-row gap-2 max-w-[1400px] m-0 m-auto">
-	<Groupbar {selectedgroup} grouplist={data.groups} />
+	<Groupbar grouplist={data.groups} />
 
 	<div class="col-span-5 mt-8 w-full space-y-2">
 		<div class="bg-surface-700 p-4">

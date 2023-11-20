@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { PageData } from "../$types"
 	import Gamecard from "../../components/gamecard.svelte"
 	import Scrollbar from "../../components/scrollbutton.svelte"
-	export let data: PageData
+
+	export let data
+
 	let gamearrays: any = {
 		Popular: { array: [], cursor: 1 },
 		OurRecommendations: { array: [], cursor: 1 },
@@ -14,7 +15,7 @@
 		data?.firstpaint.OurRecommendations.array
 	gamearrays.Visits.array = data?.firstpaint.Visits.array
 	gamearrays.NewestArrivals.array = data?.firstpaint.NewestArrivals.array
-	let scrollTimer: NodeJS.Timeout | null,
+	let scrollTimer: number | null,
 		lastScrollFireTime = 0
 
 	async function addToArray(array: string) {

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Usercard from "../../components/usercard.svelte"
-	import type { PageData } from "./$types"
 
 	async function refresh() {
 		const response = await fetch("/api/friends/friend-requests", {
@@ -15,7 +14,7 @@
 		data.friendRequests = data.friendRequests
 	}
 
-	export let data: PageData
+	export let data
 </script>
 
 <div class="space-y-4 max-w-[1200px] m-0 m-auto">

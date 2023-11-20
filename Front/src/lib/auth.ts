@@ -3,8 +3,7 @@ import { PUBLIC_ORIGIN } from "$env/static/public"
 
 export const authenticateUser = async (event: RequestEvent) => {
 	// get the cookies from the request
-	const { cookies } = event
-	const { route } = event
+	const { cookies, route } = event
 
 	// get the user token from the cookie
 	const userToken = cookies.get("jwt")

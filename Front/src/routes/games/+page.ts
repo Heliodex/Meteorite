@@ -1,7 +1,6 @@
-import type { PageLoad } from "./$types"
 import { url } from "$lib/url"
 
-export const load = (async ({ fetch }) => {
+export const load = async ({ fetch }) => {
 	let gamearrays: any = {
 		Popular: { array: [] },
 		OurRecommendations: { array: [] },
@@ -24,4 +23,4 @@ export const load = (async ({ fetch }) => {
 	return {
 		firstpaint: gamearrays,
 	}
-}) satisfies PageLoad
+}

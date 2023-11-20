@@ -1,9 +1,10 @@
 import { error, redirect } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
 import { PUBLIC_ORIGIN } from "$env/static/public"
 
-export const load = (async ({ fetch, params }) => {
-	const res = await fetch(`http://${PUBLIC_ORIGIN}/games/gameinfo/${params.slug}`)
+export const load = async ({ fetch, params }) => {
+	const res = await fetch(
+		`http://${PUBLIC_ORIGIN}/games/gameinfo/${params.slug}`,
+	)
 	const data = await res.json()
 
 	if (
@@ -30,4 +31,4 @@ export const load = (async ({ fetch, params }) => {
 		}
 	}
 	throw error(404, "Not found")
-}) satisfies PageLoad
+}

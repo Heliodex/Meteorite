@@ -1,8 +1,6 @@
-import { error } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
 import { PUBLIC_ORIGIN } from "$env/static/public"
 
-export const load = (async ({ fetch, parent }) => {
+export const load = async ({ fetch, parent }) => {
 	let data = await parent()
 
 	const response = await fetch(
@@ -20,4 +18,4 @@ export const load = (async ({ fetch, parent }) => {
 	return {
 		friendRequests: friendata.data,
 	}
-}) satisfies PageLoad
+}

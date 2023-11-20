@@ -1,8 +1,7 @@
-import { error, redirect } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
+import { error } from "@sveltejs/kit"
 import { PUBLIC_ORIGIN } from "$env/static/public"
 
-export const load = (async ({ parent, fetch, params }) => {
+export const load = async ({ parent, fetch, params }) => {
 	const res = await fetch(
 		`http://${PUBLIC_ORIGIN}/api/catalog/iteminfo/${params.slug}`,
 	)
@@ -19,4 +18,4 @@ export const load = (async ({ parent, fetch, params }) => {
 		}
 	}
 	throw error(404, "Not found")
-}) satisfies PageLoad
+}

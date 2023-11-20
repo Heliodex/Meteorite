@@ -1,17 +1,14 @@
 <script lang="ts">
-	import type { PageData } from "./$types"
 	import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton"
-	import { writable, type Writable } from "svelte/store"
 	import Itemcard from "../../components/itemcard.svelte"
 	import Colorpicker from "../../components/colorpicker.svelte"
 	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
-	import { url } from "$lib/url"
 	let avatar: string
 	import { avatarstore } from "$lib/avatarstore"
 	import { page } from "$app/stores"
 	import { goto, invalidate } from "$app/navigation"
-	import { onMount } from "svelte"
+
 	avatarstore.subscribe(value => {
 		avatar = value
 	})
@@ -20,7 +17,7 @@
 
 	$: query = $page.url
 
-	export let data: PageData
+	export let data
 	const jwt = data.jwt
 	const userid = data.user.userid
 
@@ -86,13 +83,13 @@
 				`/api/thumbnailrender/?id=${data.user.userid}&method=regenerate`,
 				{
 					headers: { Authorization: jwt },
-				},
+				}
 			)
 			await fetch(
 				`/api/thumbnailrender/?id=${data.user.userid}&type=headshot&method=regenerate`,
 				{
 					headers: { Authorization: jwt },
-				},
+				}
 			)
 			avatarstore.update(
 				n =>
@@ -100,7 +97,7 @@
 						"/api/thumbnailrender/?id=" +
 						data.user.userid +
 						"&a=" +
-						Date.now()),
+						Date.now())
 			)
 			regeneratebtn = "Regenerate"
 			regenerating = false
@@ -256,7 +253,7 @@
 									class="unstyled"
 									href="/catalog/{ItemId}/{itemdata.Name.replace(
 										/[^0-9a-z ]/gi,
-										'',
+										''
 									).replaceAll(' ', '-')}">
 									<img
 										class="w-20"
@@ -271,7 +268,7 @@
 										on:click={() => {
 											itemaction(
 												"remove",
-												parseFloat(ItemId),
+												parseFloat(ItemId)
 											)
 										}}
 										class="btn variant-filled-primary rounded-md btn-sm absolute right-0 top-5">
@@ -282,7 +279,7 @@
 										on:click={() => {
 											itemaction(
 												"wear",
-												parseFloat(ItemId),
+												parseFloat(ItemId)
 											)
 										}}
 										class="btn variant-filled-primary rounded-md btn-sm absolute right-0 top-5">

@@ -1,8 +1,6 @@
-import { error } from "@sveltejs/kit"
-import type { PageLoad } from "./$types"
 import { url as url2 } from "$lib/url"
 
-export const load = (async ({ parent, url, fetch }) => {
+export const load = async ({ parent, url, fetch }) => {
 	const avatarfilter = String(url.searchParams.get("filter") ?? "shirts")
 	const currentPage = Number(url.searchParams.get("page") ?? "1")
 	let currentItems: Array<any> = []
@@ -28,4 +26,4 @@ export const load = (async ({ parent, url, fetch }) => {
 			avatarfilter,
 		}
 	}
-}) satisfies PageLoad
+}

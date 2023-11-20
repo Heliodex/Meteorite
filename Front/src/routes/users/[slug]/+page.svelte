@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { Avatar, Tab, TabGroup } from "@skeletonlabs/skeleton"
-	import type { PageData } from "./$types"
 	import Statusbubble from "../../../components/statusbubble.svelte"
 	import Gamecard from "../../../components/gamecard.svelte"
-	import { invalidate } from "$app/navigation"
 
-	export let data: PageData
+	export let data
 	let jwt = data.jwt
 
 	let gameid = data.profile.status.id

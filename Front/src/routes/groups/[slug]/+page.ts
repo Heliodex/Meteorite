@@ -1,8 +1,7 @@
-import type { PageLoad } from "./$types"
 import { url } from "$lib/url"
 import { error } from "@sveltejs/kit"
 
-export const load = (async ({ fetch, parent, params }) => {
+export const load = async ({ fetch, parent, params }) => {
 	let data = await parent()
 
 	const response = await fetch(url + "/api/groups", {
@@ -30,4 +29,4 @@ export const load = (async ({ fetch, parent, params }) => {
 		}
 	}
 	throw error(404, "Not found")
-}) satisfies PageLoad
+}

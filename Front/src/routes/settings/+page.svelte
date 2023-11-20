@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type { PageData } from "./$types"
-	import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton"
-	import { writable, type Writable } from "svelte/store"
-	import { Modal, modalStore } from "@skeletonlabs/skeleton"
+	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import changePasswordModal from "../../components/settingsmodals/changepassword.svelte"
 	import _2faModal from "../../components/settingsmodals/_2fa.svelte"
@@ -11,6 +8,7 @@
 	import { coinstore } from "$lib/coinstore"
 	import { toastStore } from "@skeletonlabs/skeleton"
 	import type { ToastSettings } from "@skeletonlabs/skeleton"
+
 	let error = $page.url.searchParams.get("error")
 
 	let settingfilter: string
@@ -20,7 +18,7 @@
 	let customcss: string
 	let message = { error: false, message: "" }
 
-	export let data: PageData
+	export let data
 
 	customcss = data.user?.css ?? ""
 

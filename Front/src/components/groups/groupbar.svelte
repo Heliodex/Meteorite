@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Avatar } from "@skeletonlabs/skeleton"
-	export let grouplist: array
+	export let grouplist: any[] // ???
 </script>
 
 <div class="hidden sm:block">

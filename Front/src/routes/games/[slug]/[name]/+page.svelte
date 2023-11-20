@@ -1,10 +1,8 @@
 <script lang="ts">
-	import type { PageData } from "./$types"
-	import { menu, tooltip } from "@skeletonlabs/skeleton"
+	import { menu } from "@skeletonlabs/skeleton"
 	import Commentcard from "../../../../components/commentcard.svelte"
 	import { TabGroup, Tab } from "@skeletonlabs/skeleton"
-	import { writable, type Writable } from "svelte/store"
-	import { Modal, modalStore } from "@skeletonlabs/skeleton"
+	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import { invalidate } from "$app/navigation"
 	import Skybanner from "../../../../components/skybanner.svelte"
@@ -14,11 +12,12 @@
 	import Itemcard from "../../../../components/itemcard.svelte"
 	import { MoreHorizontalIcon } from "lucide-svelte"
 	import { PUBLIC_ORIGIN } from "$env/static/public"
-	let storeTab = "About"
-
-	export let data: PageData
+	
+	export let data
+	
 	const jwt = data.jwt
-
+	
+	let storeTab = "About"
 	let likefill = "none"
 	let dislikefill = "none"
 	let gamepasses: any[] = []

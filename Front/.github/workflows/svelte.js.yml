@@ -3,50 +3,48 @@
 
 name: Meteorite Push to Prod
 
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [16.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: "npm"
+            - run: npm ci
+            - run: npm run build --if-present
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-        
-    - name: Copy files to serv
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: build
-        remote: /root/meteoriterewrite/temp
-        host: ${{secrets.IPCLOUD}}
-        username: root
-        concurrency: 10
-        privateKey: ${{secrets.SSH}}
-        
-    - name: restart server and shit
-      # You may pin to the exact commit or the version.
-      # uses: appleboy/ssh-action@b60142998894e495c513803efc6d5d72a72c968a
-      uses: appleboy/ssh-action@v0.1.8
-      with:
-        key: ${{secrets.SSH}}
-        host: ${{secrets.IPCLOUD}}
-        username: root
-        script: |
-          cd /root/meteoriterewrite
-          rm -rf build
-          mv temp build
-          cd /root/SushiBlox-Website
-          npm run prodreload
+            - name: Copy files to serv
+              uses: garygrossgarten/github-action-scp@release
+              with:
+                  local: build
+                  remote: /root/meteoriterewrite/temp
+                  host: ${{secrets.IPCLOUD}}
+                  username: root
+                  concurrency: 10
+                  privateKey: ${{secrets.SSH}}
+
+            - name: restart server and shit
+              # You may pin to the exact commit or the version.
+              # uses: appleboy/ssh-action@b60142998894e495c513803efc6d5d72a72c968a
+              uses: appleboy/ssh-action@v0.1.8
+              with:
+                  key: ${{secrets.SSH}}
+                  host: ${{secrets.IPCLOUD}}
+                  username: root
+                  script: |
+                      cd /root/meteoriterewrite
+                      rm -rf build
+                      mv temp build
+                      cd /root/SushiBlox-Website
+                      npm run prodreload

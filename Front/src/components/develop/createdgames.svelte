@@ -4,7 +4,7 @@
 	export let avatartype: string
 	export let gearallowed: boolean
 
-	import { Modal, modalStore } from "@skeletonlabs/skeleton"
+	import { modalStore } from "@skeletonlabs/skeleton"
 	import type { ModalSettings, ModalComponent } from "@skeletonlabs/skeleton"
 	import Editgamemodal from "./modals/editgamemodal.svelte"
 	import type { PageData } from "../../routes/$types"

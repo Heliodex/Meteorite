@@ -1,20 +1,15 @@
 <script lang="ts">
-	import { TabGroup, Tab, dataTableHandler } from "@skeletonlabs/skeleton"
-	import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton"
-	import { writable, type Writable } from "svelte/store"
-	import { Avatar } from "@skeletonlabs/skeleton"
+	import { TabGroup, Tab } from "@skeletonlabs/skeleton"
 	import Lookup from "../../components/admin/lookup.svelte"
 	import Lookupdone from "../../components/admin/lookupdone.svelte"
 	import Assetqueue from "../../components/admin/assetqueue.svelte"
 	import Logs from "../../components/admin/logs.svelte"
-	import type { PageData } from "../$types"
 	import Config from "../../components/admin/config.svelte"
+
 	let lookupdata: any
-
 	let storeTab = "lookup"
-	const storeaction: Writable<string> = writable("horz")
 
-	export let data: PageData
+	export let data
 </script>
 
 <div

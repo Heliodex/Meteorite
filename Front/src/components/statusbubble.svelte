@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from "svelte"
 	import { PUBLIC_ORIGIN } from "$env/static/public"
 
 	export let size: string

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Avatar } from "@skeletonlabs/skeleton"
 	import Gamecard from "../../components/gamecard.svelte"
-	import type { PageData } from "./$types"
 	let avatar: string
 	import { avatarstore } from "$lib/avatarstore"
 	import Statusbubble from "../../components/statusbubble.svelte"
@@ -14,7 +13,7 @@
 		avatar = value
 	})
 
-	export let data: PageData
+	export let data
 	let friends = data.friendsdata
 	let FeedDisabled = true
 	let sharevalue: string

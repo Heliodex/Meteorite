@@ -1,7 +1,6 @@
-import type { PageLoad } from "./$types"
 import { url } from "$lib/url"
 
-export const load = (async ({ fetch, parent }) => {
+export const load = async ({ fetch, parent }) => {
 	let data = await parent()
 
 	const response = await fetch(url + "/api/auth/recentgames", {
@@ -36,4 +35,4 @@ export const load = (async ({ fetch, parent }) => {
 		friendsdata,
 		feed: feed.data,
 	}
-}) satisfies PageLoad
+}

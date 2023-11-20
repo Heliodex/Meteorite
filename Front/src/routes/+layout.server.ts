@@ -1,5 +1,5 @@
 import { redirect } from "@sveltejs/kit"
-import type { LayoutServerLoad } from "./$types"
+
 const protectedroutes = [
 	"/home",
 	"/catalog",
@@ -10,9 +10,10 @@ const protectedroutes = [
 	"/admin",
 ]
 
-export const load: LayoutServerLoad = (async ({ url, locals }) => {
-	//console.log(locals)
-	//await parent;
+export const load = async ({ url, locals }) => {
+	// console.log(locals)
+	// await parent()
+
 	if (!locals.user) {
 		if (
 			protectedroutes.includes(url.pathname) === true ||
@@ -52,4 +53,4 @@ export const load: LayoutServerLoad = (async ({ url, locals }) => {
 		protocol: url.protocol,
 		url: url.pathname,
 	}
-}) satisfies LayoutServerLoad
+}

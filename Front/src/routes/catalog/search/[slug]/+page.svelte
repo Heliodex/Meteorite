@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { json } from "@sveltejs/kit"
 	import { slide } from "svelte/transition"
 	import Itemcard from "../../../../components/itemcard.svelte"
 	import Rocks from "../../../../components/rocks.svelte"
-	import { Avatar } from "@skeletonlabs/skeleton"
 	import { url } from "$lib/url"
-	import type { PageData } from "./$types"
 
-	export let data: PageData
+	export let data
 	let search = data.slug
 
 	let accessories = false

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Usercard from "../../../../components/usercard.svelte"
-	import type { PageData } from "./$types"
 	import { url } from "$lib/url"
 	let currentPage = 1
 	let maxiumumPage = 1
 
-	export let data: PageData
+	export let data
+
 	let search = data.slug
 	$: {
 		search = data.slug

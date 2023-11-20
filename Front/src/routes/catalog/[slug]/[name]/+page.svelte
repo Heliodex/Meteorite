@@ -2,17 +2,15 @@
 	import { Avatar } from "@skeletonlabs/skeleton"
 	import Rocks from "../../../../components/rocks.svelte"
 	import Commentcard from "../../../../components/commentcard.svelte"
-	import type { PageData } from "./$types"
 	import { toastStore, menu } from "@skeletonlabs/skeleton"
 	import type { ToastSettings } from "@skeletonlabs/skeleton"
 	import { coinstore } from "$lib/coinstore"
 	import { MoreHorizontalIcon } from "lucide-svelte"
 
-	export let data: PageData
+	export let data
 
 	let itemid = data.item.ItemId
 	let price = data.item.Price
-	let money = data.user.coins
 	let jwt = data.jwt
 	let disabled = false
 	let buyButton = "Buy"
