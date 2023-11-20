@@ -5,9 +5,8 @@ const requirediscord = (req, res, next) => {
 			status: "error",
 			error: "Discord link required for develop. Link your discord in the settings panel.",
 		})
-	} else {
-		next()
 	}
+	next()
 }
 
 module.exports = { requirediscord }

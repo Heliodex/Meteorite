@@ -177,8 +177,8 @@ const _2018placelauncher = async (req, res, next) => {
 		sanitizedplaceid,
 		game.useridofowner,
 	)
-	//console.dir(response,{ depth: null })
-	//console.dir(response,{ depth: null })
+	// console.dir(response,{ depth: null })
+	// console.dir(response,{ depth: null })
 
 	await rcc.create({
 		PlaceId: sanitizedplaceid,
@@ -186,7 +186,7 @@ const _2018placelauncher = async (req, res, next) => {
 		Status: 1, // 1 means loading
 	})
 
-	//console.log(newrenderscript)
+	// console.log(newrenderscript)
 
 	var joinScriptJson = {
 		jobId: "Test",
@@ -208,5 +208,5 @@ router.all("/2018/join", requireAuth, _2018placelauncher, async (req, res) => {
 	})
 })
 
-//rcctalk.CloseJob('game2')
+// rcctalk.CloseJob("game2")
 module.exports = { router: router, _2018placelauncher: _2018placelauncher }

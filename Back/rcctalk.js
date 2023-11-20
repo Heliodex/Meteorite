@@ -294,8 +294,8 @@ async function GetExpiration(jobid) {
 		}
 	})
 }
-//var gameservertxt = fs.readFileSync('actualgameserver.txt','utf-8')
-//gameservertxt = gameservertxt.replace('function start(placeId, port, url)','function start(1111, port)')
+// var gameservertxt = fs.readFileSync('actualgameserver.txt','utf-8')
+// gameservertxt = gameservertxt.replace('function start(placeId, port, url)','function start(1111, port)')
 
 async function CloseExpiredJobs() {
 	return new Promise(async (resolve, reject) => {

@@ -108,14 +108,14 @@ router.post("/user/unfollow", jwtverify, async (req, res) => {
 			},
 		},
 		function (err, doc) {
-			//console.log(err)
+			// console.log(err)
 		},
 	)
 
 	res.json({ success: "true", isFollowing: "false" })
 })
 
-//below is friend code
+// below is friend code
 
 router.get("/user/get-friendship-count", async (req, res) => {
 	// this is used to limit friends on the client but since we won't have friends limits we can leave it here

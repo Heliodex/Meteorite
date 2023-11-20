@@ -13,7 +13,7 @@ const games = require("./../model/games.js")
 const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args))
 
-//redirect hmmmm
+// redirect hmmmm
 var rgx = /^[0-9]*\.?[0-9]*$/
 router.get("/", async (req, res) => {
 	if (req.query.name) {

@@ -349,7 +349,7 @@ async function GetAllJobs() {
 	})
 }
 
-//RenewLease('game2',"69530318916789546987353800")
+// RenewLease("game2", "69530318916789546987353800")
 async function lol() {
 	let res = await GetAllJobs()
 	//console.dir(res,{ depth: null })
@@ -371,9 +371,9 @@ async function lol() {
 	}
 	console.log(exists)
 }
-//lol()
-//GetAllJobs()
-//OpenGame('game2','3333','127.0.0.1','2')
+// lol()
+// GetAllJobs()
+// OpenGame('game2','3333','127.0.0.1','2')
 module.exports = {
 	OpenGame,
 	CloseJob,

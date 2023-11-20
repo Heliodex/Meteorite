@@ -3,7 +3,7 @@ const router = express.Router()
 const { requireAuth } = require("./../../middleware/authmiddleware")
 const bodyParser = require("body-parser")
 const catalog = require("./../../model/item.js")
-//const path = require('path');
+// const path = require("path")
 router.use(bodyParser.json())
 // only supports skyscraper ads for now
 

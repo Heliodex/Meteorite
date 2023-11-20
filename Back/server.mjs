@@ -136,7 +136,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD
 console.log(RCC_HOST)
 const { logExecutionTime } = require("mongoose-execution-time")
 
-//mongoose.plugin(logExecutionTime);
+// mongoose.plugin(logExecutionTime)
 if (PROD === "true") {
 	mongoose.connect("mongodb://127.0.0.1:27017/meteoritedb", {
 		useNewUrlParser: true,
@@ -263,12 +263,12 @@ app.use(express.urlencoded({ extended: true }))
 async function lol() {
 	try {
 		const res = await rcctalk.GetAllJobs()
-		//console.dir(res,{ depth: null })
+		// console.dir(res, { depth: null })
 	} catch (error) {
 		throw "RCC Test run failed please have rcc soap running on port 64989"
 	}
 }
-//lol()
+// lol()
 app.set("trust proxy", true)
 
 // routes lol

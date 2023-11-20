@@ -323,5 +323,5 @@ router.all(
 	},
 )
 
-//rcctalk.CloseJob('game2')
+// rcctalk.CloseJob("game2")
 module.exports = { router: router, _2020placelauncher: _2020placelauncher }

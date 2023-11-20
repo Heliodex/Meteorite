@@ -28,7 +28,7 @@ const key2020 = fs.readFileSync("PrivateKey2020.txt")
 const { _2020placelauncher } = require("../routes/2020/game")
 const { _2018placelauncher } = require("../routes/2018/game")
 
-//join and placelauncher
+// join and placelauncher
 function sleep(ms) {
 	return new Promise(resolve => {
 		setTimeout(resolve, ms)
@@ -326,7 +326,7 @@ router.all(
 			Status: 1, // 1 means loading
 		})
 
-		//console.log(newrenderscript)
+		// console.log(newrenderscript)
 
 		var joinScriptJson = {
 			jobId: "Test",
@@ -341,7 +341,7 @@ router.all(
 	},
 )
 
-//charapp and colors stealing from roblox
+// charapp and colors stealing from roblox
 
 router.get("/charapp", async (req, res) => {
 	if (Object.keys(req.query).length === 0) {
