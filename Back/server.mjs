@@ -9,10 +9,10 @@ const __filename = fileURLToPath(import.meta.url)
 
 const __dirname = path.dirname(__filename)
 
-var express = require("express")
+const express = require("express")
 const app = require("express")()
-var cookieParser = require("cookie-parser")
-var session = require("express-session")
+const cookieParser = require("cookie-parser")
+const session = require("express-session")
 const helmet = require("helmet")
 const mongoose = require("mongoose")
 import configNew from "./model/configNew.mjs"
@@ -156,20 +156,16 @@ app.disable("x-powered-by") // we don't wanna tell potential attackers our exact
 // automatically create a default document in redisdb for our config
 // if the redis document doesn't exist auto create one these are also the default settings your site will start with
 async function createconfig() {
-	try {
-		var resp = await redis.exists("config:ONE")
-		if (resp === 0) {
-			// doesn't exist
-			await configRepository.save("ONE", {
-				RegistrationEnabled: true,
-				MaintenanceEnabled: false,
-				GamesEnabled: true,
-				KeysEnabled: false,
-				bannermessage: "",
-			})
-		}
-	} catch (err) {
-		throw err
+	let resp = await redis.exists("config:ONE")
+	if (resp === 0) {
+		// doesn't exist
+		await configRepository.save("ONE", {
+			RegistrationEnabled: true,
+			MaintenanceEnabled: false,
+			GamesEnabled: true,
+			KeysEnabled: false,
+			bannermessage: "",
+		})
 	}
 }
 createconfig()
@@ -180,7 +176,7 @@ app.use(async function (req, res, next) {
 		return next()
 	}
 	res.header("Cache-Control", "no-store,no-cache,must-revalidate")
-	var resp = await configRepository.fetch("ONE")
+	let resp = await configRepository.fetch("ONE")
 	req.config = resp
 	req.configRepository = configRepository
 
@@ -192,9 +188,10 @@ app.use(async function (req, res, next) {
 			req.headers["x-forwarded-proto"] = "http"
 		}
 	}
-	/*if (!req.headers['cf-connecting-ip']){ //localhost
-        res.header("Access-Control-Allow-Origin", "*");
-    }*/
+	// if (!req.headers["cf-connecting-ip"]) {
+	// 	// localhost
+	// 	res.header("Access-Control-Allow-Origin", "*")
+	// }
 	if (
 		req.headers["x-forwarded-host"] === "www.mete0r.xyz" &&
 		req.headers["x-forwarded-host"] &&
@@ -248,8 +245,8 @@ app.use(async function (req, res, next) {
 		req.headers?.["user-agent"] !=
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/605.1.15 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/605.1.15"
 	) {
-		var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
-		var resp = await redis.exists("ipWhiteListSchema:" + ip.toString())
+		let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+		let resp = await redis.exists("ipWhiteListSchema:" + ip.toString())
 		if (resp === 0) {
 			return res
 				.status(401)
@@ -273,39 +270,30 @@ app.set("trust proxy", true)
 
 // routes lol
 const assetRouter = require("./routes/assets.js")
-
 app.use(["/asset", "/v1/asset"], assetRouter)
 
 const gameRouter = require("./routes/game.js")
-
 app.use(["/game", "//game"], gameRouter)
 
 const persistenceRouter = require("./routes/persistence.js")
-
 app.use("/persistence", persistenceRouter)
 
 const clientSettingsRouter = require("./routes/clientsettings.js")
-
 app.use("/", clientSettingsRouter)
 
 const registerRouter = require("./routes/register.js")
-
 app.use("/register", registerRouter)
 
 const loginRouter = require("./routes/login.js")
-
 app.use(["/login", "/v2/login", "/v2/twostepverification/verify"], loginRouter)
 
 const logoutRouter = require("./routes/logout.js")
-
 app.use("/logout", logoutRouter)
 
 const gamesRouter = require("./routes/games.js")
-
 app.use("/games", gamesRouter)
 
 const adminRouter = require("./routes/admin.js")
-
 app.use("/admin", adminRouter)
 
 app.get("/users/account-info", (req, res) => {
@@ -322,23 +310,18 @@ app.get("/users/account-info", (req, res) => {
 })
 
 const usersRouter = require("./routes/users.js")
-
 app.use("/", usersRouter)
 
 const avatarRouter = require("./routes/avatar.js")
-
 app.use("/api/avatar", avatarRouter)
 
 const settingsRouter = require("./routes/settings.js")
-
 app.use("/settings", settingsRouter)
 
 const developRouter = require("./routes/develop.js")
-
 app.use("/develop", developRouter)
 
 const thumbnailRenderRouter = require("./routes/api/renderthumbnail.js")
-
 app.use(
 	[
 		"/api/thumbnailrender",
@@ -349,109 +332,83 @@ app.use(
 )
 
 const purchaseRouter = require("./routes/api/purchase.js")
-
 app.use("/api/purchase", purchaseRouter)
 
 const moderateRouter = require("./routes/api/moderate.js")
-
 app.use("/api/moderate", moderateRouter)
 
 const verifyRouter = require("./routes/api/verify.js")
-
 app.use("/api/verify", verifyRouter)
 
 const itemactionRouter = require("./routes/api/itemaction.js")
-
 app.use("/api/itemaction", itemactionRouter)
 
 const bodycolorupdateRouter = require("./routes/api/bodycolorupdate.js")
-
 app.use("/api/bodycolorupdate", bodycolorupdateRouter)
 
 const changepasswordRouter = require("./routes/api/changepassword.js")
-
 app.use("/api/changepassword", changepasswordRouter)
 
 const generatekeyRouter = require("./routes/api/generatekey.js")
-
 app.use("/api/generatekey", generatekeyRouter)
 
 const authRouter = require("./routes/api/auth.js")
-
 app.use("/api/auth", authRouter)
 
 const catalogRouter = require("./routes/catalog.js")
-
 app.use("/api/catalog", catalogRouter)
 
 const updategameinfoRouter = require("./routes/api/updategameinfo.js")
-
 app.use("/", updategameinfoRouter)
 
 const userinfoRouter = require("./routes/api/userinfo.js")
-
 app.use("/api/userinfo", userinfoRouter)
 
 const updateusermembershipRouter = require("./routes/api/updateusermembership.js")
-
 app.use("/api/updateusermembership", updateusermembershipRouter)
 
 const marketplaceRouter = require("./routes/marketplace.js")
-
 app.use("/", marketplaceRouter)
 
 const versioncompatibilityRouter = require("./routes/versioncompatibility.js")
-
 app.use("/", versioncompatibilityRouter)
 
 const t8gameRouter = require("./routes/2018/game.js")
-
 app.use("/game/", t8gameRouter.router)
 
 const t20gameRouter = require("./routes/2020/game.js")
-
 app.use(["/game/", "/v1"], t20gameRouter.router)
 
 const mobileApiRouter = require("./routes/mobileapi.js")
-
 app.use("/mobileapi", mobileApiRouter)
 
 const friendsApiRouter = require("./routes/api/friends.js")
-
 app.use("/api/friends", friendsApiRouter)
 
 const advertiseApiRouter = require("./routes/api/advertise.js")
-
 app.use("/api/advertise", advertiseApiRouter)
 
 const requestAdRouter = require("./routes/api/requestad.js")
-
 app.use("/api/requestad", requestAdRouter)
 
-/*const bankRouter = require('./routes/api/bank.js');
-
-app.use('/api/bank',bankRouter)*/
+// const bankRouter = require("./routes/api/bank.js")
+// app.use("/api/bank", bankRouter)
 
 const groupRouter = require("./routes/api/groups.js")
-
 app.use("/api/groups", groupRouter)
 
 const feedRouter = require("./routes/api/feed.js")
-
 app.use("/api/feed", feedRouter)
 
 const commentRouter = require("./routes/api/comment.js")
-
 app.use("/api/comments", commentRouter)
 
 const ideRouter = require("./routes/ide.js")
-
 app.use(["/ide", "//ide"], ideRouter)
 
-/*
-app.get("/My/Places", (req, res) => {
-    res.send("No editing sorry")
-})*/
+// app.get("/My/Places", (req, res) => {
+// 	res.send("No editing sorry")
+// })
 
 app.get("/studio/e.png", (req, res) => {
 	res.send()
@@ -3456,7 +3413,6 @@ app.get("/my/settings/json", (req, res) => {
 })
 
 const userinfoClient = require("./routes/userinfoclient.js")
-
 app.use("/", userinfoClient)
 
 app.get("/metrics", async (req, res) => {
@@ -3577,7 +3533,7 @@ app.get("/v1.1/avatar-fetch", async (req, res) => {
 	if (!doc.inventory) {
 		return res.json(json)
 	}
-	for (var key of doc.inventory) {
+	for (const key of doc.inventory) {
 		if (key.Equipped === true) {
 			if (placedoc.gearallowed ?? false === true) {
 				json.accessoryVersionIds.push(parseFloat(key.ItemId))
@@ -3645,7 +3601,7 @@ app.get("/v1/avatar-fetch", async (req, res) => {
 		if (!doc.inventory) {
 			return res.json(json)
 		}
-		for (var key of doc.inventory) {
+		for (const key of doc.inventory) {
 			if (key.Equipped === true) {
 				json.accessoryVersionIds.push(parseFloat(key.ItemId))
 			}
@@ -3694,7 +3650,7 @@ app.get("/v1/avatar-fetch", async (req, res) => {
 		return res.json(json)
 	}
 	let currentEmotePosition = 1
-	for (var key of doc.inventory) {
+	for (const key of doc.inventory) {
 		if (key.Equipped === true) {
 			if (key.Type === "Emotes" && currentEmotePosition <= 8) {
 				json.emotes.push({
@@ -3812,7 +3768,7 @@ app.all(
 			//filteredtext = '#'.repeat(req.body?.text?.length)
 			//filteredtext = filteredtext.replaceAll(filtered,"#")
 			let regex
-			for (var i = 0; i < filtered.length; i++) {
+			for (const i = 0; i < filtered.length; i++) {
 				regex = new RegExp(filtered[i], "g")
 				filteredtext = filteredtext.replace(
 					regex,
@@ -3856,7 +3812,7 @@ app.all("/v1/login", (req, res) => {
 })
 
 app.get("/initialize", async (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	ip = ip.toString()
 	await ipWhiteListRepository.save(ip, {
 		ip: ip,
@@ -3896,8 +3852,8 @@ if (PROD === "true") {
 	app.listen(80) // don't forget to change to 9000 for production
 	const localPrivateKeyPath = process.env.PRIVATEKEYLOCAL
 	const localCertificatePath = process.env.LOCALCERTIFICATEPATH
-	var privateKey = require("fs").readFileSync(localPrivateKeyPath)
-	var certificate = require("fs").readFileSync(localCertificatePath)
+	const privateKey = require("fs").readFileSync(localPrivateKeyPath)
+	const certificate = require("fs").readFileSync(localCertificatePath)
 	https
 		.createServer(
 			{
@@ -3907,26 +3863,4 @@ if (PROD === "true") {
 			app,
 		)
 		.listen(443) // remove this for prod
-}
-
-const f = {
-	Mode: "Thumbnail",
-	Settings: {
-		Type: "Avatar_R15_Action",
-		PlaceId: 1818,
-		UserId: 0,
-		BaseUrl: "mete0r.xyz",
-		MatchmakingContextId: 1,
-		Arguments: [
-			"https://www.mete0r.xyz",
-			"https://api.mete0r.xyz/v1.1/avatar-fetch?userId=0",
-			"PNG",
-			420,
-			420,
-		],
-	},
-	Arguments: {
-		PrefferedPort: 53640,
-		MachineAddress: "localhost",
-	},
 }

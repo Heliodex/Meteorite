@@ -11,7 +11,7 @@ const {
 	waitForPort,
 } = require("get-port-please")
 const RCC_HOST = process.env.RCC_HOST
-var sanitize = require("mongo-sanitize")
+let sanitize = require("mongo-sanitize")
 const games = require("./../../model/games.js")
 const signatures = require("./../signatures.js")
 const rcc = require("../../model/rcc2020.js")
@@ -27,7 +27,7 @@ function sleep(ms) {
 }
 
 const _2020placelauncher = async (req, res, next) => {
-	var enabled = req.config
+	let enabled = req.config
 	if (enabled.GamesEnabled === false) {
 		return res.json({
 			status: "error",
@@ -46,7 +46,7 @@ const _2020placelauncher = async (req, res, next) => {
 		// mobile join-game
 		req.query.name = req.body.placeId
 	}
-	var joinJson = {
+	let joinJson = {
 		ClientPort: 0,
 		MachineAddress: "localhost",
 		ServerPort: 25564,
@@ -102,7 +102,7 @@ const _2020placelauncher = async (req, res, next) => {
 			message: "",
 		})
 	}
-	var sanitizedplaceid = sanitize(
+	let sanitizedplaceid = sanitize(
 		req.query.name ?? req.query.placeId ?? req.query.placeid,
 	)
 	const game = await games.findOne({ idofgame: sanitizedplaceid }).lean()
@@ -140,7 +140,7 @@ const _2020placelauncher = async (req, res, next) => {
 				`game${sanitizedplaceid}\n` /*jobid*/ +
 				timestamp /*timestamp*/,
 		)
-		var signature1 = sign1.sign(key, "base64")
+		let signature1 = sign1.sign(key, "base64")
 		joinJson.ClientTicket += signature1 + ";"
 		//create signature 2
 		const sign2 = crypto.createSign("SHA1")
@@ -149,7 +149,7 @@ const _2020placelauncher = async (req, res, next) => {
 				`game${sanitizedplaceid}\n` /*jobid*/ +
 				timestamp /*timestamp*/,
 		)
-		var signature2 = sign2.sign(key, "base64")
+		let signature2 = sign2.sign(key, "base64")
 		joinJson.ClientTicket += signature2 + ";4"
 
 		if (req.method === "POST" && req.body.isTeleport) {
@@ -222,7 +222,7 @@ const _2020placelauncher = async (req, res, next) => {
 		req.userdocument.gamejoin2020 = JSON.stringify(joinJson)
 		req.userdocument.markModified("gamejoin2020")
 		await req.userdocument.save()
-		var joinScriptJson = {
+		let joinScriptJson = {
 			jobId: "Test",
 			status: 2,
 			joinScriptUrl:
@@ -237,7 +237,7 @@ const _2020placelauncher = async (req, res, next) => {
 	}
 
 	if (instance && instance.Status === 1) {
-		var joinScriptJson = {
+		let joinScriptJson = {
 			jobId: "Test",
 			status: 1,
 			joinScriptUrl:
@@ -264,7 +264,7 @@ const _2020placelauncher = async (req, res, next) => {
 		return res.send(JSON.stringify(joinScriptJson))
 	}
 
-	var port = 53640 + Math.floor(Math.random() * 100)
+	let port = 53640 + Math.floor(Math.random() * 100)
 	// launch job
 	rcctalk.OpenGame2020(
 		"game" + sanitizedplaceid,
@@ -283,7 +283,7 @@ const _2020placelauncher = async (req, res, next) => {
 
 	//console.log(newrenderscript)
 
-	var joinScriptJson = {
+	let joinScriptJson = {
 		jobId: "Test",
 		status: 1,
 		joinScriptUrl:

@@ -6,7 +6,7 @@ const key = fs.readFileSync("DefaultPrivateKey.pem")
 function signer(wow) {
 	const sign = crypto.createSign("SHA1")
 	sign.update("\r\n" + JSON.stringify(wow))
-	var signature_b64 = sign.sign(key, "base64")
+	let signature_b64 = sign.sign(key, "base64")
 	//console.log(signature_b64)
 
 	return signature_b64

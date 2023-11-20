@@ -13,7 +13,7 @@ require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
 
 router.post("/api/updategameinfo", async (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		const { game, players } = req.body
 		//const instance = await rcc.findOne({PlaceId: game}).lean()
@@ -37,7 +37,7 @@ router.post("/api/updategameinfo", async (req, res) => {
 router.all(
 	["/api/updategameinfo/updatevisits", "/game/placevisit.ashx"],
 	async (req, res) => {
-		var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+		let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 		if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 			let { game } = req.body
 			if (req.query.AssociatedPlaceID) {
@@ -63,7 +63,7 @@ router.all(
 )
 
 router.all("/api/updategameinfo/gameloaded", async (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		let { game } = req.body
 		const gamedoc = await games.findOne({ idofgame: game }).lean()
@@ -112,7 +112,7 @@ router.all("/api/updategameinfo/gameloaded", async (req, res) => {
 })
 
 router.post("/api/updategameinfo/closejob", async (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		console.log("closed")
 		let { game } = req.body
@@ -168,7 +168,7 @@ router.post("/api/updategameinfo/closejob", async (req, res) => {
 })
 
 router.get("/api/updategameinfo/closealljobs", async (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		console.log("closed all")
 		//const instance = await rcc.findOne({PlaceId: game}).lean()
@@ -202,7 +202,7 @@ router.get("/api/updategameinfo/closealljobs", async (req, res) => {
 })
 
 router.all(["/api/updategameinfo/updatepresence"], async (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		let { game, player, name, action } = req.body
 		game = await games.findOne({ idofgame: game })

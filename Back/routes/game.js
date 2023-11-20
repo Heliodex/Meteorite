@@ -9,7 +9,7 @@ const rcctalk = require("../rcctalk")
 const games = require("../model/games.js")
 const catalog = require("../model/item.js")
 const rcc = require("../model/rcc.js")
-var sanitize = require("mongo-sanitize")
+const sanitize = require("mongo-sanitize")
 const {
 	getPort,
 	checkPort,
@@ -81,7 +81,7 @@ end)
 `
 	const sign = crypto.createSign("SHA1")
 	sign.update("\r\n" + string)
-	var signature = sign.sign(key, "base64")
+	let signature = sign.sign(key, "base64")
 
 	res.send("--rbxsig%" + signature + "%\r\n" + string)
 })
@@ -108,12 +108,12 @@ router.get(["/join", "/join.ashx"], requireAuth, async (req, res) => {
 		) {
 			return res.json({ status: "error", error: "no placelauncher" })
 		}
-		var joinJson = JSON.parse(req.userdocument.gamejoin2018)
+		let joinJson = JSON.parse(req.userdocument.gamejoin2018)
 		req.userdocument.gamejoin2018 = undefined
 		req.userdocument.markModified("gamejoin2018")
 		await req.userdocument.save()
 		//sign with our sign module
-		var signature = signatures.signer(joinJson)
+		let signature = signatures.signer(joinJson)
 		//console.log(signature)
 
 		return res.send(
@@ -127,14 +127,14 @@ router.get(["/join", "/join.ashx"], requireAuth, async (req, res) => {
 		) {
 			return res.json({ status: "error", error: "no placelauncher" })
 		}
-		var joinJson = JSON.parse(req.userdocument.gamejoin2020)
+		let joinJson = JSON.parse(req.userdocument.gamejoin2020)
 		req.userdocument.gamejoin2020 = undefined
 		req.userdocument.markModified("gamejoin2020")
 		await req.userdocument.save()
 		//sign with our sign module
 		const sign = crypto.createSign("SHA1")
 		sign.update("\r\n" + JSON.stringify(joinJson))
-		var signature = sign.sign(key2020, "base64")
+		let signature = sign.sign(key2020, "base64")
 
 		//console.log(signature)
 
@@ -145,12 +145,12 @@ router.get(["/join", "/join.ashx"], requireAuth, async (req, res) => {
 	if (!req.userdocument.gamejoin || req.userdocument.gamejoin === "{}") {
 		return res.json({ status: "error", error: "no placelauncher" })
 	}
-	var joinJson = JSON.parse(req.userdocument.gamejoin)
+	let joinJson = JSON.parse(req.userdocument.gamejoin)
 	req.userdocument.gamejoin = undefined
 	req.userdocument.markModified("gamejoin")
 	await req.userdocument.save()
 	//sign with our sign module
-	var signature = signatures.signer(joinJson)
+	let signature = signatures.signer(joinJson)
 	//console.log(signature)
 
 	res.send("--rbxsig%" + signature + "%\r\n" + JSON.stringify(joinJson))
@@ -162,14 +162,14 @@ router.all(
 	_2020placelauncher,
 	_2018placelauncher,
 	async (req, res, next) => {
-		var enabled = req.config
+		let enabled = req.config
 		if (enabled.GamesEnabled === false) {
 			return res.json({
 				status: "error",
 				error: "Games are disabled bad boy",
 			})
 		}
-		var joinJson = {
+		let joinJson = {
 			ClientPort: 0,
 			MachineAddress: "localhost",
 			ServerPort: 25564,
@@ -226,7 +226,7 @@ router.all(
 				message: "",
 			})
 		}
-		var sanitizedplaceid = sanitize(req.query.name ?? req.query.placeId)
+		let sanitizedplaceid = sanitize(req.query.name ?? req.query.placeId)
 		const game = await games.findOne({ idofgame: sanitizedplaceid }).lean()
 		if (!game) {
 			return res.json({
@@ -245,8 +245,7 @@ router.all(
 			// if an rcc instance already exists we don't need to create a new one so we will just drag them into the existing game
 			joinJson.UserName = req.userdocument.username
 			joinJson.UserId = req.userdocument.userid
-			joinJson.CharacterAppearance =
-				"http://mete0r.xyz/game/charapp?name=" + req.userdocument.userid
+			joinJson.CharacterAppearance = `http://mete0r.xyz/game/charapp?name=${req.userdocument.userid}`
 			joinJson.MachineAddress = RCC_HOST // need to put rcc host here lol
 			joinJson.ServerPort = instance.Port
 			joinJson.PlaceId = instance.PlaceId
@@ -267,7 +266,7 @@ router.all(
 					`game${sanitizedplaceid}\n` /*jobid*/ +
 					timestamp /*timestamp*/,
 			)
-			var signature1 = sign1.sign(key, "base64")
+			let signature1 = sign1.sign(key, "base64")
 			joinJson.ClientTicket += signature1 + ";"
 
 			//create signature 2
@@ -277,18 +276,16 @@ router.all(
 					`game${sanitizedplaceid}\n` /*jobid*/ +
 					timestamp /*timestamp*/,
 			)
-			var signature2 = sign2.sign(key, "base64")
+			let signature2 = sign2.sign(key, "base64")
 			joinJson.ClientTicket += signature2
 
 			req.userdocument.gamejoin = JSON.stringify(joinJson)
 			req.userdocument.markModified("gamejoin")
 			await req.userdocument.save()
-			var joinScriptJson = {
+			let joinScriptJson = {
 				jobId: "Test",
 				status: 2,
-				joinScriptUrl:
-					"http://mete0r.xyz/game/join.ashx?auth=" +
-					joinJson.SessionId,
+				joinScriptUrl: `http://mete0r.xyz/game/join.ashx?auth=${joinJson.SessionId}`,
 				authenticationUrl: "http://mete0r.xyz/Login/Negotiate.ashx",
 				authenticationTicket: "SomeTicketThatDosentCrash",
 				message: "",
@@ -297,7 +294,7 @@ router.all(
 			return res.send(JSON.stringify(joinScriptJson))
 		}
 		if (instance && instance.Status === 1) {
-			var joinScriptJson = {
+			let joinScriptJson = {
 				jobId: "Test",
 				status: 1,
 				joinScriptUrl:
@@ -310,12 +307,12 @@ router.all(
 			return res.send(JSON.stringify(joinScriptJson))
 		}
 
-		var port = await getPort({ random: true })
-		var newgamescript =
+		let port = await getPort({ random: true })
+		let newgamescript =
 			"local placeId = " + sanitizedplaceid + "\n" + gamescript
 		newgamescript = "local port = " + port + "\n" + newgamescript
 		// launch job
-		var response = await rcctalk.OpenJob(
+		let response = await rcctalk.OpenJob(
 			"game" + sanitizedplaceid,
 			newgamescript,
 			"99999",
@@ -328,11 +325,10 @@ router.all(
 
 		// console.log(newrenderscript)
 
-		var joinScriptJson = {
+		let joinScriptJson = {
 			jobId: "Test",
 			status: 1,
-			joinScriptUrl:
-				"http://mete0r.xyz/game/join.ashx?auth=" + joinJson.SessionId,
+			joinScriptUrl: `http://mete0r.xyz/game/join.ashx?auth=${joinJson.SessionId}`,
 			authenticationUrl: "http://mete0r.xyz/Login/Negotiate.ashx",
 			authenticationTicket: "SomeTicketThatDosentCrash",
 			message: "",
@@ -363,13 +359,13 @@ router.get("/charapp", async (req, res) => {
 				return res.json([])
 			}
 			return res.send(
-				"http://mete0r.xyz/game/colors?name=" + req.query.name + ";",
+				`http://mete0r.xyz/game/colors?name=${req.query.name};`,
 			)
 		}
 
 		if (req.query.rcc) {
-			var empty = []
-			for (var key of user.inventory) {
+			let empty = []
+			for (const key of user.inventory) {
 				if (key.Equipped === true) {
 					empty.push({ item: { itemid: key.ItemId, type: key.Type } })
 				}
@@ -377,17 +373,15 @@ router.get("/charapp", async (req, res) => {
 			return res.json(empty)
 		}
 
-		var charapp = "http://mete0r.xyz/asset?name=" + req.query.name + ";"
+		let charapp = `http://mete0r.xyz/asset?name=${req.query.name};`
 		// add to charapp string by adding json to it
-		for (var key of user.inventory) {
+		for (const key of user.inventory) {
 			if (key.Equipped === true) {
-				if (placedoc.gearallowed ?? false === true) {
-					charapp += "http://mete0r.xyz/asset?id=" + key.ItemId + ";"
-				} else {
-					if (key.Type != "Gears") {
-						charapp +=
-							"http://mete0r.xyz/asset?id=" + key.ItemId + ";"
-					}
+				if (
+					(placedoc.gearallowed ?? false === true) ||
+					key.Type != "Gears"
+				) {
+					charapp += `http://mete0r.xyz/asset?id=${key.ItemId};`
 				}
 			}
 		}
@@ -407,39 +401,28 @@ router.get("/colors", async (req, res) => {
 		}
 
 		if (req.query.rcc) {
-			var empty = []
-			for (var key of user.colors) {
+			let empty = []
+			for (const key of user.colors) {
 				empty.push(key.value)
 			}
 			return res.json(empty)
 		}
 
 		res.type("application/xml")
-		var colorsxml =
-			`<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+
+		const find = name => user.colors.find(x => x.name === name).value
+		const colorsxml = `<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
     <External>null</External>
     <External>nil</External>
     <Item class="BodyColors">
     <Properties>
-    <int name="HeadColor">` +
-			user.colors.find(x => x.name === "Head").value +
-			`</int>
-    <int name="LeftArmColor">` +
-			user.colors.find(x => x.name === "Left Arm").value +
-			`</int>
-    <int name="LeftLegColor">` +
-			user.colors.find(x => x.name === "Left Leg").value +
-			`</int>
+    <int name="HeadColor">${find("Head")}</int>
+    <int name="LeftArmColor">${find("Left Arm")}</int>
+    <int name="LeftLegColor">${find("Left Leg")}</int>
     <string name="Name">Body Colors</string>
-    <int name="RightArmColor">` +
-			user.colors.find(x => x.name === "Right Arm").value +
-			`</int>
-    <int name="RightLegColor">` +
-			user.colors.find(x => x.name === "Right Leg").value +
-			`</int>
-    <int name="TorsoColor">` +
-			user.colors.find(x => x.name === "Torso").value +
-			`</int>
+    <int name="RightArmColor">${find("Right Arm")}</int>
+    <int name="RightLegColor">${find("Right Leg")}</int>
+    <int name="TorsoColor">${find("Torso")}</int>
     <bool name="archivable">true</bool>
     </Properties>
     </Item>
@@ -482,7 +465,7 @@ router.post("/badge/awardbadge", async (req, res) => {
 
 	if (typeof user.badges !== "undefined") {
 		// check if user already owns item
-		for (var v of user.badges) {
+		for (const v of user.badges) {
 			if (v.badgeid === badgeid) {
 				// they already own it
 				return res.send("0")
@@ -510,12 +493,7 @@ router.post("/badge/awardbadge", async (req, res) => {
 	)
 
 	return res.send(
-		user.username +
-			" won " +
-			badgecreator.username +
-			"'s " +
-			badge.Name +
-			" award!",
+		`${user.username} won ${badgecreator.username}'s ${badge.Name} award!`,
 	)
 })
 

@@ -3,7 +3,7 @@ const router = express.Router()
 const { requireAuth } = require("./../../middleware/authmiddleware")
 const bodyParser = require("body-parser")
 const groups = require("./../../model/groups.js")
-var multer = require("multer")
+let multer = require("multer")
 const fs = require("fs")
 const path = require("path")
 router.use(bodyParser.json())
@@ -106,7 +106,7 @@ async function validateImage(groupid, res) {
 	})
 }
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// Uploads is the Upload_folder_name
 		cb(null, "./assets/groupicons")
@@ -137,12 +137,10 @@ router.post("/create", requireAuth, async (req, res) => {
 	uploadicon.single("groupicon")(req, res, async function (err) {
 		if (err) {
 			if (err?.message === "File too large") {
-				return res
-					.status(400)
-					.send({
-						status: "error",
-						error: "File too large! 1MB Limit",
-					})
+				return res.status(400).send({
+					status: "error",
+					error: "File too large! 1MB Limit",
+				})
 			}
 			if (err === "Invalid file type") {
 				return res
@@ -152,7 +150,7 @@ router.post("/create", requireAuth, async (req, res) => {
 			return res.status(400).send({ status: "error", error: err.message })
 		}
 
-		var xss = require("xss")
+		let xss = require("xss")
 		const { groupname, description, publicgroup } = req.body
 
 		if (!groupname) {

@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const { requireAuth } = require("./../../middleware/authmiddleware")
 const bodyParser = require("body-parser")
-var numbtest = /^\d+\.?\d*$/
+let numbtest = /^\d+\.?\d*$/
 const bank = require("./../../model/bank.js")
 const User = require("./../../model/user.js")
 router.use(bodyParser.json())

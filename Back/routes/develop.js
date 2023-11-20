@@ -5,10 +5,10 @@ const User = require("./../model/user.js")
 const games = require("./../model/games.js")
 const catalog = require("./../model/item.js")
 const { requirediscord } = require("./../middleware/requirediscord.js")
-var multer = require("multer")
+let multer = require("multer")
 const fs = require("fs")
 const path = require("path")
-var numbtest = /^\d+\.?\d*$/
+let numbtest = /^\d+\.?\d*$/
 const bodyParser = require("body-parser")
 const { pngValidator } = require("png-validator")
 const fileTypeChecker = require("file-type-checker")
@@ -110,7 +110,7 @@ router.post("/creations", requireAuth, async (req, res) => {
 	return res.json(items)
 })
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// Uploads is the Upload_folder_name
 		if (file.fieldname === "thumbnail") {
@@ -169,12 +169,10 @@ router.post(
 		uploadcloth.single("clothingfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 1MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 1MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -185,7 +183,7 @@ router.post(
 					.status(400)
 					.send({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { clothingname, description, price, type } = req.body
 			// save shirt template
 			if (!clothingname) {
@@ -340,7 +338,7 @@ router.post(
 const uploadgame = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 		if (ext !== ".png" && ext !== ".rbxl" /* && ext !== '.mp3'*/) {
 			return callback("Invalid file type")
 		}
@@ -352,7 +350,7 @@ const uploadgame = multer({
 const uploadaudio = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 		if (ext !== ".mp3" && ext !== ".ogg") {
 			return callback("Invalid file type")
 		}
@@ -361,7 +359,7 @@ const uploadaudio = multer({
 	limits: { fileSize: 5120 * 1024 }, // 5mb
 })
 
-var editgamestorage = multer.diskStorage({
+let editgamestorage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// Uploads is the Upload_folder_name
 		if (file.fieldname === "thumbnail") {
@@ -401,7 +399,7 @@ var editgamestorage = multer.diskStorage({
 const editgame = multer({
 	storage: editgamestorage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 
 		if (ext !== ".rbxl" /* && ext !== '.mp3'*/) {
 			return callback("Invalid file type")
@@ -413,7 +411,7 @@ const editgame = multer({
 
 router.post("/editgame", requireAuth, requirediscord, async (req, res) => {
 	const { nameofgame, description, gameid } = req.body
-	var xss = require("xss")
+	let xss = require("xss")
 	if (!gameid) {
 		return res.json({ status: "error", error: "GameID required" })
 	}
@@ -531,12 +529,10 @@ router.post(
 		editgame.single("gamefile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 10MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 10MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -560,12 +556,10 @@ router.post("/uploadgame", requireAuth, requirediscord, async (req, res) => {
 	])(req, res, async function (err) {
 		if (err) {
 			if (err?.message === "File too large") {
-				return res
-					.status(400)
-					.send({
-						status: "error",
-						error: "File too large! 10MB Limit",
-					})
+				return res.status(400).send({
+					status: "error",
+					error: "File too large! 10MB Limit",
+				})
 			}
 			if (err === "Invalid file type") {
 				return res
@@ -574,7 +568,7 @@ router.post("/uploadgame", requireAuth, requirediscord, async (req, res) => {
 			}
 			return res.status(400).send({ status: "error", error: err.message })
 		}
-		var xss = require("xss")
+		let xss = require("xss")
 		const { gamename, description, version } = req.body
 		// save game
 		if (!gamename) {
@@ -653,7 +647,7 @@ router.post("/uploadgame", requireAuth, requirediscord, async (req, res) => {
 const uploadasset = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 		if (ext !== ".png" && ext !== ".mesh") {
 			return callback("Invalid file type")
 		}
@@ -671,12 +665,10 @@ router.post(
 		uploadasset.single("assetfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 1MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 1MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -687,7 +679,7 @@ router.post(
 					.status(400)
 					.send({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { itemname } = req.body
 			// save mesh
 			if (!itemname) {
@@ -745,12 +737,10 @@ router.post(
 		uploadasset.single("assetfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.json({
-							status: "error",
-							error: "File too large! 1MB Limit",
-						})
+					return res.status(400).json({
+						status: "error",
+						error: "File too large! 1MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -761,7 +751,7 @@ router.post(
 					.status(400)
 					.json({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { itemname } = req.body
 			// save badge
 			if (!itemname) {
@@ -806,12 +796,10 @@ router.post(
 		uploadasset.single("assetfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 1MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 1MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -822,7 +810,7 @@ router.post(
 					.status(400)
 					.send({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { itemname } = req.body
 			// save userad
 			if (!itemname) {
@@ -865,12 +853,10 @@ router.post(
 		uploadasset.single("assetfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 1MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 1MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -881,7 +867,7 @@ router.post(
 					.status(400)
 					.send({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { itemname, price, gameid } = req.body
 			// save game pass
 			if (!itemname) {
@@ -974,12 +960,10 @@ router.post(
 		uploadaudio.single("assetfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 5MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 5MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -990,7 +974,7 @@ router.post(
 					.status(400)
 					.send({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { itemname } = req.body
 			// save audio
 			if (!itemname) {
@@ -1046,7 +1030,7 @@ router.post(
 const uploadvideo = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 		if (ext !== ".webm") {
 			return callback("Invalid file type")
 		}
@@ -1064,12 +1048,10 @@ router.post(
 		uploadvideo.single("assetfile")(req, res, async function (err) {
 			if (err) {
 				if (err?.message === "File too large") {
-					return res
-						.status(400)
-						.send({
-							status: "error",
-							error: "File too large! 10MB Limit",
-						})
+					return res.status(400).send({
+						status: "error",
+						error: "File too large! 10MB Limit",
+					})
 				}
 				if (err === "Invalid file type") {
 					return res
@@ -1080,7 +1062,7 @@ router.post(
 					.status(400)
 					.send({ status: "error", error: err.message })
 			}
-			var xss = require("xss")
+			let xss = require("xss")
 			const { itemname } = req.body
 			// save audio
 			if (!itemname) {

@@ -4,10 +4,10 @@ const rcctalk = require("./../../thumbnailrcctalk")
 const rcctalk2018 = require("./../../rcctalk2018")
 const fs = require("fs")
 const assetrenderscript = fs.readFileSync("assetthumbnailrenderer.lua", "utf-8")
-var path = require("path")
+let path = require("path")
 const User = require("./../../model/user.js")
 const item = require("./../../model/item.js")
-var rgx = /^[0-9]*\.?[0-9]*$/
+let rgx = /^[0-9]*\.?[0-9]*$/
 router.use(express.json({ limit: "200mb" }))
 const { requireAuth } = require("./../../middleware/authmiddleware.js")
 const { grabAuth } = require("./../../middleware/grabauth.js")
@@ -36,7 +36,7 @@ router.get("/", grabAuth, async (req, res) => {
 	}
 	let id = req.query.id ?? req.query.userId
 
-	var sanitizedid = id.match(rgx)
+	let sanitizedid = id.match(rgx)
 
 	const user = await User.findOne({ userid: sanitizedid }).lean()
 	if (!user) {
@@ -124,7 +124,7 @@ router.get("/", grabAuth, async (req, res) => {
 })
 
 router.post("/rcc", (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		const { player, thumbnail } = req.body
 		let path2 = path.resolve(
@@ -150,7 +150,7 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 	}
 	let id = req.query.id ?? req.query.assetid
 
-	var sanitizedid = id.match(rgx)
+	let sanitizedid = id.match(rgx)
 
 	const user = await item.findOne({ ItemId: sanitizedid }).lean()
 	if (!user) {
@@ -224,12 +224,12 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 	fs.access(path2, fs.F_OK, async err => {
 		if (err) {
 			// get our renderscript with the new character app
-			var newrenderscript = assetrenderscript.replace(
+			let newrenderscript = assetrenderscript.replace(
 				"local asset = 0",
 				'local asset = "' + sanitizedid + '"',
 			)
 			//open a new job for our thumbnail render request
-			var response = await rcctalk.OpenJob(
+			let response = await rcctalk.OpenJob(
 				"Thumbnailfor" + sanitizedid,
 				newrenderscript,
 				"120",
@@ -268,7 +268,7 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 })
 
 router.post("/rccasset", (req, res) => {
-	var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+	let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 	if (ip == RCC_HOST || ip == "::ffff:" + RCC_HOST) {
 		const { asset, thumbnail } = req.body
 		console.log(asset)

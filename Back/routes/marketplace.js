@@ -5,7 +5,7 @@ const User = require("./../model/user.js")
 const item = require("./../model/item.js")
 const { requireAuth } = require("../middleware/authmiddleware.js")
 
-var rgx = /^[0-9]*\.?[0-9]*$/
+let rgx = /^[0-9]*\.?[0-9]*$/
 router.get("/marketplace/productinfo", async (req, res) => {
 	const sanitizedid = req.query.assetId.match(rgx)
 	let json = {
@@ -73,7 +73,7 @@ router.post("/marketplace/purchase", requireAuth, async (req, res) => {
 	const itemdoc = await item.findOne({ ItemId: productId }) //.lean()
 	if (typeof req.userdocument.inventory !== "undefined") {
 		// check if user already owns item
-		for (var v of req.userdocument.inventory) {
+		for (const v of req.userdocument.inventory) {
 			if (v.ItemId === itemdoc.ItemId) {
 				// they already own it
 				return res.json({
@@ -157,7 +157,7 @@ router.get("/ownership/hasasset", async (req, res) => {
 
 	if (typeof doc.inventory !== "undefined") {
 		// check if user already owns item
-		for (var v of doc.inventory) {
+		for (const v of doc.inventory) {
 			if (v.ItemId === itemdoc.ItemId) {
 				// they already own it
 				return res.send("true")
@@ -184,7 +184,7 @@ router.get("/v1/users/:userId/items/gamepass/:assetId", async (req, res) => {
 
 	if (typeof doc.inventory !== "undefined") {
 		// check if user already owns item
-		for (var v of doc.inventory) {
+		for (const v of doc.inventory) {
 			if (v.ItemId === itemdoc.ItemId) {
 				// they already own it
 				data.data.push({
@@ -237,7 +237,7 @@ router.post(
 
 		if (typeof req.userdocument.inventory !== "undefined") {
 			// check if user already owns item
-			for (var v of req.userdocument.inventory) {
+			for (const v of req.userdocument.inventory) {
 				if (v.ItemId === itemdoc.ItemId) {
 					// they already own it
 					return res.json({

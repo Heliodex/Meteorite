@@ -8,11 +8,11 @@ router.use(bodyParser.json())
 // hay this code hasn't been updated so it contains very old code because I haven't bothered to add key support since the last time they existed 2 months ago?
 
 function stringGen(len) {
-	var text = ""
+	let text = ""
 
-	var charset = "abcdefghijklmnopqrstuvwxyz0123456789"
+	let charset = "abcdefghijklmnopqrstuvwxyz0123456789"
 
-	for (var i = 0; i < len; i++)
+	for (const i = 0; i < len; i++)
 		text += charset.charAt(Math.floor(Math.random() * charset.length))
 
 	return text
@@ -20,7 +20,7 @@ function stringGen(len) {
 
 router.post("/", requireAuth, async (req, res) => {
 	if (req.userdocument.admin === true) {
-		var key = stringGen(10)
+		let key = stringGen(10)
 		const response = await keys.create({
 			Creator: req.userdocument.username,
 			Key: key,
@@ -33,7 +33,7 @@ router.post("/", requireAuth, async (req, res) => {
 		req.userdocument.coins -= 100
 		req.userdocument.markModified("coins")
 		await req.userdocument.save()
-		var key = stringGen(10)
+		let key = stringGen(10)
 		const response = await keys.create({
 			Creator: req.userdocument.username,
 			Key: key,

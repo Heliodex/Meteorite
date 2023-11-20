@@ -39,7 +39,7 @@ router.post("/share", requireAuth, async (req, res) => {
 
 	if (req.userdocument.friends) {
 		//console.log(req.userdocument.friends)
-		for (let item of req.userdocument.friends) {
+		for (const item of req.userdocument.friends) {
 			User.updateOne(
 				{ userid: item.userid },
 				{

@@ -25,8 +25,8 @@ const requireAuth = (req, res, next) => {
 				.status(401)
 				.json({ status: "error", error: "Unauthorized" })
 		} else {
-			var tokendata = decodedtoken
-			var name = tokendata.userid
+			let tokendata = decodedtoken
+			let name = tokendata.userid
 			try {
 				model.findOne({ userid: name }, async function (err, doc) {
 					req.numberofcoins = doc.coins
@@ -77,9 +77,9 @@ const requireAuth = (req, res, next) => {
 						// if they are moderated then we invalidate the cookie and proceed
 						//res.cookie('jwt', "", {SameSite: "Strict",maxAge: 1 })
 						//return res.send("You have been moderated for "+moderationstatus.Reason+" expires at"+moderationstatus.ExpiresIn+" Moderated by "+moderationstatus.BannedBy )
-						var date = Date.parse(moderationstatus.ExpiresIn)
-						var datetime = new Date()
-						var datetime2 = Date.parse(datetime)
+						let date = Date.parse(moderationstatus.ExpiresIn)
+						let datetime = new Date()
+						let datetime2 = Date.parse(datetime)
 						/*if (date <= datetime2){
                         // they have served there time
 

@@ -7,7 +7,7 @@ router.use(bodyParser.json())
 
 function selectKeys(obj, keysArray) {
 	let result = {}
-	for (let i = 0; i < keysArray.length; i++) {
+	for (const i = 0; i < keysArray.length; i++) {
 		if (keysArray[i] in obj === true) {
 			result[keysArray[i]] = obj[keysArray[i]]
 		}

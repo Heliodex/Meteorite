@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
-var path = require("path")
+let path = require("path")
 const { requireAuth } = require("./../middleware/authmiddleware")
-var multer = require("multer")
+let multer = require("multer")
 const bodyParser = require("body-parser")
 router.use(bodyParser.json())
 const User = require("./../model/games.js")
@@ -10,13 +10,13 @@ const ActualUser = require("./../model/user.js")
 const catalog = require("./../model/item.js")
 const games = require("./../model/games.js")
 const rcc = require("./../model/rcc.js")
-var numbtest = /^\d+\.?\d*$/
+let numbtest = /^\d+\.?\d*$/
 const rcctalk = require("./../rcctalk")
 require("dotenv").config()
 const RCCDIR = process.env.RCC_Content
 
-var thisistheplaceid = "1"
-var storage = multer.diskStorage({
+let thisistheplaceid = "1"
+let storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		// Uploads is the Upload_folder_name
 		if (file.mimetype == "image/png") {
@@ -56,7 +56,7 @@ var storage = multer.diskStorage({
 const upload = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 		if (ext !== ".png" && ext !== ".png" && ext !== ".rbxl") {
 			return callback("Only pngs and rbxl are allowed")
 		}
@@ -67,7 +67,7 @@ const upload = multer({
 const itemupload = multer({
 	storage: storage,
 	fileFilter: function (req, file, callback) {
-		var ext = path.extname(file.originalname)
+		let ext = path.extname(file.originalname)
 		if (req.userdocument.admin === "false") {
 			return callback("LEAVE")
 		}
@@ -145,7 +145,7 @@ router.post("/moderateuser", requireAuth, async (req, res) => {
 	//console.log(unbantime)
 
 	// if all above checks have passed lets set their moderation status and also log this entry for later lookup
-	var datetime = new Date()
+	let datetime = new Date()
 	ActualUser.updateOne(
 		{ userid: userid },
 		{

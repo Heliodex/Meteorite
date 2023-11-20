@@ -2,7 +2,7 @@ const { response } = require("express")
 const express = require("express")
 const router = express.Router()
 const fs = require("fs")
-var path = require("path")
+let path = require("path")
 const crypto = require("crypto")
 require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
@@ -14,7 +14,7 @@ const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args))
 
 // redirect hmmmm
-var rgx = /^[0-9]*\.?[0-9]*$/
+let rgx = /^[0-9]*\.?[0-9]*$/
 router.get("/", async (req, res) => {
 	if (req.query.name) {
 		const user = await User.findOne({ userid: req.query.name }).lean()
@@ -23,15 +23,15 @@ router.get("/", async (req, res) => {
 		}
 
 		if (req.query.rcc) {
-			var empty = []
-			for (var key of user.colors) {
+			let empty = []
+			for (const key of user.colors) {
 				empty.push(key.value)
 			}
 			return res.json(empty)
 		}
 
 		res.type("application/xml")
-		var colorsxml =
+		let colorsxml =
 			`<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
   <External>null</External>
   <External>nil</External>
@@ -69,9 +69,9 @@ router.get("/", async (req, res) => {
 			"assettype"
 		] === "Place"
 	) {
-		var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+		let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 		console.log(ip)
-		var sanitizedid = req.query.id.match(rgx)
+		let sanitizedid = req.query.id.match(rgx)
 		if (ip === RCC_HOST || ip === "::ffff:" + RCC_HOST) {
 			console.log(req.headers["accesskey"])
 			if (req.headers?.["accesskey"] === ACCESS_KEY) {
@@ -110,9 +110,9 @@ router.get("/", async (req, res) => {
 			})
 			return res.end()
 		}
-		var sanitizedid = parseFloat(req.query.id)
+		let sanitizedid = parseFloat(req.query.id)
 		const response = await catalog.findOne({ ItemId: sanitizedid }).lean()
-		var ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
+		let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 		if (
 			response?.approved === false &&
 			(ip != RCC_HOST || ip === "::ffff:" + RCC_HOST) &&

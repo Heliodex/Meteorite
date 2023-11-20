@@ -3,7 +3,7 @@ const fetch = (...args) =>
 let controller = new AbortController()
 require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
-var convert = require("xml-js")
+let convert = require("xml-js")
 
 let url = "http://" + RCC_HOST + ":8000" // change this to rcc soap
 
@@ -157,7 +157,7 @@ async function OpenGame2020(jobid, port, ip, placeid, creatorid) {
 
 async function CloseJob(jobid) {
 	return new Promise(async (resolve, reject) => {
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -250,7 +250,7 @@ async function lol2() {
 
 async function RenewLease(jobid, expiration) {
 	return new Promise(async (resolve, reject) => {
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},

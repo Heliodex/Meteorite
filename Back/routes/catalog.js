@@ -89,7 +89,7 @@ router.post("/fetch", async (req, res) => {
 })
 
 router.get("/iteminfo/:id", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 
 	if (isNaN(parseInt(id)) === true) {
 		return res.json({ status: "error", error: "Must be number" })
@@ -103,7 +103,7 @@ router.get("/iteminfo/:id", async (req, res) => {
 })
 
 router.post("/iteminfo/:id/configure", requireAuth, async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 
 	let { name, description, price } = req.body
 

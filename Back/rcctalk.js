@@ -6,7 +6,7 @@ const RCC_HOST = process.env.RCC_HOST
 
 const url = "http://" + RCC_HOST + ":64989" // change this to rcc soap
 
-var convert = require("xml-js")
+let convert = require("xml-js")
 const sampleHeaders = {
 	"Content-Type": "text/xml;charset=UTF-8",
 }
@@ -14,7 +14,7 @@ const sampleHeaders = {
 async function OpenJob(jobid, script, expiration) {
 	return new Promise(async (resolve, reject) => {
 		// this is all boilerplate because soap sucks
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -117,7 +117,7 @@ async function GetAllJobs() {
 
 async function Execute(jobid, script) {
 	return new Promise(async (resolve, reject) => {
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -168,7 +168,7 @@ async function Execute(jobid, script) {
 }
 async function CloseJob(jobid) {
 	return new Promise(async (resolve, reject) => {
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -212,7 +212,7 @@ async function CloseJob(jobid) {
 
 async function RenewLease(jobid, expiration) {
 	return new Promise(async (resolve, reject) => {
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -261,7 +261,7 @@ async function RenewLease(jobid, expiration) {
 
 async function GetExpiration(jobid) {
 	return new Promise(async (resolve, reject) => {
-		var xml = {
+		let xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -294,12 +294,15 @@ async function GetExpiration(jobid) {
 		}
 	})
 }
-// var gameservertxt = fs.readFileSync('actualgameserver.txt','utf-8')
-// gameservertxt = gameservertxt.replace('function start(placeId, port, url)','function start(1111, port)')
+// let gameservertxt = fs.readFileSync("actualgameserver.txt", "utf-8")
+// gameservertxt = gameservertxt.replace(
+// 	"function start(placeId, port, url)",
+// 	"function start(1111, port)",
+// )
 
 async function CloseExpiredJobs() {
 	return new Promise(async (resolve, reject) => {
-		var xml = (xml = {
+		let xml = (xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -331,7 +334,7 @@ async function CloseExpiredJobs() {
 
 async function CloseAllJobs() {
 	return new Promise(async (resolve, reject) => {
-		var xml = (xml = {
+		let xml = (xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},

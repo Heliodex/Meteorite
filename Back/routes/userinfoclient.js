@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const User = require("./../model/user.js")
-var bodyParser = require("body-parser")
+let bodyParser = require("body-parser")
 router.use(bodyParser.json()) // support json encoded bodies
 router.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 router.use(bodyParser.text()) // support encoded bodies
@@ -15,8 +15,8 @@ const jwtverify = (req, res, next) => {
 			if (err) {
 				return res.status(403).end()
 			} else {
-				var tokendata = decodedtoken
-				var name = tokendata.username
+				let tokendata = decodedtoken
+				let name = tokendata.username
 				try {
 					User.findOne(
 						{ username: new RegExp("^" + name + "$", "i") },

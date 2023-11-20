@@ -29,12 +29,12 @@ router.post("/buymembership", requireAuth, async (req, res) => {
 })
 
 router.post("/:id", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	if (isNaN(parseFloat(id)) === true) {
 		return res.json({ error: true })
 	}
 
-	var key = req.query.key
+	let key = req.query.key
 	if (isNaN(parseFloat(key)) === true) {
 		return res.json({ error: true })
 	}

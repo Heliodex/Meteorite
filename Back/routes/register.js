@@ -6,13 +6,13 @@ const mongoose = require("mongoose")
 const User = require("./../model/user.js")
 const keys = require("./../model/keys.js")
 const bcrypt = require("bcrypt")
-var sanitize = require("mongo-sanitize")
+let sanitize = require("mongo-sanitize")
 const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args))
-var xss = require("xss")
+let xss = require("xss")
 
 function isAlphaNumeric(str) {
-	var code, i, len
+	let code, i, len
 
 	for (i = 0, len = str.length; i < len; i++) {
 		code = str.charCodeAt(i)
@@ -71,7 +71,7 @@ router.post("/", async (req, res) => {
 		})
 	}
 	// verify our captcha
-	var captchaverifyreq = await fetch("https://hcaptcha.com/siteverify", {
+	let captchaverifyreq = await fetch("https://hcaptcha.com/siteverify", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
 			sitekey: "30f6dee1-f765-42d0-ae34-29697c4aa623",
 		}),
 	})
-	var captcha = await captchaverifyreq.json()
+	let captcha = await captchaverifyreq.json()
 	if (captcha.success == false) {
 		return res.json({
 			status: "error",
@@ -91,7 +91,7 @@ router.post("/", async (req, res) => {
 	}
 
 	// check if keys are enabled
-	var registration = req.config
+	let registration = req.config
 	if (registration.RegistrationEnabled === false) {
 		return res.json({
 			status: "error",
@@ -141,8 +141,8 @@ router.post("/", async (req, res) => {
 	try {
 		const password = await bcrypt.hash(plainTextPassword, 10)
 		const userid = await User.countDocuments()
-		var datetime = new Date()
-		var datetimeepoch = new Date().getTime()
+		let datetime = new Date()
+		let datetimeepoch = new Date().getTime()
 		const response = await User.create({
 			username,
 			password,

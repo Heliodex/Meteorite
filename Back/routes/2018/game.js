@@ -11,7 +11,7 @@ const {
 	waitForPort,
 } = require("get-port-please")
 const RCC_HOST = process.env.RCC_HOST
-var sanitize = require("mongo-sanitize")
+let sanitize = require("mongo-sanitize")
 const games = require("./../../model/games.js")
 const signatures = require("./../signatures.js")
 const rcc = require("../../model/rcc2018.js")
@@ -24,14 +24,14 @@ function sleep(ms) {
 	})
 }
 const _2018placelauncher = async (req, res, next) => {
-	var enabled = req.config
+	let enabled = req.config
 	if (enabled.GamesEnabled === false) {
 		return res.json({
 			status: "error",
 			error: "Games are disabled bad boy",
 		})
 	}
-	var joinJson = {
+	let joinJson = {
 		ClientPort: 0,
 		MachineAddress: "localhost",
 		ServerPort: 25564,
@@ -87,7 +87,7 @@ const _2018placelauncher = async (req, res, next) => {
 			message: "",
 		})
 	}
-	var sanitizedplaceid = sanitize(
+	let sanitizedplaceid = sanitize(
 		req.query.name ?? req.query.placeId ?? req.query.placeid,
 	)
 	const game = await games.findOne({ idofgame: sanitizedplaceid }).lean()
@@ -125,7 +125,7 @@ const _2018placelauncher = async (req, res, next) => {
 				`game${sanitizedplaceid}\n` /*jobid*/ +
 				timestamp /*timestamp*/,
 		)
-		var signature1 = sign1.sign(key, "base64")
+		let signature1 = sign1.sign(key, "base64")
 		joinJson.ClientTicket += signature1 + ";"
 
 		//create signature 2
@@ -135,13 +135,13 @@ const _2018placelauncher = async (req, res, next) => {
 				`game${sanitizedplaceid}\n` /*jobid*/ +
 				timestamp /*timestamp*/,
 		)
-		var signature2 = sign2.sign(key, "base64")
+		let signature2 = sign2.sign(key, "base64")
 		joinJson.ClientTicket += signature2
 
 		req.userdocument.gamejoin2018 = JSON.stringify(joinJson)
 		req.userdocument.markModified("gamejoin2018")
 		await req.userdocument.save()
-		var joinScriptJson = {
+		let joinScriptJson = {
 			jobId: "Test",
 			status: 2,
 			joinScriptUrl:
@@ -155,7 +155,7 @@ const _2018placelauncher = async (req, res, next) => {
 		return res.send(JSON.stringify(joinScriptJson))
 	}
 	if (instance && instance.Status === 1) {
-		var joinScriptJson = {
+		let joinScriptJson = {
 			jobId: "Test",
 			status: 1,
 			joinScriptUrl:
@@ -168,7 +168,7 @@ const _2018placelauncher = async (req, res, next) => {
 		return res.send(JSON.stringify(joinScriptJson))
 	}
 
-	var port = await getPort({ random: true })
+	let port = await getPort({ random: true })
 	// launch job
 	rcctalk.OpenGame(
 		"game" + sanitizedplaceid,
@@ -188,7 +188,7 @@ const _2018placelauncher = async (req, res, next) => {
 
 	// console.log(newrenderscript)
 
-	var joinScriptJson = {
+	let joinScriptJson = {
 		jobId: "Test",
 		status: 1,
 		joinScriptUrl:

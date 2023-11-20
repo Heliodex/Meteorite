@@ -240,7 +240,7 @@ end`
 })
 
 router.get("/gameinfo/:id", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	if (isNaN(parseFloat(id)) === true) {
 		return res.json({ status: "error", error: "Not found" })
 	}
@@ -273,7 +273,7 @@ router.get("/gameinfo/:id", async (req, res) => {
 })
 
 router.get("/gameinfo/:id/store", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	if (isNaN(parseFloat(id)) === true) {
 		return res.json({ status: "error", error: "Not found" })
 	}

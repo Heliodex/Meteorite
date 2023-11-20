@@ -6,7 +6,7 @@ require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
 router.use(bodyParser.text({ limit: "100mb" }))
 router.use(async function (req, res, next) {
-	var ip =
+	let ip =
 		req.headers["cf-connecting-ip"] ||
 		req.socket.remoteAddress.replace(/^.*:/, "")
 	console.log(ip)
@@ -45,7 +45,7 @@ router.post("/getV2", async (req, res) => {
 		// 1 = Key name
 		// 0 = scope
 
-		var wow = {
+		let wow = {
 			data: [
 				{
 					Key: {

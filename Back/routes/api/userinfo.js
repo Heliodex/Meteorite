@@ -8,7 +8,7 @@ const bodyParser = require("body-parser")
 router.use(bodyParser.json())
 
 router.get("/:id", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	if (isNaN(parseFloat(id)) === true) {
 		return res.json({ error: true })
 	}
@@ -84,7 +84,7 @@ router.get("/:id", async (req, res) => {
 })
 
 router.post("/:id/inventory", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	const resultsPerPage = 5
 	let page = req.body.page ?? 0
 	if (page != 0) {
@@ -228,7 +228,7 @@ router.post("/:id/inventory", async (req, res) => {
 })
 
 router.get("/:id/creations", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	if (isNaN(parseFloat(id)) === true) {
 		return res.json({ error: true })
 	}
@@ -254,7 +254,7 @@ router.get("/:id/creations", async (req, res) => {
 })
 
 router.get("/:id/visits", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 	if (isNaN(parseFloat(id)) === true) {
 		return res.json({ error: true })
 	}
@@ -280,7 +280,7 @@ router.get("/:id/visits", async (req, res) => {
 })
 
 router.get("/usernametoid/:id", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 
 	const response = await user
 		.findOne({ username: { $regex: id, $options: "i" } })
@@ -295,7 +295,7 @@ router.get("/usernametoid/:id", async (req, res) => {
 })
 
 router.get("/discordidtouserid/:id", async (req, res) => {
-	var id = req.params.id
+	let id = req.params.id
 
 	const response = await user.findOne({ discordid: id }).lean()
 
