@@ -124,26 +124,19 @@ let storage = multer.diskStorage({
 		//console.log(path.basename(file.originalname,'.png'))
 		if (path.extname(file.originalname) === ".rbxl") {
 			const placeid = await games.countDocuments()
-			cb(
-				null,
-				"gamefile" + "-" + placeid + path.extname(file.originalname),
-			)
+			cb(null, `gamefile-${placeid}${path.extname(file.originalname)}`)
 		} else if (file.fieldname === "thumbnail") {
 			// is a game thumbnail
 			const placeid = await games.countDocuments()
-			cb(null, "thumbnail" + "-" + placeid + ".png")
-		} else if (file.mimetype == "image/png") {
+			cb(null, `thumbnail-${placeid}.png`)
+		} else if (
+			file.mimetype == "image/png" ||
+			path.extname(file.originalname) === ".mp3" ||
+			path.extname(file.originalname) === ".mesh" ||
+			path.extname(file.originalname) === ".webm"
+		) {
 			const itemid = await catalog.countDocuments()
-			cb(null, "itemfile" + "-" + itemid + ".rbxm")
-		} else if (path.extname(file.originalname) === ".mp3") {
-			const itemid = await catalog.countDocuments()
-			cb(null, "itemfile" + "-" + itemid + ".rbxm")
-		} else if (path.extname(file.originalname) === ".mesh") {
-			const itemid = await catalog.countDocuments()
-			cb(null, "itemfile" + "-" + itemid + ".rbxm")
-		} else if (path.extname(file.originalname) === ".webm") {
-			const itemid = await catalog.countDocuments()
-			cb(null, "itemfile" + "-" + itemid + ".rbxm")
+			cb(null, `itemfile-${itemid}.rbxm`)
 		}
 	},
 })
@@ -254,16 +247,13 @@ router.post(
 			} catch {}
 
 			// save actual item
-			let xml =
-				`<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+			const xml = `<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
     <External>null</External>
     <External>nil</External>
     <Item class="Shirt" referent="RBX0">
       <Properties>
         <Content name="ShirtTemplate">
-          <url>http://mete0r.xyz/asset/?id=` +
-				itemid +
-				`</url>
+          <url>http://mete0r.xyz/asset/?id=${itemid}</url>
         </Content>
         <string name="Name">Shirt</string>
         <bool name="archivable">true</bool>
@@ -271,16 +261,13 @@ router.post(
     </Item>
   </roblox>`
 			if (type === "Pants") {
-				xml =
-					`<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+				xml = `<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
   <External>null</External>
   <External>nil</External>
   <Item class="Pants" referent="RBX0">
     <Properties>
       <Content name="PantsTemplate">
-        <url>http://mete0r.xyz/asset/?id=` +
-					itemid +
-					`</url>
+        <url>http://mete0r.xyz/asset/?id=${itemid}</url>
       </Content>
       <string name="Name">Pants</string>
       <bool name="archivable">true</bool>
@@ -291,7 +278,7 @@ router.post(
 			let shirtid = itemid + 1 // prevent any race conditions
 			shirtid = shirtid.toString()
 			fs.writeFile(
-				"./assets/ugc/itemfile-" + shirtid + ".rbxm",
+				`./assets/ugc/itemfile-${shirtid}.rbxm`,
 				xml,
 				async function (err) {
 					if (err) {

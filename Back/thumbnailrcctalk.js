@@ -4,7 +4,7 @@ const controller = new AbortController()
 require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
 
-const url = "http://" + RCC_HOST + ":64990" // change this to rcc soap
+const url = `http://${RCC_HOST}:64990` // change this to rcc soap
 const convert = require("xml-js")
 const sampleHeaders = {
 	"Content-Type": "text/xml;charset=UTF-8",
@@ -167,7 +167,7 @@ async function Execute(jobid, script) {
 }
 async function CloseJob(jobid) {
 	return new Promise(async (resolve, reject) => {
-		let xml = {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -301,7 +301,7 @@ async function GetExpiration(jobid) {
 
 async function CloseExpiredJobs() {
 	return new Promise(async (resolve, reject) => {
-		let xml = (xml = {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -313,7 +313,7 @@ async function CloseExpiredJobs() {
 				},
 				"SOAP-ENV:Body": { "ns1:CloseExpiredJobs": {} },
 			},
-		})
+		}
 
 		const body = convert.js2xml(xml, { compact: true, spaces: 4 })
 

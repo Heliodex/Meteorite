@@ -45,7 +45,7 @@ router.post("/", requireAuth, async (req, res) => {
 			path.resolve(
 				path.resolve(
 					__dirname,
-					"../../assets/ugc/itemfile-" + itemid + ".rbxm",
+					`../../assets/ugc/itemfile-${itemid}.rbxm`,
 				),
 			),
 			err => {
@@ -88,7 +88,7 @@ router.post("/queue", requireAuth, async (req, res) => {
 			path.resolve(
 				path.resolve(
 					__dirname,
-					"../../assets/ugc/itemfile-" + itemid + ".rbxm",
+					`../../assets/ugc/itemfile-${itemid}.rbxm`,
 				),
 			),
 			err => {

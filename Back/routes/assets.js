@@ -31,31 +31,28 @@ router.get("/", async (req, res) => {
 		}
 
 		res.type("application/xml")
-		let colorsxml =
-			`<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+		let colorsxml = `<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
   <External>null</External>
   <External>nil</External>
   <Item class="BodyColors">
   <Properties>
-  <int name="HeadColor">` +
-			user.colors.find(x => x.name === "Head").value +
-			`</int>
-  <int name="LeftArmColor">` +
-			user.colors.find(x => x.name === "Left Arm").value +
-			`</int>
-  <int name="LeftLegColor">` +
-			user.colors.find(x => x.name === "Left Leg").value +
-			`</int>
   <string name="Name">Body Colors</string>
-  <int name="RightArmColor">` +
-			user.colors.find(x => x.name === "Right Arm").value +
-			`</int>
-  <int name="RightLegColor">` +
-			user.colors.find(x => x.name === "Right Leg").value +
-			`</int>
-  <int name="TorsoColor">` +
-			user.colors.find(x => x.name === "Torso").value +
-			`</int>
+  <int name="HeadColor">${user.colors.find(x => x.name === "Head").value}</int>
+  <int name="LeftArmColor">${
+		user.colors.find(x => x.name === "Left Arm").value
+  }</int>
+  <int name="LeftLegColor">${
+		user.colors.find(x => x.name === "Left Leg").value
+  }</int>
+  <int name="RightArmColor">${
+		user.colors.find(x => x.name === "Right Arm").value
+  }</int>
+  <int name="RightLegColor">${
+		user.colors.find(x => x.name === "Right Leg").value
+  }</int>
+  <int name="TorsoColor">${
+		user.colors.find(x => x.name === "Torso").value
+  }</int>
   <bool name="archivable">true</bool>
   </Properties>
   </Item>
@@ -65,9 +62,8 @@ router.get("/", async (req, res) => {
 	}
 	if (
 		req.query.method ||
-		/*req.headers?.["requester"] === "Server" &&*/ req.headers?.[
-			"assettype"
-		] === "Place"
+		// req.headers?.["requester"] === "Server" &&
+		req.headers?.["assettype"] === "Place"
 	) {
 		let ip = req.headers["cf-connecting-ip"] || req.socket.remoteAddress
 		console.log(ip)
@@ -76,7 +72,7 @@ router.get("/", async (req, res) => {
 			console.log(req.headers["accesskey"])
 			if (req.headers?.["accesskey"] === ACCESS_KEY) {
 				fs.access(
-					"./assets/ugc/gamefile-" + sanitizedid + ".rbxl",
+					`./assets/ugc/gamefile-${sanitizedid}.rbxl`,
 					fs.F_OK,
 					err => {
 						if (err) {
@@ -122,7 +118,7 @@ router.get("/", async (req, res) => {
 		}
 		//this will only allow numbers in our system so that we don't allow nodejs to expose our whole server filesystem
 		fs.access(
-			"./assets/ugc/itemfile-" + sanitizedid + ".rbxm",
+			`./assets/ugc/itemfile-${sanitizedid}.rbxm`,
 			fs.F_OK,
 			async err => {
 				//console.log("./assets/ugc/itemfile-"+sanitizedid+".rbxm")
@@ -184,9 +180,7 @@ router.get("/", async (req, res) => {
 				}
 
 				res.sendFile(
-					path.resolve(
-						"./assets/ugc/itemfile-" + sanitizedid + ".rbxm",
-					),
+					path.resolve(`./assets/ugc/itemfile-${sanitizedid}.rbxm`),
 				)
 				return
 			},

@@ -139,7 +139,7 @@ router.get(["/join", "/join.ashx"], requireAuth, async (req, res) => {
 		//console.log(signature)
 
 		return res.send(
-			"--rbxsig2%" + signature + "%\r\n" + JSON.stringify(joinJson),
+			`--rbxsig2%${signature}%\r\n${JSON.stringify(joinJson)}`,
 		)
 	}
 	if (!req.userdocument.gamejoin || req.userdocument.gamejoin === "{}") {
@@ -153,7 +153,7 @@ router.get(["/join", "/join.ashx"], requireAuth, async (req, res) => {
 	let signature = signatures.signer(joinJson)
 	//console.log(signature)
 
-	res.send("--rbxsig%" + signature + "%\r\n" + JSON.stringify(joinJson))
+	res.send(`--rbxsig%${signature}%\r\n${JSON.stringify(joinJson)}`)
 })
 
 router.all(

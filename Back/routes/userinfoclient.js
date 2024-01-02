@@ -19,7 +19,7 @@ const jwtverify = (req, res, next) => {
 				let name = tokendata.username
 				try {
 					User.findOne(
-						{ username: new RegExp("^" + name + "$", "i") },
+						{ username: new RegExp(`^${name}$`, "i") },
 						function (err, doc) {
 							req.userdocument = doc
 							next()

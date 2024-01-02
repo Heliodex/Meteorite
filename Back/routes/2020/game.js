@@ -134,20 +134,20 @@ const _2020placelauncher = async (req, res, next) => {
 		//create signature 1
 		const sign1 = crypto.createSign("SHA1")
 		sign1.update(
-			`${req.userdocument.userid}\n` /*userid*/ +
-				`${req.userdocument.username}\n` /*username*/ +
-				`${"0"}\n` /*userid 2 that 0k wants for some reason what a retard*/ +
-				`game${sanitizedplaceid}\n` /*jobid*/ +
-				timestamp /*timestamp*/,
+			`${req.userdocument.userid /*userid*/}\n${
+				req.userdocument.username /*username*/
+			}\n${
+				"0" /*userid 2 that 0k wants for some reason what a retard*/
+			}\ngame${sanitizedplaceid /*jobid*/}\n${timestamp}`,
 		)
 		let signature1 = sign1.sign(key, "base64")
 		joinJson.ClientTicket += signature1 + ";"
 		//create signature 2
 		const sign2 = crypto.createSign("SHA1")
 		sign2.update(
-			`${req.userdocument.userid}\n` /*userid*/ +
-				`game${sanitizedplaceid}\n` /*jobid*/ +
-				timestamp /*timestamp*/,
+			`${req.userdocument.userid /*userid*/}\ngame${
+				sanitizedplaceid /*jobid*/
+			}\n${timestamp}`,
 		)
 		let signature2 = sign2.sign(key, "base64")
 		joinJson.ClientTicket += signature2 + ";4"

@@ -40,18 +40,20 @@ app.use((req, res, next) => {
 		"assetgame.mete0r.xyz",
 		"clientsettingscdn.mete0r.xyz",
 		"http://127.0.0.1:5173",
+		"localhost:9000",
 	]
 	const origin = req.get("host")
 	if (allowedOrigins.includes(origin)) {
 		res.setHeader(
 			"Access-Control-Allow-Origin",
-			req.headers["x-forwarded-proto"] ?? "http" + "://" + origin,
+			// req.headers["x-forwarded-proto"] ?? "http://" + origin,
+			"*", // fuk it
 		)
 	}
 	if (origin === "mete0r.xyz") {
 		res.setHeader("Access-Control-Allow-Origin", "*")
 	}
-	//res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
+	// res.header("Access-Control-Allow-Origin", "http://127.0.0.1:8020")
 	res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization")
 	res.header("Access-Control-Allow-Credentials", true)
@@ -180,7 +182,7 @@ app.use(async function (req, res, next) {
 	req.config = resp
 	req.configRepository = configRepository
 
-	//console.log(req.headers['x-forwarded-proto'])
+	// console.log(req.headers["x-forwarded-proto"])
 	if (!req.headers["x-forwarded-proto"]) {
 		if (req.secure === true) {
 			req.headers["x-forwarded-proto"] = "https"

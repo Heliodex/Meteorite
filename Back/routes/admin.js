@@ -48,7 +48,7 @@ let storage = multer.diskStorage({
 			const itemid = await catalog.countDocuments()
 			cb(
 				null,
-				file.fieldname + "-" + itemid + path.extname(file.originalname),
+				`${file.fieldname}-${itemid}${path.extname(file.originalname)}`,
 			)
 		}
 	},

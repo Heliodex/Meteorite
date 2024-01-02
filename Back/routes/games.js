@@ -266,8 +266,9 @@ router.get("/gameinfo/:id", async (req, res) => {
 		return res.json({ status: "error", error: "Not found" })
 	}
 	const date = new Date(response._id.getTimestamp())
-	response.creationdate =
-		date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear()
+	response.creationdate = `${
+		date.getMonth() + 1
+	}/${date.getDate()}/${date.getFullYear()}`
 
 	return res.json({ error: false, gameinfo: response })
 })

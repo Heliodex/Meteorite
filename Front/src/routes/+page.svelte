@@ -178,7 +178,6 @@
 				placeholder="Password"
 				class="input input-bordered input-primary w-full max-w-xs rounded-md"
 				required />
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<h5 class="!text-xs w-full max-w-xs">
 				By clicking Login, you are agreeing to the <a
 					href="/legal/terms"

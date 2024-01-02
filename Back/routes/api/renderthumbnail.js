@@ -46,12 +46,12 @@ router.get("/", grabAuth, async (req, res) => {
 	// lets get our file path with sanitized id
 	let path2 = path.resolve(
 		__dirname,
-		"../../assets/userthumbnails/" + sanitizedid + ".png",
+		`../../assets/userthumbnails/${sanitizedid}.png`,
 	)
 	if (headshot === true) {
 		path2 = path.resolve(
 			__dirname,
-			"../../assets/userthumbnailsheadshots/" + sanitizedid + ".png",
+			`../../assets/userthumbnailsheadshots/${sanitizedid}.png`,
 		)
 	}
 
@@ -76,10 +76,10 @@ router.get("/", grabAuth, async (req, res) => {
 			return res.end(Buffer.from(newrender, "base64"))
 
 			// if this timeouts and rcc doesn't return the image feor some reason then send the default fallback
-			//return res.sendFile(path.resolve("./assets/default.png"))
+			// return res.sendFile(path.resolve("./assets/default.png"))
 		}
 
-		//file exists
+		// file exists
 		if (
 			req.query.method &&
 			req.userdocument &&
@@ -129,7 +129,7 @@ router.post("/rcc", (req, res) => {
 		const { player, thumbnail } = req.body
 		let path2 = path.resolve(
 			__dirname,
-			"../../assets/userthumbnails/" + player + ".png",
+			`../../assets/userthumbnails/${player}.png`,
 		)
 		fs.writeFile(path2, thumbnail, "base64", function (err) {
 			if (err) {
@@ -178,7 +178,7 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 		return res.sendFile(
 			path.resolve(
 				__dirname,
-				"../../assets/ugc/itemfile-" + sanitizedid + ".rbxm",
+				`../../assets/ugc/itemfile-${sanitizedid}.rbxm`,
 			),
 		)
 	}
@@ -186,7 +186,7 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 		return res.sendFile(
 			path.resolve(
 				__dirname,
-				"../../assets/ugc/itemfile-" + sanitizedid + ".rbxm",
+				`../../assets/ugc/itemfile-${sanitizedid}.rbxm`,
 			),
 		)
 	}
@@ -198,14 +198,14 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 			await fs.promises.access(
 				path.resolve(
 					__dirname,
-					"../../assets/ugc/itemfile-" + sanitizedid + ".rbxm",
+					`../../assets/ugc/itemfile-${sanitizedid}.rbxm`,
 				),
 				fs.constants.W_OK,
 			)
 			return res.sendFile(
 				path.resolve(
 					__dirname,
-					"../../assets/ugc/itemfile-" + sanitizedid + ".rbxm",
+					`../../assets/ugc/itemfile-${sanitizedid}.rbxm`,
 				),
 			)
 		} catch {
@@ -218,7 +218,7 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 	// lets get our file path with sanitized id
 	let path2 = path.resolve(
 		__dirname,
-		"../../assets/ugc/asset-" + sanitizedid + ".png",
+		`../../assets/ugc/asset-${sanitizedid}.png`,
 	)
 
 	fs.access(path2, fs.F_OK, async err => {
@@ -226,9 +226,9 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 			// get our renderscript with the new character app
 			let newrenderscript = assetrenderscript.replace(
 				"local asset = 0",
-				'local asset = "' + sanitizedid + '"',
+				`local asset = "${sanitizedid}"`,
 			)
-			//open a new job for our thumbnail render request
+			// open a new job for our thumbnail render request
 			let response = await rcctalk.OpenJob(
 				"Thumbnailfor" + sanitizedid,
 				newrenderscript,
@@ -238,7 +238,7 @@ router.get(["/asset", "/asset.ashx"], grabAuth, async (req, res) => {
 				response["SOAP-ENV:Envelope"]["SOAP-ENV:Body"]["SOAP-ENV:Fault"]
 			) {
 				// if failed then print out error close job then send a fallback image
-				//console.dir(response,{ depth: null })
+				// console.dir(response, { depth: null })
 				rcctalk.CloseJob("Thumbnailfor" + sanitizedid)
 				return res.sendFile(path.resolve("./assets/default.png"))
 			} else {
@@ -274,7 +274,7 @@ router.post("/rccasset", (req, res) => {
 		console.log(asset)
 		let path2 = path.resolve(
 			__dirname,
-			"../../assets/ugc/asset-" + asset + ".png",
+			`../../assets/ugc/asset-${asset}.png`,
 		)
 		fs.writeFile(path2, thumbnail, "base64", function (err) {
 			if (err) {

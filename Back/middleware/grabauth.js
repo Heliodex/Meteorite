@@ -25,7 +25,7 @@ const grabAuth = (req, res, next) => {
 			let name = tokendata.username
 			try {
 				model.findOne(
-					{ username: new RegExp("^" + name + "$", "i") },
+					{ username: new RegExp(`^${name}$`, "i") },
 					function (err, doc) {
 						req.numberofcoins = doc.coins
 						req.admin = doc.admin

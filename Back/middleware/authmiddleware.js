@@ -37,7 +37,7 @@ const requireAuth = (req, res, next) => {
 					if (
 						actualTimeMilliseconds - doc.timesincelastrequest >=
 							60000 * 1 ||
-						!doc.timesincelastrequest /*2 minutes make sure to update*/
+						!doc.timesincelastrequest // 2 minutes make sure to update
 					) {
 						doc.timesincelastrequest = actualTimeMilliseconds
 						doc.markModified("timesincelastrequest")
@@ -75,25 +75,34 @@ const requireAuth = (req, res, next) => {
 
 					if (moderationstatus.status !== "ok") {
 						// if they are moderated then we invalidate the cookie and proceed
-						//res.cookie('jwt', "", {SameSite: "Strict",maxAge: 1 })
-						//return res.send("You have been moderated for "+moderationstatus.Reason+" expires at"+moderationstatus.ExpiresIn+" Moderated by "+moderationstatus.BannedBy )
+						res.cookie("jwt", "", { SameSite: "Strict", maxAge: 1 })
+						return res.send(
+							`You have been moderated for ${moderationstatus.Reason} expires at ${moderationstatus.ExpiresIn} Moderated by ${moderationstatus.BannedBy}`,
+						)
 						let date = Date.parse(moderationstatus.ExpiresIn)
 						let datetime = new Date()
 						let datetime2 = Date.parse(datetime)
-						/*if (date <= datetime2){
-                        // they have served there time
+						// if (date <= datetime2) {
+						// 	// they have served their time
 
-                            model.updateOne({userid: doc.userid}, {
-                                $set: {
-                                    moderation: JSON.stringify({"status":"ok","Reason":"none","ExpiresIn":"none", "BannedBy": "none"})
-                                }
-                            }, 
-                            function(err, doc) {
-                              //console.log(err)
-                            })
-                            return next()
-                            
-                    }*/
+						// 	model.updateOne(
+						// 		{ userid: doc.userid },
+						// 		{
+						// 			$set: {
+						// 				moderation: JSON.stringify({
+						// 					status: "ok",
+						// 					Reason: "none",
+						// 					ExpiresIn: "none",
+						// 					BannedBy: "none",
+						// 				}),
+						// 			},
+						// 		},
+						// 		function (err, doc) {
+						// 			// console.log(err)
+						// 		},
+						// 	)
+						// 	return next()
+						// }
 						return res.json({
 							status: "error",
 							error: "Moderated",

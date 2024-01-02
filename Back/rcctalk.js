@@ -1,20 +1,20 @@
 const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args))
-let controller = new AbortController()
+
 require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
 
-const url = "http://" + RCC_HOST + ":64989" // change this to rcc soap
+const url = `http://${RCC_HOST}:64989` // change this to rcc soap
 
-let convert = require("xml-js")
+const convert = require("xml-js")
 const sampleHeaders = {
 	"Content-Type": "text/xml;charset=UTF-8",
 }
 
-async function OpenJob(jobid, script, expiration) {
-	return new Promise(async (resolve, reject) => {
+const OpenJob = async (jobid, script, expiration) =>
+	new Promise(async (resolve, reject) => {
 		// this is all boilerplate because soap sucks
-		let xml = {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -71,10 +71,9 @@ async function OpenJob(jobid, script, expiration) {
 			return reject(error)
 		}
 	})
-}
 
-async function GetAllJobs() {
-	return new Promise(async (resolve, reject) => {
+const GetAllJobs = async () =>
+	new Promise(async (resolve, reject) => {
 		const xmlData = (xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
@@ -113,11 +112,10 @@ async function GetAllJobs() {
 			return reject(error)
 		}
 	})
-}
 
-async function Execute(jobid, script) {
-	return new Promise(async (resolve, reject) => {
-		let xml = {
+const Execute = async (jobid, script) =>
+	new Promise(async (resolve, reject) => {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -165,10 +163,10 @@ async function Execute(jobid, script) {
 			return reject(error)
 		}
 	})
-}
-async function CloseJob(jobid) {
-	return new Promise(async (resolve, reject) => {
-		let xml = {
+
+const CloseJob = async jobid =>
+	new Promise(async (resolve, reject) => {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -208,11 +206,10 @@ async function CloseJob(jobid) {
 			return reject(error)
 		}
 	})
-}
 
-async function RenewLease(jobid, expiration) {
-	return new Promise(async (resolve, reject) => {
-		let xml = {
+const RenewLease = async (jobid, expiration) =>
+	new Promise(async (resolve, reject) => {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -257,11 +254,10 @@ async function RenewLease(jobid, expiration) {
 			return reject(error)
 		}
 	})
-}
 
-async function GetExpiration(jobid) {
-	return new Promise(async (resolve, reject) => {
-		let xml = {
+const GetExpiration = async jobid =>
+	new Promise(async (resolve, reject) => {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -293,16 +289,16 @@ async function GetExpiration(jobid) {
 			return reject(error)
 		}
 	})
-}
+
 // let gameservertxt = fs.readFileSync("actualgameserver.txt", "utf-8")
 // gameservertxt = gameservertxt.replace(
 // 	"function start(placeId, port, url)",
 // 	"function start(1111, port)",
 // )
 
-async function CloseExpiredJobs() {
-	return new Promise(async (resolve, reject) => {
-		let xml = (xml = {
+const CloseExpiredJobs = async () =>
+	new Promise(async (resolve, reject) => {
+		const xml = (xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -330,11 +326,10 @@ async function CloseExpiredJobs() {
 			return reject(error)
 		}
 	})
-}
 
-async function CloseAllJobs() {
-	return new Promise(async (resolve, reject) => {
-		let xml = (xml = {
+const CloseAllJobs = async () =>
+	new Promise(async (resolve, reject) => {
+		const xml = (xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -362,7 +357,6 @@ async function CloseAllJobs() {
 			return reject(error)
 		}
 	})
-}
 
 module.exports = {
 	OpenJob,

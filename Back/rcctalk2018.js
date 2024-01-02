@@ -1,14 +1,14 @@
 const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args))
-let controller = new AbortController()
+
 require("dotenv").config()
 const RCC_HOST = process.env.RCC_HOST
-let convert = require("xml-js")
+const convert = require("xml-js")
 
-let url = "http://" + RCC_HOST + ":8000" // change this to rcc soap
+const url = `http://${RCC_HOST}:8000` // change this to rcc soap
 
-async function OpenGame(jobid, port, ip, placeid, creatorid) {
-	return new Promise(async (resolve, reject) => {
+const OpenGame = async (jobid, port, ip, placeid, creatorid) =>
+	new Promise(async (resolve, reject) => {
 		let json = {
 			Mode: "GameServer",
 			GameId: "game1",
@@ -45,7 +45,7 @@ async function OpenGame(jobid, port, ip, placeid, creatorid) {
 		json.Settings.CreatorId = creatorid
 		json.Settings.GameId = jobid
 
-		let xml = `<?xml version = "1.0" encoding = "UTF-8"?>
+		const xml = `<?xml version = "1.0" encoding = "UTF-8"?>
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://roblox.com/RCCServiceSoap" xmlns:ns1="http://roblox.com/" xmlns:ns3="http://roblox.com/RCCServiceSoap12">
           <SOAP-ENV:Body>
                  <ns1:OpenJob>
@@ -78,10 +78,9 @@ async function OpenGame(jobid, port, ip, placeid, creatorid) {
 			return reject(error)
 		}
 	})
-}
 
-async function OpenGame2020(jobid, port, ip, placeid, creatorid) {
-	return new Promise(async (resolve, reject) => {
+const OpenGame2020 = async (jobid, port, ip, placeid, creatorid) =>
+	new Promise(async (resolve, reject) => {
 		let json = {
 			Mode: "GameServer",
 			GameId: "game1",
@@ -120,7 +119,7 @@ async function OpenGame2020(jobid, port, ip, placeid, creatorid) {
 		json.Settings.PlaceFetchUrl =
 			"https://mete0r.xyz/asset?id=" + parseFloat(placeid)
 
-		let xml = `<?xml version = "1.0" encoding = "UTF-8"?>
+		const xml = `<?xml version = "1.0" encoding = "UTF-8"?>
     <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://roblox.com/RCCServiceSoap" xmlns:ns1="http://roblox.com/" xmlns:ns3="http://roblox.com/RCCServiceSoap12">
         <SOAP-ENV:Body>
                <ns1:OpenJob>
@@ -138,7 +137,7 @@ async function OpenGame2020(jobid, port, ip, placeid, creatorid) {
             </SOAP-ENV:Body>
     </SOAP-ENV:Envelope>`
 
-		//console.log(encodeURIComponent(JSON.stringify(json)))
+		// console.log(encodeURIComponent(JSON.stringify(json)))
 		try {
 			const result = await fetch(
 				url +
@@ -153,11 +152,10 @@ async function OpenGame2020(jobid, port, ip, placeid, creatorid) {
 			return reject(error)
 		}
 	})
-}
 
-async function CloseJob(jobid) {
-	return new Promise(async (resolve, reject) => {
-		let xml = {
+const CloseJob = async jobid =>
+	new Promise(async (resolve, reject) => {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -186,23 +184,20 @@ async function CloseJob(jobid) {
 		const body = convert.js2xml(xml, { compact: true, spaces: 4 })
 
 		try {
-			const result = await fetch(url + "/closejob/" + jobid)
+			const result = await fetch(`${url}/closejob/${jobid}`)
 			const data = await result.text()
 			return resolve(data)
 		} catch (error) {
 			return reject(error)
 		}
 	})
-}
 
-async function OpenRender(userid, closeup) {
-	return new Promise(async (resolve, reject) => {
+const OpenRender = async (userid, closeup) =>
+	new Promise(async (resolve, reject) => {
 		try {
-			const result = await fetch(
-				url + "/openrender/" + userid + "/" + closeup,
-			)
+			const result = await fetch(`${url}/openrender/${userid}/${closeup}`)
 			const data = await result.text()
-			//console.log(data)
+			// console.log(data)
 			if (data === '{"status": "error","error":"Already started"}') {
 				return resolve(JSON.parse(data))
 			}
@@ -215,16 +210,15 @@ async function OpenRender(userid, closeup) {
 			return reject(error)
 		}
 	})
-}
 
-async function OpenRenderAsset(assetid, type) {
-	return new Promise(async (resolve, reject) => {
+const OpenRenderAsset = async (assetid, type) =>
+	new Promise(async (resolve, reject) => {
 		try {
 			const result = await fetch(
-				url + "/openrenderasset/" + assetid + "/" + type,
+				`${url}/openrenderasset/${assetid}/${type}`,
 			)
 			const data = await result.text()
-			//console.log(data)
+			// console.log(data)
 			if (data === '{"status": "error","error":"Already started"}') {
 				return resolve(JSON.parse(data))
 			}
@@ -237,20 +231,10 @@ async function OpenRenderAsset(assetid, type) {
 			return reject(error)
 		}
 	})
-}
 
-async function lol2() {
-	const lol = await OpenRender(0)
-	console.log(
-		lol["SOAP-ENV:Envelope"]["SOAP-ENV:Body"]["ns1:OpenJobResponse"][
-			"ns1:OpenJobResult"
-		][0]["ns1:value"]._text,
-	)
-}
-
-async function RenewLease(jobid, expiration) {
-	return new Promise(async (resolve, reject) => {
-		let xml = {
+const RenewLease = async (jobid, expiration) =>
+	new Promise(async (resolve, reject) => {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -279,7 +263,7 @@ async function RenewLease(jobid, expiration) {
 
 		try {
 			const result = await fetch(
-				url + "/renewlease/" + jobid + "/" + expiration,
+				`${url}/renewlease/${jobid}/${expiration}`,
 			)
 			const data = await result.text()
 			return resolve(data)
@@ -287,10 +271,9 @@ async function RenewLease(jobid, expiration) {
 			return reject(error)
 		}
 	})
-}
 
-async function Execute(jobid, json) {
-	return new Promise(async (resolve, reject) => {
+const Execute = async (jobid, json) =>
+	new Promise(async (resolve, reject) => {
 		try {
 			const result = await fetch(
 				url +
@@ -305,11 +288,10 @@ async function Execute(jobid, json) {
 			return reject(error)
 		}
 	})
-}
 
-async function GetAllJobs() {
-	return new Promise(async (resolve, reject) => {
-		const xmlData = (xml = {
+const GetAllJobs = async () =>
+	new Promise(async (resolve, reject) => {
+		const xmlData = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF - 8" },
 			},
@@ -327,7 +309,7 @@ async function GetAllJobs() {
 				},
 				"SOAP-ENV:Body": { "ns1:GetAllJobsEx": {} },
 			},
-		})
+		}
 
 		const body = convert.js2xml(xmlData, { compact: true, spaces: 4 })
 
@@ -347,33 +329,12 @@ async function GetAllJobs() {
 			return reject(error)
 		}
 	})
-}
 
 // RenewLease("game2", "69530318916789546987353800")
-async function lol() {
-	let res = await GetAllJobs()
-	//console.dir(res,{ depth: null })
-	let exists = false
-	if (res != "{}") {
-		if (Array.isArray(res["ns1:Job"]) === false) {
-			console.log("asd")
-			//console.log(res['ns1:Job']['ns1:id']._text)
-			if (res["ns1:Job"]["ns1:id"]._text === "game2") {
-				exists = true
-			}
-		} else {
-			res["ns1:Job"].forEach(element => {
-				if (element["ns1:id"]?._text === "game2") {
-					exists = true
-				}
-			})
-		}
-	}
-	console.log(exists)
-}
-// lol()
+
 // GetAllJobs()
-// OpenGame('game2','3333','127.0.0.1','2')
+// OpenGame("game2", "3333", "127.0.0.1", "2")
+
 module.exports = {
 	OpenGame,
 	CloseJob,
