@@ -105,8 +105,8 @@ importers:
         specifier: ^4.6.5
         version: 4.6.8
       redis-om:
-        specifier: ^0.4.0-beta.3
-        version: 0.4.2
+        specifier: ^0.4.7
+        version: 0.4.7
       req-flash:
         specifier: ^0.0.3
         version: 0.0.3
@@ -410,6 +410,18 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.19':
     resolution: {integrity: sha512-kf37QtfW+Hwx/buWGMPcR60iF9ziHa6r/CZJIHbmcm4+0qrXiVdxegAH0F6yddEVQ7zdkjcGCgCzUu+BcbhQxw==}
+
+  '@jsep-plugin/assignment@1.3.0':
+    resolution: {integrity: sha512-VVgV+CXrhbMI3aSusQyclHkenWSAm95WaiKrMxRFam3JSUiIaQjoMIw2sEs/OX4XifnqeQUN4DYbJjlA8EfktQ==}
+    engines: {node: '>= 10.16.0'}
+    peerDependencies:
+      jsep: ^0.4.0||^1.0.0
+
+  '@jsep-plugin/regex@1.0.4':
+    resolution: {integrity: sha512-q7qL4Mgjs1vByCaTnDFcBnV9HS7GVPJX5vyVoCgZHNSC9rjwIlmbXG5sUuorR5ndfHAIlJ8pVStxvjXHbNvtUg==}
+    engines: {node: '>= 10.16.0'}
+    peerDependencies:
+      jsep: ^0.4.0||^1.0.0
 
   '@mapbox/node-pre-gyp@1.0.11':
     resolution: {integrity: sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==}
@@ -1262,9 +1274,14 @@ packages:
     resolution: {integrity: sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==}
     hasBin: true
 
-  jsonpath-plus@7.2.0:
-    resolution: {integrity: sha512-zBfiUPM5nD0YZSBT/o/fbCUlCcepMIdP0CJZxM1+KgA4f2T206f6VAg9e7mX35+KlMaIc5qXW34f3BnwJ3w+RA==}
-    engines: {node: '>=12.0.0'}
+  jsep@1.4.0:
+    resolution: {integrity: sha512-B7qPcEVE3NVkmSJbaYxvv4cHkVW7DQsZz13pUMrfS8z8Q/BuShN+gcTXrUlPiGqM2/t/EEaI030bpxMqY8gMlw==}
+    engines: {node: '>= 10.16.0'}
+
+  jsonpath-plus@10.1.0:
+    resolution: {integrity: sha512-gHfV1IYqH8uJHYVTs8BJX1XKy2/rR93+f8QQi0xhx95aCiXn1ettYAd5T+7FU6wfqyDoX/wy0pm/fL3jOKJ9Lg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
 
   jsonwebtoken@9.0.2:
     resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
@@ -1686,8 +1703,8 @@ packages:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
 
-  redis-om@0.4.2:
-    resolution: {integrity: sha512-sBah+ljGQY4Zm1f9/+l7HjtIuTQH/rzIX3JSLizymbr6VlTZ2ibt+U3xYKNjIA0tv/D9toEMF7HFXHMtT+l+1A==}
+  redis-om@0.4.7:
+    resolution: {integrity: sha512-s0N+RNkW0qNeMhTbaxYZqhbBR8W/nOdMsGm25EOls0jxLHvMj9O7nD2mSgpwYycxc1/wUkePAMnp9y6u3VH9fw==}
     engines: {node: '>= 14'}
 
   redis@4.6.8:
@@ -2527,6 +2544,14 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  '@jsep-plugin/assignment@1.3.0(jsep@1.4.0)':
+    dependencies:
+      jsep: 1.4.0
+
+  '@jsep-plugin/regex@1.0.4(jsep@1.4.0)':
+    dependencies:
+      jsep: 1.4.0
 
   '@mapbox/node-pre-gyp@1.0.11':
     dependencies:
@@ -3588,7 +3613,13 @@ snapshots:
 
   jiti@1.20.0: {}
 
-  jsonpath-plus@7.2.0: {}
+  jsep@1.4.0: {}
+
+  jsonpath-plus@10.1.0:
+    dependencies:
+      '@jsep-plugin/assignment': 1.3.0(jsep@1.4.0)
+      '@jsep-plugin/regex': 1.0.4(jsep@1.4.0)
+      jsep: 1.4.0
 
   jsonwebtoken@9.0.2:
     dependencies:
@@ -3983,9 +4014,9 @@ snapshots:
     dependencies:
       picomatch: 2.3.1
 
-  redis-om@0.4.2:
+  redis-om@0.4.7:
     dependencies:
-      jsonpath-plus: 7.2.0
+      jsonpath-plus: 10.1.0
       just-clone: 6.2.0
       redis: 4.6.8
       ulid: 2.3.0
