@@ -44,7 +44,7 @@
 		"prom-client": "^14.1.0",
 		"qrcode": "^1.5.1",
 		"redis": "^4.6.5",
-		"redis-om": "^0.4.0-beta.3",
+		"redis-om": "^0.4.7",
 		"req-flash": "^0.0.3",
 		"speakeasy": "^2.0.0",
 		"xml-js": "^1.6.11",
