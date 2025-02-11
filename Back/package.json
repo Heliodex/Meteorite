@@ -23,7 +23,7 @@
 		"daisyui": "^2.24.2",
 		"dotenv": "^16.0.1",
 		"easy-soap-request": "^4.8.0",
-		"esbuild": "0.17.4",
+		"esbuild": "0.25.0",
 		"express": "^4.21.2",
 		"express-flash-message": "^2.1.0",
 		"express-prom-bundle": "^6.5.0",
