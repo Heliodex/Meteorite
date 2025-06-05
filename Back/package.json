@@ -38,7 +38,7 @@
 		"mongoose": "^8.9.5",
 		"mongoose-execution-time": "^1.0.2",
 		"mongoose-unique-validator": "^5.0.1",
-		"multer": "^1.4.5-lts.1",
+		"multer": "^2.0.1",
 		"node-fetch": "^3.2.10",
 		"png-validator": "^1.1.0",
 		"prom-client": "^14.1.0",
