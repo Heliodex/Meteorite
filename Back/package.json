@@ -28,7 +28,7 @@
 		"express-flash-message": "^2.1.0",
 		"express-prom-bundle": "^6.5.0",
 		"express-rate-limit": "^6.7.0",
-		"express-session": "^1.18.1",
+		"express-session": "^1.18.2",
 		"file-type-checker": "^1.0.4",
 		"get-port": "^6.1.2",
 		"get-port-please": "^2.6.1",
