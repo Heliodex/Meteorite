@@ -15,7 +15,7 @@
 		"@mfd/rbxdatastoreservice": "^2.3.10",
 		"@yaireo/relative-time": "^1.0.3",
 		"atob": "^2.1.2",
-		"bcrypt": "^5.0.1",
+		"bcrypt": "^6.0.0",
 		"body-parser": "^2.2.1",
 		"connect-flash": "^0.1.1",
 		"cookie-parser": "^1.4.7",
