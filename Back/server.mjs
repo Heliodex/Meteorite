@@ -3770,7 +3770,7 @@ app.all(
 			//filteredtext = '#'.repeat(req.body?.text?.length)
 			//filteredtext = filteredtext.replaceAll(filtered,"#")
 			let regex
-			for (const i = 0; i < filtered.length; i++) {
+			for (let i = 0; i < filtered.length; i++) {
 				regex = new RegExp(filtered[i], "g")
 				filteredtext = filteredtext.replace(
 					regex,

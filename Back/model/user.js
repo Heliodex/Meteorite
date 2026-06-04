@@ -45,7 +45,7 @@ const UserSchema = new mongoose.Schema(
 				moderated: Boolean,
 			},
 		],
-		required: false,
+		// required: false,
 	},
 
 	{ collection: "users" },

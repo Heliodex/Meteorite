@@ -298,7 +298,7 @@ const GetExpiration = async jobid =>
 
 const CloseExpiredJobs = async () =>
 	new Promise(async (resolve, reject) => {
-		const xml = (xml = {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -310,7 +310,7 @@ const CloseExpiredJobs = async () =>
 				},
 				"SOAP-ENV:Body": { "ns1:CloseExpiredJobs": {} },
 			},
-		})
+		}
 
 		const body = convert.js2xml(xml, { compact: true, spaces: 4 })
 
@@ -329,7 +329,7 @@ const CloseExpiredJobs = async () =>
 
 const CloseAllJobs = async () =>
 	new Promise(async (resolve, reject) => {
-		const xml = (xml = {
+		const xml = {
 			_declaration: {
 				_attributes: { version: "1.0", encoding: "UTF-8" },
 			},
@@ -341,7 +341,7 @@ const CloseAllJobs = async () =>
 				},
 				"SOAP-ENV:Body": { "ns1:CloseAllJobs": {} },
 			},
-		})
+		}
 
 		const body = convert.js2xml(xml, { compact: true, spaces: 4 })
 
