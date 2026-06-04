@@ -146,16 +146,16 @@
 			<div>
 				{#if JSON.parse(lookupdata.moderation).status.toUpperCase() != "OK"}
 					<h5 class="!text-sm flex flex-row gap-1">
-						Moderation Status: <h5 class="!text-sm text-error-600">
+						Moderation Status: <span class="!text-sm text-error-600">
 							{JSON.parse(lookupdata.moderation).status}
-						</h5>
+						</span>
 					</h5>
 				{:else}
 					<h5 class="!text-sm flex flex-row gap-1">
-						Moderation Status: <h5
+						Moderation Status: <span
 							class="!text-sm text-success-600">
 							{JSON.parse(lookupdata.moderation).status}
-						</h5>
+						</span>
 					</h5>
 				{/if}
 				<h5 class="!text-sm">Rocks: {lookupdata.coins}</h5>

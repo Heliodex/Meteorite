@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="bg-surface-700 max-w-[800px] p-6 border-2 border-primary-500 m-0 m-auto">
+	class="bg-surface-700 max-w-[800px] p-6 border-2 border-primary-500 m-auto">
 	<h2>{data.user.moderationstatus.status}</h2>
 
 	<div class="p-4 space-y-4">
@@ -13,9 +13,9 @@
 		</h5>
 
 		<h5 class="text-base flex flex-row gap-2">
-			Moderator Note: <h5 class="text-base font-bold">
+			Moderator Note: <span class="text-base font-bold">
 				{data.user.moderationstatus.Reason}
-			</h5>
+			</span>
 		</h5>
 		{#if data.user.moderationstatus.ExpiresIn === "2100-01-01"}
 			<h5 class="text-base">You may reactivate after never.</h5>

@@ -304,34 +304,34 @@
 				</svg>
 				<nav class=" rounded-none mt-6" data-menu="navigationsort">
 					<ul>
-						<button
+						<span
 							class="btn bg-surface-700 !rounded-none text-sm">
 							Oldest
-						</button>
+						</span>
 					</ul>
 					<ul>
-						<button
+						<span
 							class="btn bg-surface-700 !rounded-none text-sm">
 							Newest
-						</button>
+						</span>
 					</ul>
 					<ul>
-						<button
+						<span
 							class="btn bg-surface-700 !rounded-none text-sm">
 							Bestselling
-						</button>
+						</span>
 					</ul>
 					<ul>
-						<button
+						<span
 							class="btn bg-surface-700 !rounded-none text-sm">
 							Price (High to Low)
-						</button>
+						</span>
 					</ul>
 					<ul>
-						<button
+						<span
 							class="btn bg-surface-700 !rounded-none text-sm">
 							Price (Low to High)
-						</button>
+						</span>
 					</ul>
 				</nav>
 			</button>
