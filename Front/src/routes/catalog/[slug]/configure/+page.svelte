@@ -92,7 +92,7 @@
 				<span>Description</span>
 				<textarea
 					bind:value={description}
-					class="input input-bordered input-primary w-full rounded-md" />
+					class="input input-bordered input-primary w-full rounded-md"></textarea>
 			</label>
 
 			<div

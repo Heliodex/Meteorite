@@ -281,7 +281,7 @@
 				class="rounded-md grow input input-bordered input-primary"
 				bind:value={about}
 				placeholder="Tell the Meteorite community what you think!"
-				maxlength={200} />
+				maxlength={200}></textarea>
 
 			<div class="flex flex-row justify-end gap-x-2">
 				<button

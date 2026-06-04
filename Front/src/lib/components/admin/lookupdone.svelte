@@ -101,7 +101,7 @@
 		<h5>Moderator Note:</h5>
 		<textarea
 			bind:value={banreason}
-			class="input input-bordered input-primary w-full rounded-md h-32" />
+			class="input input-bordered input-primary w-full rounded-md h-32"></textarea>
 		<div
 			class="!text-xs mt-6 {message.error === true
 				? 'text-error-600'

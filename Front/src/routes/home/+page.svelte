@@ -135,7 +135,7 @@
 						class="rounded-md grow input input-bordered input-primary"
 						maxlength={50}
 						bind:value={sharevalue}
-						placeholder="What are you up to?" />
+						placeholder="What are you up to?"></textarea>
 					<button
 						on:click={share}
 						class="btn mt-6 variant-filled-primary rounded-md"

@@ -82,7 +82,7 @@
 			<div class="bg-surface-700 p-4 flex flex-row gap-x-2">
 				<textarea
 					class="rounded-md grow input input-bordered input-primary"
-					placeholder="Shout here!!" />
+					placeholder="Shout here!!"></textarea>
 				<button class="btn mb-6 variant-filled-primary rounded-md">
 					Shout
 				</button>

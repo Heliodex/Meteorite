@@ -83,7 +83,7 @@
 			class="rounded-md grow input input-bordered input-primary"
 			maxlength={200}
 			bind:value={comment}
-			placeholder={PlaceholderText} />
+			placeholder={PlaceholderText}></textarea>
 		<button
 			on:click={postComment}
 			class="btn mt-6 variant-filled-primary rounded-md"

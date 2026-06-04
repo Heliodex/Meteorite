@@ -301,7 +301,7 @@
 					maxlength={5000}
 					placeholder={"Custom CSS"}
 					class="input h-64 input-bordered input-primary rounded-md grow"
-					required />
+					required></textarea>
 
 				<button
 					on:click={csschange}
