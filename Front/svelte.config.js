@@ -1,5 +1,5 @@
 import adapter from "@sveltejs/adapter-node"
-import preprocess from "svelte-preprocess"
+import { sveltePreprocess } from "svelte-preprocess"
 
 /** @type {import("@sveltejs/kit").Config} */
 const config = {
@@ -7,7 +7,7 @@ const config = {
 		adapter: adapter(),
 	},
 	preprocess: [
-		preprocess({
+		sveltePreprocess({
 			postcss: true,
 		}),
 	],
