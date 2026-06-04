@@ -290,7 +290,7 @@
 						href="/games">
 						Games
 						<div
-							class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]" />
+							class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]"></div>
 					</a>
 					{#if data.user?.admin === true}
 						<a
@@ -298,7 +298,7 @@
 							href="/admin">
 							Admin
 							<div
-								class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]" />
+								class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]"></div>
 						</a>
 					{/if}
 					<a
@@ -306,14 +306,14 @@
 						href="/catalog">
 						Catalog
 						<div
-							class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]" />
+							class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]"></div>
 					</a>
 					<a
 						class="btn btn-sm rounded-none group relative"
 						href="/develop">
 						Develop
 						<div
-							class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]" />
+							class="transition-width delay-0 absolute min-h-[1px] top-8 w-4 group-hover:w-16 group-hover:shadow-[inset_0_-2px_0_0_white]"></div>
 					</a>
 				</div>
 				<div class="relative hidden md:block">

@@ -39,7 +39,7 @@
 			.replaceAll(' ', '-')}">
 		{#if type != "Audio" && type != "Video"}
 			{#if imageloading}
-				<div class="w-36 h-36 rounded-none placeholder animate-pulse" />
+				<div class="w-36 h-36 rounded-none placeholder animate-pulse"></div>
 			{/if}
 			<img
 				alt=""

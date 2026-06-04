@@ -9,5 +9,5 @@
 		<Groupbar grouplist={data.groups} />
 	{/if}
 
-	<div class="col-span-5" />
+	<div class="col-span-5"></div>
 </div>

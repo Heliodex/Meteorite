@@ -41,7 +41,7 @@
 			class="card rounded-md card-glass-surface snap-center card-hover w-20 sm:w-40 relative">
 			{#if imageloading}
 				<div
-					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse" />
+					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse"></div>
 			{/if}
 			<img
 				alt=""
@@ -76,7 +76,7 @@
 			class="card rounded-md card-glass-surface snap-center card-hover w-20 sm:w-40 relative">
 			{#if imageloading}
 				<div
-					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse" />
+					class="w-20 h-20 sm:w-40 sm:h-40 rounded-none placeholder animate-pulse"></div>
 			{/if}
 			<img
 				alt=""
