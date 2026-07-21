@@ -16,7 +16,7 @@
 		"@yaireo/relative-time": "^1.0.3",
 		"atob": "^2.1.2",
 		"bcrypt": "^6.0.0",
-		"body-parser": "^2.2.1",
+		"body-parser": "^2.3.0",
 		"connect-flash": "^0.1.1",
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.5",
